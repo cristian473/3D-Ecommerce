@@ -3,12 +3,13 @@ const authRouter = require("./auth.js");
 const { Product } = require("../models");
 const router = Router();
 
+
 router.get("/", function (req, res, next) {
-  Product.findAll({}).then(function (product) {
+  Product.findAll().then(function (product) {
     if (!product) {
       return res.status(404).send("No hay productos en la tienda");
     }
-    res.render("Producto", { product });
+    return res.status(200).json(product);
   });
 });
 
@@ -17,16 +18,18 @@ router.get("/:id", function (req, res, next) {
     if (!product) {
       return res.status(404).send("Producto Inexistente");
     }
-    res.render("Producto", { product });
+    return res.status(200).json(product);
+
   });
 });
 
 router.post("/", function (req, res, next) {
+  console.log(req.body);
   Product.findOrCreate({
     where: { id: req.body.id },
   })
     .then(function (newProduct) {
-      return newProduct.create({
+      return Product.create({
         title: req.body.title,
         urlTitle: req.body.urlTitle,
         description: req.body.description,
@@ -36,16 +39,12 @@ router.post("/", function (req, res, next) {
       });
     })
     .then(function (newProduct) {
-      res.redirect(newProduct.urlTitle);
+      res.send(newProduct);
     });
-  // .then(function (newProduct) {
-  //   res.redirect(JSON.parse(newProduct.urlTitle));
-  // });
-});
+})
 
-// load each router on a route
-// i.e: router.use('/auth', authRouter);
 router.use("/auth", authRouter);
-// router.use('/products', productRouter);
+
+
 
 module.exports = router;

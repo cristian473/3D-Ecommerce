@@ -6,8 +6,8 @@ const Product = (sequelize, S) => {
       autoIncrement: true,
       primaryKey: true,
     },
-    title: { type: S.STRING, allowNull: false },
-    urlTitle: { type: S.STRING, allowNull: false },
+    title: { type: S.STRING, allowNull: true },
+    urlTitle: { type: S.STRING, allowNull: true },
     route: {
       type: S.VIRTUAL,
       get() {
@@ -16,7 +16,7 @@ const Product = (sequelize, S) => {
     },
     description: { type: S.TEXT },
     images: { type: S.BLOB },
-    precio: { type: S.REAL },
+    price: { type: S.REAL },
     color: { type: S.STRING },
   });
 
@@ -27,32 +27,6 @@ const Product = (sequelize, S) => {
   return P;
 };
 
-// Product.sync({ force: true }).then(function () {
-//   return Product.create({
-//     title: "",
-//     description: "",
-//     images: "",
-//     price: "",
-//     color: "",
-//   });
-// });
+module.exports = Product;
 
-// const Category = (sequelize, S) => {
-//   const C = sequelize.define("category", {
-//     id: {
-//       type: S.INTEGER,
-//       allowNull: false,
-//       autoIncrement: true,
-//       primaryKey: true,
-//     },
-//     name: { type: S.STRING, allowNull: false },
-//   });
 
-//   return C;
-// };
-
-// Product.belongsTo(Category, { as: "author" });
-
-module.exports = () => {
-  Product;
-};
