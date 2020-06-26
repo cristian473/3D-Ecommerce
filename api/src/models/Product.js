@@ -4,7 +4,8 @@ const Product = (sequelize, S) => {
       type: S.INTEGER,
       allowNull: false,
       autoIncrement: true,
-      primaryKey: true,
+      primaryKey: true
+
     },
     title: { type: S.STRING, allowNull: true },
     urlTitle: { type: S.STRING, allowNull: true },

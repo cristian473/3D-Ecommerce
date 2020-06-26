@@ -8,6 +8,7 @@ function db() {
       native: false, // lets Sequelize know we can use pg-native for ~30% more speed
     }
   );
+
 }
 
 module.exports = db;
