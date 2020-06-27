@@ -1,24 +1,28 @@
+  
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Product from './components/product'
+import Catalog from './components/catalog.jsx'
+import {Route} from 'wouter'
+import Navbar from './components/navBar'
+import Details from './components/details'
+import Banner from './components/banner'
+import SearchBar from './components/SearchBar'
+import AddCategory from './components/AddCategory'
+import CrudProduct from './components/CrudProduct'
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navbar/>
+      <Route path='/' component={Banner}/>
+      <Route path='/catalogo' component={Catalog}/>
+      <Route path='/producto/:id' component={Details}/>
+      
+      <Route path='/' component={SearchBar}/>
+      <Route path='/admin' component={AddCategory}/>
+      <Route path='/admin' component={CrudProduct}/>
     </div>
   );
 }
