@@ -1,0 +1,63 @@
+*{
+	margin: 0;
+	padding: 0;
+	text-decoration: none;
+	list-style-type: none;
+	box-sizing: border-box;
+}
+
+button, .button {
+	font-size: 1em;
+	padding: 10px;
+	background-color: #0366ee;
+	color: white;
+	font-weight: bold;
+	margin: 5px;
+	border-radius: 5px;
+	border: none;
+	display: inline;
+}
+
+input {
+	font-size: 1em;
+	padding: 10px;
+	margin: 5px;
+	border-radius: 5px;
+	border: 1px solid grey;
+	display: inline;
+}
+
+select {
+	font-size: 1em;
+	padding: 10px;
+	margin: 10px;
+	border-radius: 5px;
+	border: 1px solid grey;
+}
+
+.inline {
+	display: inline;
+}
+
+.table {
+	border: 1px solid grey;
+	padding: 5px;
+	margin: 10px;
+}
+
+form {
+	padding: 5px;
+	margin: 10px;
+}
+
+.image {
+	width: 100px;
+}
+
+.wrapper{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+
+}
