@@ -19,8 +19,6 @@ function App() {
       <Route path='/' component={Banner}/>
       <Route path='/catalogo' component={Catalog}/>
       <Route path='/producto/:id' component={Details}/>
-      
-      <Route path='/' component={SearchBar}/>
       <Route path='/admin' component={AddCategory}/>
       <Route path='/admin' component={CrudProduct}/>
     </div>
