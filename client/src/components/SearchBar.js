@@ -5,6 +5,7 @@ import Product from './product'
 import { getProducts } from '../actions/searchActions';
 import {Link} from 'wouter'
 
+
 export class SearchBar extends React.Component {
   
   constructor(props) {
@@ -16,7 +17,6 @@ export class SearchBar extends React.Component {
   
   handleChange(event) {
     this.setState({ title: event.target.value });
-   
   }
   
   handleSubmit(event) {
@@ -37,6 +37,7 @@ export class SearchBar extends React.Component {
           </div>
           <Link to={'/search='+title}><button>Buscar</button></Link>
         </form>
+
       </div>
     );
   }

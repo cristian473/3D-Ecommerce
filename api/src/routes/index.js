@@ -4,7 +4,9 @@ const {Product} = require("../models/");
 const router = Router();
 
 
+
 router.get("/products", function (req, res, next) {
+
   Product.findAll().then(function (product) {
     if (!product) {
       return res.status(404).send("No hay productos en la tienda");
@@ -23,7 +25,9 @@ router.get("/products/:id", function (req, res, next) {
   });
 });
 
+
 router.post("/products", function (req, res, next) {
+
   console.log(req.body);
   Product.create({
         title: req.body.title,
