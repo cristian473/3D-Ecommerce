@@ -17,7 +17,7 @@ import Catalog from './catalog'
         return(
             <div>
                 <div className='navBar'>
-                    <a href="/" ><h1 >3D-Shop</h1></a>
+                    <a href="/" ><h1>3D-Shop</h1></a>
                     <div className='navBarButtons'>
                         <Link className='navLink' to='/'>Inicio</Link> 
                         <Link className='navLink' to='/Catalogo'>Catalogo</Link> 
