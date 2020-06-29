@@ -1,9 +1,13 @@
 const { Router } = require("express");
-const authRouter = require("./auth.js");
-const {Product} = require("../models/");
+const { Product } = require("../models/");
+const { Category } = require("../models/");
 const router = Router();
 
+const authRouter = require("./auth.js");
+// const routerProducts = require("./routerProducts.js")
 
+router.use("/auth", authRouter);
+// router.use("/products", routerProducts);
 
 router.get("/products", function (req, res, next) {
 
@@ -27,16 +31,27 @@ router.get("/products/:id", function (req, res) {
 
 router.post("/products/", function (req, res) {
   Product.create({
-    title: req.body.title,
-    urlTitle: req.body.urlTitle,
+    name: req.body.name,
     description: req.body.description,
     images: req.body.images,
     price: req.body.price,
     color: req.body.color,
   },
-    { fields: ['title', 'urlTite', 'description', 'images', 'price', 'color'] })
+    { fields: ['name', 'description', 'images', 'price', 'color'] })
     .then(function (newProduct) {
       res.send(newProduct);
+    })
+    .catch(function (err) {
+      console.log(err)
+    })
+});
+router.post("/category/", function (req, res) {
+  Category.create({
+    name: req.body.name,
+  },
+    { fields: ['name'] })
+    .then(function (newCategory) {
+      res.send(newCategory);
     })
     .catch(function (err) {
       console.log(err)
@@ -46,8 +61,7 @@ router.post("/products/", function (req, res) {
 router.put('/products/update/:id', function (req, res) {
   Product.update(
     {
-      title: req.body.title,
-      urlTitle: req.body.urlTitle,
+      name: req.body.name,
       description: req.body.description,
       images: req.body.images,
       price: req.body.price,
@@ -73,7 +87,6 @@ router.delete('/products/delete/:id', (req, res) => {
   }).catch(res.send);
 });
 
-router.use("/auth", authRouter);
 
 module.exports = router;
 
