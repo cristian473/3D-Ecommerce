@@ -1,8 +1,10 @@
+var Sequelize = require('sequelize');
+const S = Sequelize;
 const Product = (sequelize, S) => {
   const P = sequelize.define("product", {
     id: {
       type: S.INTEGER,
-      allowNull: false,
+      allowNull: true,
       autoIncrement: true,
       primaryKey: true
 
@@ -22,7 +24,8 @@ const Product = (sequelize, S) => {
   });
 
   P.addHook("beforeValidate", (product) => {
-    product.urlTitle = product.title.replace(/\s+/g, "_").replace(/\W/g, "");
+    console.log(product)
+    product.urlTitle = product.title.replace(/\s+/g, "_");
   });
 
   return P;

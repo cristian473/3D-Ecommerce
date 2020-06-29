@@ -1,10 +1,12 @@
 const { Router } = require("express");
 const authRouter = require("./auth.js");
-const { Product } = require("../models");
+const {Product} = require("../models/");
 const router = Router();
 
 
-router.get("/products/", function (req, res, next) {
+
+router.get("/products", function (req, res, next) {
+
   Product.findAll().then(function (product) {
     if (!product) {
       return res.status(404).send("No hay productos en la tienda");
@@ -74,3 +76,4 @@ router.delete('/products/delete/:id', (req, res) => {
 router.use("/auth", authRouter);
 
 module.exports = router;
+

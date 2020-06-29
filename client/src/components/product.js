@@ -18,7 +18,7 @@ export default class Product extends React.Component{
         return (
         <div className ='Product'>
             <div className='divProduct'>
-            <Link to={'/producto/'+ this.props.price} ><img width="60px" src = {this.state.image}></img>
+            <Link to={'/producto/'+ this.props.id} ><img width="60px" src = {this.props.image}></img>
             <h2>{this.props.name}</h2></Link>
             <p>{this.props.description}</p>
             <h4>Precio: ${this.props.price}</h4>

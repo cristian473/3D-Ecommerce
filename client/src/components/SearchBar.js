@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import './style.css';
 import Product from './product'
 import { getProducts } from '../actions/searchActions';
+import {Link} from 'wouter'
+
 
 export class SearchBar extends React.Component {
   
@@ -20,6 +22,7 @@ export class SearchBar extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     this.props.getProducts(this.state.title)
+    console.log(this.props)
   }
 
   render() {
@@ -32,18 +35,9 @@ export class SearchBar extends React.Component {
               onChange={(e) => this.handleChange(e)}
             />
           </div>
-          <button type="submit">Buscar</button>
+          <Link to={'/search='+title}><button>Buscar</button></Link>
         </form>
-        <ul className="wrapper">
-          {this.props.products && this.props.products.map((el, i) => (
-            <div key={i}>
-              <Product 
-                name = {el.Title}
-                image = {el.Poster}
-              />
-            </div>
-          ))}
-        </ul>
+
       </div>
     );
   }
