@@ -21,22 +21,24 @@ export default class Catalog extends React.Component{
             actualCategory: ''
         }
         
-        this.showProducts = this.showProducts.bind(this)
-        this.showCategories = this.showCategories.bind(this)
-        this.getProducts = this.getProducts.bind(this)
-        this.change = this.change.bind(this)
+        // this.showProducts = this.showProducts.bind(this)
+        // this.showCategories = this.showCategories.bind(this)
+        // this.getProducts = this.getProducts.bind(this)
+        
         
     }
 
     componentDidMount(){
-        axios.get("https://jsonplaceholder.typicode.com/posts")
+        console.log('entre')
+        axios.get("http://localhost:3001/products")
             .then(response =>{
                 this.setState({
                     products: response.data,
                     category: response.data
                     
                 })
-                console.log('cargue primera vez')
+                console.log(response);
+                
             })
             .catch(error => {
                 console.log(error)
@@ -44,7 +46,7 @@ export default class Catalog extends React.Component{
     }
 
     getProducts(e){   
-        axios.get("https://jsonplaceholder.typicode.com/posts?userId="+ e.target.value)
+        axios.get("http://localhost:3001/products/category/"+ e.target.value)
         .then (response =>{
             this.setState({
                 products: response.data,
@@ -70,23 +72,13 @@ export default class Catalog extends React.Component{
           
         this.state.products.map(element => 
             <Product
-                image = {element.image}
+                image = {element.images}
                 name = {element.title}
-                description = {element.body}
-                price = {element.id}
-                stock = {element.stock}
+                description = {element.description}
+                price = {element.price}
+                stock = {element.id}
             />
         )
-    
-    
-    change(){
-        this.setState({
-            products: [{
-                title:'100',
-                body: 'jaja cambié xD'
-            }]
-        })
-    }
     
     
 

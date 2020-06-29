@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  
   "scripts": {
     "start": "NODE_PATH=./src nodemon -L",
     "forever": "NODE_PATH=./src forever index.js",

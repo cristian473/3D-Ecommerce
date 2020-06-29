@@ -1,6 +1,6 @@
 import React from 'react'
 import {Link} from 'wouter'
-import Catalog from './catalog'  
+import SearchBar from './SearchBar'
 
 
   export default class Navbar extends React.Component{
@@ -17,10 +17,12 @@ import Catalog from './catalog'
         return(
             <div>
                 <div className='navBar'>
-                    <a href="/" ><h1 >3D-Shop</h1></a>
+                    <a href="/" ><h1>3D-Shop</h1></a>
+                    <SearchBar />
                     <div className='navBarButtons'>
                         <Link className='navLink' to='/'>Inicio</Link> 
-                        <Link className='navLink' to='/Catalogo'>Catalogo</Link> 
+                        <Link className='navLink' to='/Catalogo'>Catalogo</Link>
+                        <Link className='navLink' to='/admin'>Admin</Link> 
                     </div>
                 </div>
 
