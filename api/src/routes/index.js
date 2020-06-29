@@ -2,13 +2,15 @@ const { Router } = require("express");
 const { Product } = require("../models/");
 const { Category } = require("../models/");
 const router = Router();
-
+var Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 const authRouter = require("./auth.js");
-// const routerProducts = require("./routerProducts.js")
-
 router.use("/auth", authRouter);
-// router.use("/products", routerProducts);
 
+
+// ---------------------------------------------------------------------
+// RUTAS PRODUCTOS
+// ---------------------------------------------------------------------
 router.get("/products", function (req, res, next) {
 
   Product.findAll().then(function (product) {
@@ -29,6 +31,26 @@ router.get("/products/:id", function (req, res) {
   });
 });
 
+router.get('/products/search', function (req, res) {
+  const productName = req.query.keyword;
+  Product.findAll(
+    {
+      where: {
+        name: {
+          [Op.like]: `%${productName}`
+        }
+      }
+    }
+  )
+    .then(function (product) {
+      if (!product) {
+        return res.status(404).send("Producto Inexistente");
+      }
+      return res.status(200).json(product);
+
+    });
+});
+
 router.post("/products/", function (req, res) {
   Product.create({
     name: req.body.name,
@@ -40,18 +62,6 @@ router.post("/products/", function (req, res) {
     { fields: ['name', 'description', 'images', 'price', 'color'] })
     .then(function (newProduct) {
       res.send(newProduct);
-    })
-    .catch(function (err) {
-      console.log(err)
-    })
-});
-router.post("/category/", function (req, res) {
-  Category.create({
-    name: req.body.name,
-  },
-    { fields: ['name'] })
-    .then(function (newCategory) {
-      res.send(newCategory);
     })
     .catch(function (err) {
       console.log(err)
@@ -72,11 +82,7 @@ router.put('/products/update/:id', function (req, res) {
     .then(function (product) {
       res.status(200).json({ mensaje: "El Producto ha sido actualizado correctamente", data: product })
     })
-  // .catch(function (reason) {
-  //   res.status(400).json({ mensaje: "El Producto no pudo ser actualizado", data: reason })
-  // })
 })
-
 
 router.delete('/products/delete/:id', (req, res) => {
   const id = req.params.id;
@@ -87,6 +93,43 @@ router.delete('/products/delete/:id', (req, res) => {
   }).catch(res.send);
 });
 
+//---------------------------------------------------------------------
+// RUTAS CATEGORIAS
+// ---------------------------------------------------------------------
+
+router.post("/category/", function (req, res) {
+  Category.create({
+    name: req.body.name,
+  },
+    { fields: ['name'] })
+    .then(function (newCategory) {
+      res.send(newCategory);
+    })
+    .catch(function (err) {
+      console.log(err)
+    })
+});
+
+router.delete("/category/delete/:id", (req, res) => {
+  const id = req.params.id;
+  Category.destroy({
+    where: { categoryId: id }
+  }).then(deletedCategory => {
+    res.json(deletedCategory);
+  }).catch(res.send);
+});
+
+router.put('/category/update/:id', function (req, res) {
+  Category.update(
+    {
+      name: req.body.name,
+    },
+    { where: { categoryId: req.params.id }, returning: true }
+  )
+    .then(function (product) {
+      res.status(200).json({ mensaje: "La categoria ha sido actualizada correctamente", data: product })
+    })
+})
 
 module.exports = router;
 
