@@ -1,7 +1,7 @@
 
 import React from 'react'
 import {Link} from 'wouter'
-import Catalog from './catalog'  
+// import Catalog from './catalog/catalog'  
 
 
   export default class Banner extends React.Component{
