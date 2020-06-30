@@ -2,29 +2,31 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Product from './components/product'
-import Catalog from './components/catalog.jsx'
+import Product from './components/catalog/product'
+import Catalog from './components/catalog/catalog.jsx'
 import {Route} from 'wouter'
+import Provider from 'react-redux'
 import Navbar from './components/navBar'
-import Details from './components/details'
+import Details from './components/catalog/details'
 import Banner from './components/banner'
-import Results from './components/searchResults'
-import AddCategory from './components/AddCategory'
-import CrudProduct from './components/CrudProduct'
+import Results from './components/search/searchResults'
+import AddCategory from './components/CRUD/AddCategory'
+import CrudProduct from './components/CRUD/CrudProduct'
+import store from './store/store'
 
 function App() {
   return (
-    <div className="App">
-      <Navbar/>
-      <Route path='/' component={Banner}/>
-      <Route path='/Catalogo' component={Catalog}/>
-      <Route path='/producto/:id' component={Details}/>
+      <div className="App">
+        <Navbar/>
+        <Route path='/' component={Banner}/>
+        <Route path='/Catalogo' component={Catalog}/>
+        <Route path='/producto/:id' component={Details}/>
 
-      <Route path='/search=:search' component={Results}/>
+        <Route path='/search=:search' component={Results}/>
 
-      <Route path='/admin' component={AddCategory}/>
-      <Route path='/admin' component={CrudProduct}/>
-    </div>
+        <Route path='/admin' component={AddCategory}/>
+        <Route path='/admin' component={CrudProduct}/>
+      </div>
   );
 }
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import {Link} from 'wouter'
-import SearchBar from './SearchBar'
+import SearchBar from './search/searchBarFix'
 
 
   export default class Navbar extends React.Component{

@@ -1,11 +1,12 @@
-import { GET_PRODUCTS } from '../constants/searchConstants';
+import { GET_SEARCH } from '../constants/searchConstants';
 
-export function getProducts(searchKeyword) {
+export const getProducts = () => async (dispatch) => {
   return function(dispatch) {
-    return fetch("http://www.omdbapi.com/?apikey=20dac387&s=" + searchKeyword)
+     fetch("http://localhost:3001/products/search?keyword=" + 'torre')
       .then(response => response.json())
       .then(json => {
-        dispatch({ type: GET_PRODUCTS, payload: json });
+        console.log(dispatch)
+        dispatch({ type: 'GET_PRODUCTS', payload: json });
       });
   };
 }

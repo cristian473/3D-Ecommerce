@@ -1,6 +1,6 @@
 import React from 'react'
 import {Link} from 'wouter'
-import Catalog from './catalog'  
+// import Catalog from './catalog/catalog'  
 import axios from 'axios'
 
 

@@ -1,12 +1,24 @@
 import { createStore, applyMiddleware } from "redux";
-import rootReducer from "../reducers/searchReducers";
+import getData from "../reducers/productReducers";
 import thunk from "redux-thunk";
+import Axios from "axios";
+
+
+
+var initialState ={
+  products: [],
+  categories:[],
+}
 
 // En esta constante almacenamos el Store.
-const store = createStore(
-  rootReducer, // Primer parametro el reducer.
-  applyMiddleware(thunk) // Metodo ya definido de Redux para facilitar action creator asincronicas.
-);
+Axios.get('http://localhost:3001/products')
+  .then(response =>{
+    initialState.products= response.data
+    console.log(initialState)
+  })
+
+
+const store = createStore(getData, applyMiddleware(thunk));
 
 // Exportamos el Store para usarlo en otro archivo.
-export default store;
+export  {store, initialState}
