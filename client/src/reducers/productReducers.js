@@ -1,4 +1,4 @@
-import { GET_PRODUCTS , GET_SEARCH, DEL_PRODUCT} from '../constants/searchConstants';
+import { GET_PRODUCTS , GET_SEARCH, DEL_PRODUCT, ADD_PRODUCT} from '../constants/searchConstants';
 import {initialState} from '../store/store'
 
 
@@ -22,7 +22,14 @@ function getData(state = initialState, action) {
     if (action.type === DEL_PRODUCT){
         return {
             ...state,
-            products: action.payload
+            products: state.products.filter(pro => pro.id !== action.payload)
+        }
+    }
+
+    if (action.type === ADD_PRODUCT){
+        return {
+            ...state,
+            products: state.products.concat (action.payload)
         }
     }
     
