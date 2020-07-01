@@ -5,6 +5,7 @@ import ProductTable from '../tables/ProductTable'
 import {connect, useDispatch, useSelector} from 'react-redux'
 import {getProducts} from '../../actions/productActions'
 
+
 // const products=[{
 //   name: 'hola'
 // }]
@@ -15,8 +16,7 @@ const Crud = () => {
   useEffect(()=>dispatch(getProducts()),[]);
   // CRUD operations
   const addProduct = product => {
-    // product.id = products.length + 1
-    // setProducts([ ...products, product ])
+    
   }
   const updateProduct = (id, updatedProduct) => {
     // setEditing(false)
@@ -55,7 +55,7 @@ const Crud = () => {
             // </Fragment>
              <Fragment>
               <h2>Agregar productos</h2>
-                {/* <AddProductForm/> */}
+                <AddProductForm/> 
             </Fragment>
           }
         </div>
