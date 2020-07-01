@@ -100,6 +100,18 @@ router.delete('/delete/:id', (req, res) => {
     })
 });
 
+router.delete("/remove/:id", (req, res) => {
+    const categoryId = req.body.categories;
+    Product.findByPk(req.params.id)
+        .then(function (product) {
+            console.log(product);
+            let prod = product;
+            prod.removeCategories(categoryId)
+        })
+        .then(function (deletedCategory) {
+            res.status(200).json({ mensaje: "La categoria ha sido eliminada correctamente", data: deletedCategory })
+        })
+});
 
 
 module.exports = router;
