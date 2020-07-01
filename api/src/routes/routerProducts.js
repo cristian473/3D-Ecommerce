@@ -72,7 +72,6 @@ router.post("/", function (req, res) {
         .catch(err => res.status(500).send(err))
 });
 
-
 router.put('/update/:id', function (req, res) {
     Product.update(
         {
@@ -90,14 +89,17 @@ router.put('/update/:id', function (req, res) {
 
 })
 
-
 router.delete('/delete/:id', (req, res) => {
     const id = req.params.id;
-    Product.destroy({
-        where: { id: id }
-    }).then(function (product) {
-        res.status(200).json({ mensaje: "El producto ha sido eliminado correctamente", data: product })
-    })
+    Product.findByPk(id)
+        .then((result) => {
+            return Product.destroy({
+                where: { id: id }
+            }).then((product) => {
+                res.status(200).json({ mensaje: "El producto ha sido eliminado correctamente", data: result })
+            })
+        })
+
 });
 
 router.delete("/remove/:id", (req, res) => {
