@@ -48,29 +48,49 @@ router.get("/:id", function (req, res) {
     });
 });
 
+// router.post("/", function (req, res) {
+//     Product.create({
+//         name: req.body.name,
+//         description: req.body.description,
+//         images: req.body.images,
+//         price: req.body.price,
+//         color: req.body.color,
+//     },
+//         { fields: ['name', 'description', 'images', 'price', 'color'] })
+//         .then(newProduct => {
+//             newProductId = newProduct.id;
+//             return req.body.categories.map(category => {
+//                 return newProduct.addCategory(category);
+//             });
+//         })
+//         .then(categories => {
+//             return Promise.all(categories)
+//         })
+//         .then(function (newProduct) {
+//             res.send(newProduct);
+//         })
+//         .catch(err => res.status(500).send(err))
+// });
+
 router.post("/", function (req, res) {
+    {console.log(req.body)}
     Product.create({
-        name: req.body.name,
-        description: req.body.description,
-        images: req.body.images,
-        price: req.body.price,
-        color: req.body.color,
-    },
-        { fields: ['name', 'description', 'images', 'price', 'color'] })
-        .then(newProduct => {
-            newProductId = newProduct.id;
-            return req.body.categories.map(category => {
-                return newProduct.addCategory(category);
-            });
-        })
-        .then(categories => {
-            return Promise.all(categories)
-        })
-        .then(function (newProduct) {
-            res.send(newProduct);
-        })
-        .catch(err => res.status(500).send(err))
-});
+      name: req.body.name,
+      description: req.body.description,
+      images: req.body.images,
+      price: req.body.price,
+      color: req.body.color,
+      stock: req.body.stock
+    })
+      // { fields: ['name', 'description', 'images', 'price', 'stock', 'color'] })
+      .then(function (newProduct) {
+        res.send(newProduct);
+      })
+      .catch(function (err) {
+        console.log(err)
+      })
+  })
+
 
 router.put('/update/:id', async (req, res) => {
     try {

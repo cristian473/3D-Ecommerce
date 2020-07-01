@@ -1,19 +1,22 @@
-import React, { useState, Fragment } from 'react'
+import React, { useState, Fragment, useEffect } from 'react'
 import AddProductForm from '../forms/AddProductForm'
 import EditProductForm from '../forms/EditProductForm'
 import ProductTable from '../tables/ProductTable'
-import {connect} from 'react-redux'
+import {connect, useDispatch, useSelector} from 'react-redux'
 import {getProducts} from '../../actions/productActions'
-import {delProduct} from '../../actions/productActions'
+
+
 // const products=[{
 //   name: 'hola'
 // }]
-const Crud = ({products}) => {
-
+const Crud = () => {
+  const dispatch = useDispatch();
+  const products = useSelector(store => store.products);
+ 
+  useEffect(()=>dispatch(getProducts()),[]);
   // CRUD operations
   const addProduct = product => {
-    // product.id = products.length + 1
-    // setProducts([ ...products, product ])
+    
   }
   const updateProduct = (id, updatedProduct) => {
     // setEditing(false)
@@ -37,7 +40,7 @@ const Crud = ({products}) => {
 
   return (
     <div className="container">
-      {getProducts()}
+      
       <div className="flex-row">
         <div className="flex-large">
           {
@@ -52,34 +55,31 @@ const Crud = ({products}) => {
             // </Fragment>
              <Fragment>
               <h2>Agregar productos</h2>
-                {/* <AddProductForm addProduct={addProduct} /> */}
+                <AddProductForm/> 
             </Fragment>
           }
         </div>
 
         <div className="flex-large">
           <h2>Productos</h2>
-          <ProductTable products={products} editRow={editRow} deleteProduct={delProduct} />
+          <ProductTable products={products} />
         </div>
       </div>
     </div>
   )
 }
 
-const mapStateToProps= state =>{
-  return {
-    products : state.products
-  }
+// const mapStateToProps= state =>({
   
-}
+//     products : state.products
+
+// })
+
+// const mapDispatchToProps = (dispatch) => ({
+//   getData: () => dispatch(getProducts()),
+//   delete: () => delProduct(),
+//   // boundExercises: () => dispatch(setExercises()),
+// });
 
 
-// const mapDispatchToProps = dispatch =>{
-// }
-
-
-
-export default connect (mapStateToProps, {
-  getProducts,
-  delProduct
-})(Crud)
+export default (Crud)

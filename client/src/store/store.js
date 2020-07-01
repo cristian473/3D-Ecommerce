@@ -5,18 +5,13 @@ import Axios from "axios";
 
 
 
-var initialState = {
+const initialState ={
+
   products: [],
   categories: [],
 }
 
 // En esta constante almacenamos el Store.
-Axios.get('http://localhost:3001/products')
-  .then(response => {
-    initialState.products = response.data
-    console.log(initialState)
-  })
-
 
 const store = createStore(getData, applyMiddleware(thunk));
 

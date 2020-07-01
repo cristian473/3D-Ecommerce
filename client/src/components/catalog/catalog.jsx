@@ -75,7 +75,7 @@ const Catalog = ({products, categories, getData}) =>(
     //     return (
             <section >
                 <div className='shopSection'><h3>Categorias:</h3>
-                {()=>getProducts()}
+                
                 {console.log(products)}
                 
                 <select onClick={()=>console.log('hola')} className='categorySelect' onChange={(e)=>this.getProducts(e)}>

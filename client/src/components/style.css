@@ -27,6 +27,16 @@ input {
 	display: inline;
 }
 
+
+input {
+	font-size: 1em;
+	padding: 10px;
+	margin: 5px;
+	border-radius: 5px;
+	border: 1px solid grey;
+	display: inline;
+}
+
 select {
 	font-size: 1em;
 	padding: 10px;
