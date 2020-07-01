@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { Product } = require("../models/");
+const { Category } = require("../models");
 var Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
@@ -12,8 +13,7 @@ router.get('/search', function (req, res) {
                     [Op.like]: `%${productName}%`
                 }
             }
-        }
-    )
+        })
         .then(function (product) {
             if (!product) {
                 return res.status(404).send("Producto Inexistente");
@@ -23,8 +23,14 @@ router.get('/search', function (req, res) {
 });
 
 router.get("/", function (req, res, next) {
-
-    Product.findAll().then(function (product) {
+    const category = req.body.categories;
+    if (category) {
+        find = { include: [{ model: Category, where: { categoryId: category } }] };
+    }
+    else {
+        find = {};
+    }
+    Product.findAll(find).then(function (product) {
         if (!product) {
             return res.status(404).send("No hay productos en la tienda");
         }
@@ -51,12 +57,19 @@ router.post("/", function (req, res) {
         color: req.body.color,
     },
         { fields: ['name', 'description', 'images', 'price', 'color'] })
+        .then(newProduct => {
+            newProductId = newProduct.id;
+            return req.body.categories.map(category => {
+                return newProduct.addCategory(category);
+            });
+        })
+        .then(categories => {
+            return Promise.all(categories)
+        })
         .then(function (newProduct) {
             res.send(newProduct);
         })
-        .catch(function (err) {
-            console.log(err)
-        })
+        .catch(err => res.status(500).send(err))
 });
 
 
@@ -86,5 +99,7 @@ router.delete('/delete/:id', (req, res) => {
         res.status(200).json({ mensaje: "El producto ha sido eliminado correctamente", data: product })
     })
 });
+
+
 
 module.exports = router;
