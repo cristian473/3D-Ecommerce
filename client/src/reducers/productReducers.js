@@ -22,7 +22,7 @@ function getData(state = initialState, action) {
     if (action.type === DEL_PRODUCT){
         return {
             ...state,
-            products: action.payload
+            products: state.products.filter(pro => pro.id !== action.payload)
         }
     }
     
