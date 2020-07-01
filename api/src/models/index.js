@@ -2,6 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const db = require("db.js");
 
+
 const basename = path.basename(__filename);
 const models = {};
 
@@ -19,7 +20,12 @@ fs.readdirSync(__dirname)
   });
 
 const { Product } = models;
+const { Category } = models;
+
 
 // Add model relationships here
+// Product.belongsToMany(Category, { through: "product_categories" });
+// Category.belongsToMany(Product, { through: "product_categories" });
+
 
 module.exports = models;
