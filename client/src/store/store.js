@@ -5,15 +5,15 @@ import Axios from "axios";
 
 
 
-var initialState ={
+var initialState = {
   products: [],
-  categories:[],
+  categories: [],
 }
 
 // En esta constante almacenamos el Store.
 Axios.get('http://localhost:3001/products')
-  .then(response =>{
-    initialState.products= response.data
+  .then(response => {
+    initialState.products = response.data
     console.log(initialState)
   })
 
@@ -21,4 +21,4 @@ Axios.get('http://localhost:3001/products')
 const store = createStore(getData, applyMiddleware(thunk));
 
 // Exportamos el Store para usarlo en otro archivo.
-export  {store, initialState}
+export { store, initialState }
