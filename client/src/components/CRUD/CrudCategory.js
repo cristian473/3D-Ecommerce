@@ -9,12 +9,10 @@ const CrudCategory = () => {
   const dispatch = useDispatch();
   const categories = useSelector(store => store.categories);
 
-  useEffect(() => {
-    console.log('render')
-  });
+  useEffect(() => dispatch(getCategories()),[]);
+  console.log(categories);
  
-  // useEffect(()=>dispatch(getCategories()),[]);
-  // CRUD operations
+
   const addProduct = product => {
     
   }

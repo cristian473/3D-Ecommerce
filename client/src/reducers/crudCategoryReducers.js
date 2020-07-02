@@ -1,19 +1,18 @@
 import { GET_CATEGORIES , ADD_CATEGORY, DELETE_CATEGORY} from '../constants/crudCategoryConstants';
-import { initialState } from '../store/store'
+import { store } from '../store/store'
 
-function getData(state = initialState, action) {
+const initialState = [];
+
+function getDataCategories(state = initialState, action) {
   if (action.type === GET_CATEGORIES) {
-    return {
-      ...state,
-      categories: action.payload
-    }                
+    
+    
+    return action.payload
+              
   }
   
   if (action.type === ADD_CATEGORY){
-    return {
-      ...state,
-      categories: action.payload
-    }
+    return state.concat (action.payload)
   }
 
   if (action.type === DELETE_CATEGORY){
@@ -26,4 +25,4 @@ function getData(state = initialState, action) {
   return state;
 }
 
-export default getData;
+export default getDataCategories;
