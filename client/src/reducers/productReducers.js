@@ -18,14 +18,12 @@ function getData(state = initialState, action) {
     }
 
     if (action.type === DEL_PRODUCT){
-        return {
-            ...state,
-            products: state.products.filter(pro => pro.id !== action.payload)
-        }
+
+        return state.filter(pro => pro.id !== action.payload)
+        
     }
 
     if (action.type === ADD_PRODUCT){
-
         return state.concat (action.payload)
     }
     

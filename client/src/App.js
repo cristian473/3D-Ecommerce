@@ -22,7 +22,7 @@ function App() {
       <Route path='/Catalogo' component={Catalog} />
       <Route path='/producto/:id' component={Details} />
 
-      <Route path='/search=:search' component={Results} />
+      <Route path='/products/search' component={Results} />
 
         <Route path='/admin' component={CrudCategory}/>
         <Route path='/admin' component={CrudProduct}/>
