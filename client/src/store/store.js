@@ -6,14 +6,14 @@ import Axios from "axios";
 
 
 const initialState ={
+
   products: [],
-  categories:[],
+  categories: [],
 }
 
 // En esta constante almacenamos el Store.
 
-
 const store = createStore(getData, applyMiddleware(thunk));
 
 // Exportamos el Store para usarlo en otro archivo.
-export  {store, initialState}
+export { store, initialState }
