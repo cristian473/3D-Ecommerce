@@ -1,4 +1,4 @@
-import React, { useState }from 'react'
+import React, { useState, useEffect }from 'react'
 import axios from 'axios'
 import Product from './product'
 import {
@@ -7,84 +7,42 @@ import {
     Route,
     Switch,
   } from 'react-router-dom';
-import { connect } from 'react-redux';
+import {  useDispatch, useSelector } from 'react-redux';
 import { getProducts } from '../../actions/productActions';
+import { getCategories } from '../../actions/crudCategoryActions';
 
 
 
 
-const Catalog = ({products, categories, getData}) =>(
+const Catalog = () =>{
 
-    // constructor(props){
-    //     super(props)
-    //      this.state={
-    //         products: [],
-    //         category: [],
-    //         actualCategory: ''
-    //     }
-        
-    //     // this.showProducts = this.showProducts.bind(this)
-    //     // this.showCategories = this.showCategories.bind(this)
-    //     // this.getProducts = this.getProducts.bind(this)
-        
-        
-    // }
-
-    // componentDidMount(){
-    //     console.log('entre')
-    //     axios.get("http://localhost:3001/products")
-    //         .then(response =>{
-    //             this.setState({
-    //                 products: response.data,
-    //                 category: response.data
-                    
-    //             })
-    //             console.log(response);
-                
-    //         })
-    //         .catch(error => {
-    //             console.log(error)
-    //         })
-    // }
-
-    // getProducts(e){   
-    //     axios.get("http://localhost:3001/products/category/"+ e.target.value)
-    //     .then (response =>{
-    //         this.setState({
-    //             products: response.data,
-    //         })
-    //         console.log(this.state)
-            
-    //     })
-
-    //     .catch(error => {
-    //         console.log(error)
-    //     })
-
-    // }
     
+    
+  const dispatch = useDispatch();
+  const products = useSelector(store => store.products);
+    const categories = useSelector(store => store.categories);
+   
+    useEffect(() => dispatch(getProducts()),[]);
+    useEffect(() => dispatch(getCategories()),[]);
         
           
         
     
     
-
-    // render(){
-    //     const showCategories = this.showCategories()
-    //     const showProducts = this.showProducts()
-    //     return (
+    console.log(products)
+    return(
+         
             <section >
                 <div className='shopSection'><h3>Categorias:</h3>
-                
-                {console.log(products)}
+
                 
                 <select onClick={()=>console.log('hola')} className='categorySelect' onChange={(e)=>this.getProducts(e)}>
-                {categories.map(element => 
+                {categories && categories.map(element => 
                     <option key = {element.id} value = {element.name}>{element.name} </option>
                     )}
                     </select>
                 </div>
-                {products.map(element => 
+                {products && products.map(element => 
                     <Product
                         image = {element.images}
                         name = {element.name}
@@ -94,18 +52,12 @@ const Catalog = ({products, categories, getData}) =>(
                     />
                 )}
             </section>
-           
     )
+}
     
 
-    const mapStateToProps = state =>({
-        products: state.products,
-        categories: state.categories
-    })
-    // const mapDispatchToProps = dispatch => (
-        
-    // )
+    
 
 
-    export default connect(mapStateToProps, getProducts)(Catalog)
+    export default Catalog
 
