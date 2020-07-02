@@ -10,7 +10,7 @@ import Navbar from './components/navBar'
 import Details from './components/catalog/details'
 import Banner from './components/banner'
 import Results from './components/search/searchResults'
-import AddCategory from './components/CRUD/AddCategory'
+import CrudCategory from './components/CRUD/CrudCategory'
 import CrudProduct from './components/CRUD/CrudProduct'
 import store from './store/store'
 
@@ -24,9 +24,9 @@ function App() {
 
       <Route path='/search=:search' component={Results} />
 
-      <Route path='/admin' component={AddCategory} />
-      <Route path='/admin' component={CrudProduct} />
-    </div>
+        <Route path='/admin' component={CrudCategory}/>
+        <Route path='/admin' component={CrudProduct}/>
+      </div>
   );
 }
 
