@@ -8,7 +8,7 @@ const ProductTable = props => {
 
   const dispatch = useDispatch();
   const products = useSelector(store => store.products);
-
+  console.log(products)
   return(
       <table className="table">
         <thead>
