@@ -5,7 +5,7 @@ import Axios from "axios";
 
 
 
-const initialState ={
+const initialState = {
   products: [],
   categories:[],
 }

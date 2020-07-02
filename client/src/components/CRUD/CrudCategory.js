@@ -8,8 +8,12 @@ import {getCategories} from '../../actions/crudCategoryActions'
 const CrudCategory = () => {
   const dispatch = useDispatch();
   const categories = useSelector(store => store.categories);
+
+  useEffect(() => {
+    console.log('render')
+  });
  
-  useEffect(()=>dispatch(getCategories()),[]);
+  // useEffect(()=>dispatch(getCategories()),[]);
   // CRUD operations
   const addProduct = product => {
     
@@ -51,14 +55,14 @@ const CrudCategory = () => {
             // </Fragment>
              <Fragment>
               <h2>Agregar Categorias</h2>
-                <AddCategoryForm/> 
+                <AddCategoryForm /> 
             </Fragment>
           }
         </div>
 
         <div className="flex-large">
           <h2>Categorias</h2>
-          <CategoryTable categories={getCategories} />
+          <CategoryTable categories={categories} />
         </div>
       </div>
     </div>

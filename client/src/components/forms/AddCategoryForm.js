@@ -1,18 +1,23 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useSelector } from 'react'
 import '../style.css';
 import { useDispatch } from 'react-redux'
 import { addCategory } from '../../actions/crudCategoryActions'
+import { getCategories } from '../../actions/crudCategoryActions'
 
 const AddCategoryForm = props => {
 	const initialFormState = { id: null, name: '' }
 	const [ category, setCategory ] = useState(initialFormState)
-	const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  
+  
 
 	const handleInputChange = event => {
 		const { name, value } = event.target
 
 		setCategory({ ...category, [name]: value })
-	}
+  }
+  
+  useEffect(() => dispatch(getCategories()),[]);
 
 	return (
 		<form onSubmit={event => {
