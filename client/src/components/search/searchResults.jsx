@@ -1,17 +1,18 @@
-import React from 'react'
+import React  from 'react'
 import Product from '../catalog/product'
 import axios from 'axios'
-import {connect} from 'react-redux'
+import {useSelector} from 'react-redux'
 import { getSearch } from '../../actions/searchActions';
 
-const Results = ({products, categories}) =>{
-
+const Results = () =>{
+    const search = useSelector (store => store.search)
+    console.log(search)
     return(
             <div className="result">
-                {console.log(products)}
+               
                 
                 <ul className="wrapper">
-                    {products.map((element, i) => (
+                    {search.map((element, i) => (
                         <div key={i}>
                             {console.log(element.name)}
                             <Product
@@ -29,10 +30,5 @@ const Results = ({products, categories}) =>{
         )
     }
 
-    const mapStateToProps = state =>({
-        products: state.products,
-        categories: state.categories
-    })
 
-
-    export default connect(mapStateToProps)(Results)
+export default Results

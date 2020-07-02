@@ -1,48 +1,36 @@
 import React from 'react';
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import '../style.css';
-import { getProducts } from '../../actions/searchActions';
+import { getSearch } from '../../actions/searchActions';
 import {Link} from 'wouter'
+import { INPUT_CHANGE } from '../../constants/searchConstants';
 
 
-class SearchBar extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-          title: ""
-        };
-      }
-
-    handleSubmit(event) {
-    // event.preventDefault();
-    // this.props.getProducts()
-    console.log('this.props')
-    }
+const SearchBar = () => {
+  const dispatch = useDispatch();
+  
+  
+  const handlerChange = (e) =>{
+    dispatch(getSearch(e))
+  }
 
 
-    render(){   
+   
         return(
               <div>
-                <form onSubmit={()=>{console.log('hola')}}>
+                <form>
                   <div className="inline">
-                    <input type="text" id="title" autoComplete="off" placeholder="Buscar producto"
-                    />
+                    <input type="text" onChange={(e)=>handlerChange(e.target.value)} id="title" autoComplete="off" placeholder="Buscar producto"/>
                   </div>
-                  <button onClick={()=>console.log('holaOnclick')}>Buscar</button>
+                  <Link to={'/products/search'}><button>Buscar</button></Link>
                 </form>
     
               </div>
         )
       }
 
-}
+  
 
-const mapStateToProps = state =>{
-    return {
-        products : state.products
-    }
-}
-
-export default connect(mapStateToProps,getProducts)(SearchBar);
+export default SearchBar;
 

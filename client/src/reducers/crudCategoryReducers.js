@@ -16,10 +16,9 @@ function getDataCategories(state = initialState, action) {
   }
 
   if (action.type === DELETE_CATEGORY){
-    return {
-      ...state,
-      categories: state.categories.filter(categoryId => categoryId.id !== action.payload)
-    }
+
+    return state.filter(categoryId => categoryId.id !== action.payload)
+    
   }
 
   return state;
