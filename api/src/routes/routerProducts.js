@@ -104,6 +104,7 @@ router.delete('/delete/:id', (req, res) => {
 
 });
 
+
 // AGREGAR - BORRAR Categorias //
 router.post('/add/:idProd/:idCat', (req, res) => {
     let product = Product.findByPk(req.params.idProd)
@@ -126,6 +127,7 @@ router.post('/add/:idProd/:idCat', (req, res) => {
 router.delete("/remove/:idProd/:idCat", (req, res) => {
     const categoryId = req.params.idCat;
     Product.findByPk(req.params.idProd)
+
         .then(function (product) {
             console.log(product);
             let prod = product;

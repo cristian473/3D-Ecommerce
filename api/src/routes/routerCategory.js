@@ -39,12 +39,13 @@ router.put('/update/:id', function (req, res) {
 // CONSULTA DE CATEGORIAS //
 router.get("/", function (req, res, next) {
 
-    Category.findAll().then(function (categorias) {
-        if (!categorias) {
-            return res.status(404).send("No hay categorias en el catálogo");
-        }
-        return res.status(200).json(categorias);
-    });
+  Category.findAll().then(function (categorias) {
+      if (!categorias) {
+          return res.status(404).send("No hay categorias en el catálogo");
+      }
+      return res.status(200).json(categorias);
+  });
 });
+
 
 module.exports = router;
