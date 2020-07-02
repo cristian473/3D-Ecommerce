@@ -16,7 +16,8 @@ export function addProduct (product){
     return (dispatch) =>{
         axios.post('http://localhost:3001/products',product)
             .then(response=>{
-                dispatch({type:ADD_PRODUCT, payload: response.data})
+                console.log(response.data.newProduct)
+                dispatch({type:ADD_PRODUCT, payload: response.data.newProduct})
             })
     }
 }
