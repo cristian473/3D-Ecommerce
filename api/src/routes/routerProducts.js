@@ -129,7 +129,7 @@ router.delete('/delete/:id', (req, res) => {
 
 });
 
-router.delete("/remove/:id", (req, res) => {
+router.delete("/remove/:id", (req, res) => { // Para borrar solo una categoria
     const categoryId = req.body.categories;
     Product.findByPk(req.params.id)
         .then(function (product) {

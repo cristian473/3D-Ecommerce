@@ -1,10 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import '../style.css'
 import {deleteCategory} from '../../actions/crudCategoryActions'
 
 const CategoryTable = props => {
-
 
   const dispatch = useDispatch();
   const categories = useSelector(store => store.categories);
