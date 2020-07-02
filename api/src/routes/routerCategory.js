@@ -37,6 +37,7 @@ router.put('/update/:id', function (req, res) {
 })
 
 router.get("/", function (req, res, next) {
+
   Category.findAll().then(function (categorias) {
       if (!categorias) {
           return res.status(404).send("No hay categorias en el catálogo");

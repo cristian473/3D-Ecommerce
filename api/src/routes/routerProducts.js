@@ -92,22 +92,29 @@ router.post("/", function (req, res) {
   })
 
 
-router.put('/update/:id', function (req, res) {
-    Product.update(
-        {
+router.put('/update/:id', async (req, res) => {
+    try {
+        const product = await Product.update({
             name: req.body.name,
             description: req.body.description,
             images: req.body.images,
             price: req.body.price,
             color: req.body.color
-        },
-        { where: { id: req.params.id }, returning: true }
-    )
-        .then(function (product) {
-            res.status(200).json({ mensaje: "El Producto ha sido actualizado correctamente", data: product })
-        })
-
+        }, {
+            where: { id: req.params.id }
+        });
+        if (product) {
+            const productChange = await Product.findByPk(req.params.id);
+            if (productChange) {
+                res.json(productChange)
+            }
+        }
+        throw new Error('Product not found');
+    } catch (error) {
+        return res.status(500).send(error.message);
+    }
 })
+
 
 router.delete('/delete/:id', (req, res) => {
     const id = req.params.id;
