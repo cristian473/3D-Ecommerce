@@ -4,6 +4,7 @@ const { Category } = require("../models");
 var Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
+// CONSULTA DE PRODUCTOS //
 router.get('/search', function (req, res) {
     const productName = req.query.keyword;
     Product.findAll(
@@ -48,73 +49,47 @@ router.get("/:id", function (req, res) {
     });
 });
 
-// router.post("/", function (req, res) {
-//     Product.create({
-//         name: req.body.name,
-//         description: req.body.description,
-//         images: req.body.images,
-//         price: req.body.price,
-//         color: req.body.color,
-//     },
-//         { fields: ['name', 'description', 'images', 'price', 'color'] })
-//         .then(newProduct => {
-//             newProductId = newProduct.id;
-//             return req.body.categories.map(category => {
-//                 return newProduct.addCategory(category);
-//             });
-//         })
-//         .then(categories => {
-//             return Promise.all(categories)
-//         })
-//         .then(function (newProduct) {
-//             res.send(newProduct);
-//         })
-//         .catch(err => res.status(500).send(err))
-// });
-
+// AGREGAR - EDITAR - BORRAR Productos //
 router.post("/", function (req, res) {
-    {console.log(req.body)}
+    { console.log(req.body) }
     Product.create({
-      name: req.body.name,
-      description: req.body.description,
-      images: req.body.images,
-      price: req.body.price,
-      color: req.body.color,
-      stock: req.body.stock
+        name: req.body.name,
+        description: req.body.description,
+        images: req.body.images,
+        price: req.body.price,
+        color: req.body.color,
+        stock: req.body.stock
     })
-      // { fields: ['name', 'description', 'images', 'price', 'stock', 'color'] })
-      .then(function (newProduct) {
-        res.send(newProduct);
-      })
-      .catch(function (err) {
-        console.log(err)
-      })
-  })
-
-
-router.put('/update/:id', async (req, res) => {
-    try {
-        const product = await Product.update({
-            name: req.body.name,
-            description: req.body.description,
-            images: req.body.images,
-            price: req.body.price,
-            color: req.body.color
-        }, {
-            where: { id: req.params.id }
-        });
-        if (product) {
-            const productChange = await Product.findByPk(req.params.id);
-            if (productChange) {
-                res.json(productChange)
-            }
-        }
-        throw new Error('Product not found');
-    } catch (error) {
-        return res.status(500).send(error.message);
-    }
+        .then(function (newProduct) {
+            res.send({ message: "El producto ha sido agregado al catálogo", newProduct });
+        })
+        .catch(function (err) {
+            console.log(err)
+        })
 })
 
+router.put('/update/:id', async (req, res) => {
+
+    Product.findByPk(req.params.id).then(function (product) {
+        if (!product) {
+            return res.status(404).send("Id inválido, no se pudo modificar el producto");
+        }
+        else {
+            Product.update({
+                name: req.body.name,
+                description: req.body.description,
+                images: req.body.images,
+                price: req.body.price,
+                color: req.body.color
+            }, {
+                returning: true, where: { id: product.id }
+            }
+            ).then(function ([registrosUpdated, [productUpdated]]) {
+                return res.status(200).json({ message: "El producto fue actualizado correctamente", productUpdated });
+            })
+        }
+    })
+})
 
 router.delete('/delete/:id', (req, res) => {
     const id = req.params.id;
@@ -129,16 +104,40 @@ router.delete('/delete/:id', (req, res) => {
 
 });
 
-router.delete("/remove/:id", (req, res) => { // Para borrar solo una categoria
-    const categoryId = req.body.categories;
-    Product.findByPk(req.params.id)
+
+// AGREGAR - BORRAR Categorias //
+router.post('/add/:idProd/:idCat', (req, res) => {
+    let product = Product.findByPk(req.params.idProd)
+    let category = Category.findByPk(req.params.idCat)
+    Promise.all([product, category])
+        .then(function (values) {
+            console.log(values);
+            let prod = values[0];
+            let cat = values[1];
+            prod.addCategory(cat)
+                .then(() => {
+                    Product.findByPk(req.params.idProd, { include: [Category] })
+                        .then((pc) => res.status(200).json({ message: "La categoría fue agregada al producto", pc }))
+                })
+        }).catch(function (err) {
+            res.status(400).json({ message: "No se agregó la categoría al producto", error: err })
+        })
+})
+
+router.delete("/remove/:idProd/:idCat", (req, res) => {
+    const categoryId = req.params.idCat;
+    Product.findByPk(req.params.idProd)
+
         .then(function (product) {
             console.log(product);
             let prod = product;
             prod.removeCategories(categoryId)
         })
         .then(function (deletedCategory) {
-            res.status(200).json({ mensaje: "La categoria ha sido eliminada correctamente", data: deletedCategory })
+            res.status(200).json({ message: "La categoria ha sido eliminada correctamente", data: deletedCategory })
+        })
+        .catch(function (err) {
+            res.status(400).json({ message: "No se agregó la categoría al producto", error: err })
         })
 });
 

@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { Category } = require("../models");
 
-
+// AGREGAR - EDITAR - BORRAR Categorias //
 router.post("/", function (req, res) {
     Category.create({
         name: req.body.name,
@@ -36,6 +36,7 @@ router.put('/update/:id', function (req, res) {
         })
 })
 
+// CONSULTA DE CATEGORIAS //
 router.get("/", function (req, res, next) {
 
   Category.findAll().then(function (categorias) {
