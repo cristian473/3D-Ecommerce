@@ -15,14 +15,24 @@ router.post("/", function (req, res) {
         })
 });
 
-router.delete("/delete/:id", (req, res) => {
-    const id = req.params.id;
-    Category.destroy({
-        where: { categoryId: id }
-    }).then(function (product) {
-        res.status(200).json({ mensaje: "La categoria ha sido eliminada correctamente", data: product })
-    });
+router.delete('/delete/:id', (req, res) => {
+  const id = req.params.id;
+  Category.findByPk(id)
+      .then((result) => {
+          return Category.destroy({
+              returning: true, where: { categoryId: id }
+          }).then((category) => {
+              res.status(200).json({ mensaje: "El producto ha sido eliminado correctamente", data: result })
+          })
+      })
+
 });
+
+
+
+
+
+
 
 router.put('/update/:id', function (req, res) {
     Category.update(

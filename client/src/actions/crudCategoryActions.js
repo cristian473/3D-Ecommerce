@@ -20,6 +20,7 @@ export function addCategory(category) {
 }
 
 export function deleteCategory(id) {
+  console.log(id);
   return (dispatch, getState) => {
     axios.delete("http://localhost:3001/category/delete/" + id)
     .then (response => {

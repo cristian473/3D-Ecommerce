@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react'
-import {useDispatch, useSelector} from 'react-redux'
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import '../style.css'
-import {deleteCategory} from '../../actions/crudCategoryActions'
+import { deleteCategory } from '../../actions/crudCategoryActions'
 
 const CategoryTable = props => {
 
@@ -19,7 +19,7 @@ const CategoryTable = props => {
         <tbody>
           {categories.length > 0 ? (
             categories.map(category => (
-              <tr key={category.id}>
+              <tr key={category.categoryId}>
                 <td>{category.name}</td>
                 <td>
                   <button onClick={() => {
@@ -28,9 +28,7 @@ const CategoryTable = props => {
                   >
                     Editar
                   </button>
-                  <button
-                    onClick={() => dispatch(deleteCategory(category.id))}
-                  >
+                  <button onClick={() => dispatch(deleteCategory(category.categoryId))}>
                     Eliminar
                   </button>
                 </td>
@@ -45,6 +43,5 @@ const CategoryTable = props => {
       </table>
     )
 }
-
 
 export default CategoryTable
