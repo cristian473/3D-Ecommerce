@@ -10,6 +10,7 @@ const CrudCategory = () => {
   const categories = useSelector(store => store.categories);
 
   useEffect(() => dispatch(getCategories()),[]);
+  
   console.log(categories);
  
 

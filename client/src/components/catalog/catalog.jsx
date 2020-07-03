@@ -8,7 +8,7 @@ import {
     Switch,
   } from 'react-router-dom';
 import {  useDispatch, useSelector } from 'react-redux';
-import { getProducts } from '../../actions/productActions';
+import { getProducts, getProductsByCategory } from '../../actions/productActions';
 import { getCategories } from '../../actions/crudCategoryActions';
 
 
@@ -26,7 +26,9 @@ const Catalog = () =>{
     useEffect(() => dispatch(getCategories()),[]);
         
           
-        
+    const handleCategoryChange = event =>{
+		dispatch(getProductsByCategory(event.target.value))
+	}   
     
     
     console.log(products)
@@ -36,14 +38,15 @@ const Catalog = () =>{
                 <div className='shopSection'><h3>Categorias:</h3>
 
                 
-                <select onClick={()=>console.log('hola')} className='categorySelect' onChange={(e)=>this.getProducts(e)}>
+                <select onChange={handleCategoryChange} className='categorySelect'>
                 {categories && categories.map(element => 
-                    <option key = {element.id} value = {element.name}>{element.name} </option>
+                    <option key = {element.id} value = {element.categoryId}>{element.name} </option>
                     )}
                     </select>
                 </div>
                 {products && products.map(element => 
                     <Product
+                        id = {element.id}
                         image = {element.images}
                         name = {element.name}
                         description = {element.description}

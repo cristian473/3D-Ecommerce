@@ -11,13 +11,18 @@ export function delProduct (id){
 };
 }
 
-export function addProduct (product){
-    console.log(product)
+export function addProduct (product, idCategory){
+    console.log(idCategory);
+    
     return (dispatch) =>{
-        axios.post('http://localhost:3001/products',product)
+        axios.post('http://localhost:3001/products/', product)
             .then(response=>{
-                console.log(response.data.newProduct)
-                dispatch({type:ADD_PRODUCT, payload: response.data.newProduct})
+                axios.post('http://localhost:3001/products/add/'+ response.data.newProduct.id +'/'+ idCategory)
+                .then(response =>{
+                    
+                    dispatch({type:ADD_PRODUCT, payload: response.data.pc})
+                })
+                
             })
     }
 }
