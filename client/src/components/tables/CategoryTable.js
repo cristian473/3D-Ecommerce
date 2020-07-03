@@ -7,7 +7,7 @@ const CategoryTable = props => {
 
   const dispatch = useDispatch();
   const categories = useSelector(store => store.categories);
-
+  console.log(categories)
   return(
       <table className="table">
         <thead>
@@ -29,7 +29,7 @@ const CategoryTable = props => {
                     Editar
                   </button>
                   <button
-                    onClick={() => dispatch(deleteCategory(category.id))}
+                    onClick={() => dispatch(deleteCategory(category.categoryId))}
                   >
                     Eliminar
                   </button>

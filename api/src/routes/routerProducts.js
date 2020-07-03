@@ -23,14 +23,34 @@ router.get('/search', function (req, res) {
         });
 });
 
+// router.get("/", function (req, res, next) {
+//     const category = req.body.categories;
+//     if (category) {
+//         find = { include: [{ model: Category, where: { categoryId: category } }] };
+//     }
+//     else {
+//         find = {include: [{model: Category}] };
+//     }
+//     Product.findAll(find).then(function (product) {
+//         if (!product) {
+//             return res.status(404).send("No hay productos en la tienda");
+//         }
+//         return res.status(200).json(product);
+//     });
+// });
+
 router.get("/", function (req, res, next) {
-    const category = req.body.categories;
-    if (category) {
-        find = { include: [{ model: Category, where: { categoryId: category } }] };
-    }
-    else {
-        find = {};
-    }
+    Product.findAll().then(function (product) {
+        if (!product) {
+            return res.status(404).send("No hay productos en la tienda");
+        }
+        return res.status(200).json(product);
+    });
+});
+
+router.get("/category/:id", function (req, res, next) {
+    const category = req.params.id;
+    find = { include: [{ model: Category, where: { categoryId: category } }] };
     Product.findAll(find).then(function (product) {
         if (!product) {
             return res.status(404).send("No hay productos en la tienda");
