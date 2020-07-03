@@ -46,6 +46,7 @@ const Catalog = () =>{
                 </div>
                 {products && products.map(element => 
                     <Product
+                        id = {element.id}
                         image = {element.images}
                         name = {element.name}
                         description = {element.description}

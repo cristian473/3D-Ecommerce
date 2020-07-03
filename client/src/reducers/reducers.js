@@ -6,5 +6,5 @@ import searchReducer from './searchReducer'
 export const reducers = combineReducers({
     products: getData,
     categories: getDataCategories,
-    search: searchReducer
+    search: searchReducer 
 })
