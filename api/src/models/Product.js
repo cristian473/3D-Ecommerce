@@ -14,6 +14,7 @@ const Product = (sequelize, S) => {
     images: { type: S.BLOB },
     price: { type: S.REAL },
     color: { type: S.STRING },
+    stock: { type: S.REAL },
   });
 
 

@@ -6,7 +6,6 @@ const initialState = [];
 function getDataCategories(state = initialState, action) {
   if (action.type === GET_CATEGORIES) {
     
-    
     return action.payload
               
   }
@@ -16,8 +15,8 @@ function getDataCategories(state = initialState, action) {
   }
 
   if (action.type === DELETE_CATEGORY){
-
-    return state.filter(categoryId => categoryId.id !== action.payload)
+    
+    return state.filter(categoryId => categoryId.categoryId !== action.payload)
     
   }
 

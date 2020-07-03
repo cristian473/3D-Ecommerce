@@ -28,7 +28,7 @@ const ProductTable = props => {
               <tr key={product.id}>
                 <td>{product.name}</td>
                 <td>{product.description}</td>
-                <td>{product.category}</td>
+                <td>{product.categories[0].name}</td>
                 <td>{product.price}</td>
                 <td>{product.stock}</td>
                 <td><img className="image" src={product.image}/></td>
