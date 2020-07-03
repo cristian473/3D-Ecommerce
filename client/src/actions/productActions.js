@@ -1,5 +1,5 @@
 import { GET_PRODUCTS } from '../constants/searchConstants';
-import { DEL_PRODUCT, GET_PRODUCTS_BY_CATEGORY } from '../constants/searchConstants';
+import { DEL_PRODUCT, GET_PRODUCTS_BY_CATEGORY, GET_PRODUCT_DETAIL } from '../constants/searchConstants';
 import axios from 'axios'
 
 
@@ -24,6 +24,15 @@ export function getProductsByCategory (id){
   };
 }
 
+export function getProductDetail (id){
+  return (dispatch, getState) => {
+    axios.get("http://localhost:3001/products/" + id)
+        .then (response =>{
+          console.log(response)
+            dispatch ({type: GET_PRODUCT_DETAIL, payload: response.data})
+        })
+  };
+}
 
 
 

@@ -1,50 +1,48 @@
-import React from 'react'
-import {Link} from 'wouter'
-// import Catalog from './catalog/catalog'  
+import React, { useState, useEffect }from 'react'
 import axios from 'axios'
+import Product from './product'
+import {
+    BrowserRouter as Router,
+    Link,
+    Route,
+    Switch,
+  } from 'react-router-dom';
+import {  useDispatch, useSelector } from 'react-redux';
+import { getProducts, getProductsByCategory, getProductDetail } from '../../actions/productActions';
+import { getCategories } from '../../actions/crudCategoryActions';
 
 
-export default class Product extends React.Component{
-    constructor (props){
-        super (props);
-        this.state = {
-            product:[]
-        }
-        
-    }
 
-    getProducts(id){   
-        axios.get("https://jsonplaceholder.typicode.com/posts/"+ id)
-        .then (response =>{
-            this.setState({
-                product: response.data,
-            })
-            console.log(this.state)
-            
-        })
 
-        .catch(error => {
-            console.log(error)
-        })
+const Details = props =>{
 
-    }
+    
+  const id = props.params.id
+  const dispatch = useDispatch();
+  const products = useSelector(store => store.products);
+   
+    useEffect(() => dispatch(getProductDetail(id)),[]);
+    // useEffect(() => dispatch(getCategories()),[]);
+    
+    
+    console.log(products)
+    return(
+         
+            <div >
+                <div >
+                    <img width="60px" src = {products.images}></img>
+                    <h2>{products.name}</h2>
+                    <p>{products.description}</p>
+                    <h4>Precio: ${products.price}</h4>
+                    <p>Stock: {products.stock}</p>
+                    <button>Comprar</button>
+                </div>
+            </div>
+    )
+}
     
 
-    render(){
-        const id=this.props.params.id;
-        const getProducts = this.getProducts(id)
-        return (
-        <div >
-            <div >
-                {getProducts}
-                <img width="60px" src = {this.state.image}></img>
-                <h2>{this.state.product.title}</h2>
-                <p>{this.state.product.body}</p>
-                <h4>Precio: ${this.state.product.id}</h4>
-                <p>Stock: {this.props.stock}</p>
-                <button>Comprar</button>
-            </div>
-        </div>
-        );
-    }
-}
+    
+
+
+    export default Details

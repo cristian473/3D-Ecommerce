@@ -40,7 +40,7 @@ router.get('/search', function (req, res) {
 // });
 
 router.get("/", function (req, res, next) {
-    Product.findAll().then(function (product) {
+    Product.findAll({include: [{model: Category}] }).then(function (product) {
         if (!product) {
             return res.status(404).send("No hay productos en la tienda");
         }
