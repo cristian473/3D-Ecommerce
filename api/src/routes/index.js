@@ -5,8 +5,11 @@ const Op = Sequelize.Op;
 const { Product } = require("../models/");
 const { Category } = require("../models/");
 const { Order } = require("../models/");
+
 const { OrderDetail } = require("../models/");
 const { User } = require("../models/");
+
+
 
 const authRouter = require("./auth.js");
 const routerProducts = require("./routerProducts.js");
@@ -23,8 +26,13 @@ router.use("/user", routerUser);
 Product.belongsToMany(Category, { through: "products_categories" });
 Category.belongsToMany(Product, { through: "products_categories" });
 
+
 Product.belongsToMany(Order, { through: OrderDetail });
 Order.belongsToMany(Product, { through: OrderDetail });
+
+Order.belongsToMany(Product, { through: "order_details" });
+Product.BelongToMany(Order, { through: "order_details" });
+
 
 module.exports = router;
 
