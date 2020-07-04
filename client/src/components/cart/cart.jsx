@@ -3,7 +3,6 @@ import {useDispatch, useSelector} from 'react-redux'
 import '../style.css'
 import {delProductCart} from '../../actions/productActions'
 import {REM_PRODUCT_CART, GET_CART} from '../../constants/searchConstants'
-import Product from '../catalog/product'
 
 
 
