@@ -1,7 +1,7 @@
 var Sequelize = require('sequelize');
 const S = Sequelize;
 const OrderDetail = (sequelize, S) => {
-  const OL = sequelize.define("order_detail", {
+  const OL = sequelize.define("order_details", {
     id: {
       type: S.INTEGER,
       allowNull: true,
