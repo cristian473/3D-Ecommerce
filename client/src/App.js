@@ -13,6 +13,7 @@ import Results from './components/search/searchResults'
 import CrudCategory from './components/CRUD/CrudCategory'
 import CrudProduct from './components/CRUD/CrudProduct'
 import store from './store/store'
+import Cart from './components/cart/cart'
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
       <Route path='/' component={Banner} />
       <Route path='/Catalogo' component={Catalog} />
       <Route path='/producto/:id' component={Details} />
+      <Route path = '/cart' component={Cart}/>
 
       <Route path='/products/search' component={Results} />
 

@@ -48,7 +48,7 @@ const AddProductForm = props => {
 			<label>Precio</label>
 			<input type="text" name="price" placeholder="Agregar precio" value={product.price} onChange={handleInputChange} />
 			<label>Stock</label>
-			<input type="text" name="stock" placeholder="Agregar stock" value={product.stock} onChange={handleInputChange} />
+			<input type="number" name="stock" min='1' placeholder="Agregar stock" value={product.stock} onChange={handleInputChange} />
 			<label>Imagen</label>
 			<input type="text" name="image" placeholder="Agregar url de la imagen" value={product.image} onChange={handleInputChange} />
 			
