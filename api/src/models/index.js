@@ -21,6 +21,7 @@ fs.readdirSync(__dirname)
 
 const { Product } = models;
 const { Category } = models;
+const { Cart } = models;
 
 
 // Add model relationships here
