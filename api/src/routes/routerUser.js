@@ -27,23 +27,24 @@ router.post("/", function (req, res) {
 // AGREGRAR PRODUCTOS AL CARRITO //
 
 router.post('/:idUser/cart', (req, res) => {
-
-
     let order = Order.findOrCreate({ where: { userId: req.params.idUser, status: "carrito" } });
     let product = Product.findByPk(req.body.productId);
     Promise.all([order, product])
         .then(function (values) {
-            console.log(values);
-            let order = values[0];
+            let ord = values[0];
             let prod = values[1];
-            order.addProduct(prod)
+            // console.log(values[0]);
+            // console.log(values[1]);
+            prod.addOrders(ord)
                 .then(() => {
-                    Order.findByPk(order, { include: [Product] })
+                    Order.findByPk(ord, { include: [Product] })
                         .then((op) => res.status(200).json({ message: "El producto fue agregado al carrito", op }))
                 })
-        }).catch(function (err) {
-            res.status(400).json({ message: "No se agregó la categoría al producto", error: err })
+                .catch(function (err) {
+                    res.status(400).json({ message: "No se agregó el producto al carrito", error: err })
+                })
         })
+
 })
 
 module.exports = router;
