@@ -20,7 +20,7 @@ const Login = () => {
 	}
     
   return (
-    <div>
+    <div className="loginScreen">
       <h2>Iniciar Sesión</h2>
       <form onSubmit={event => {
         event.preventDefault()
@@ -39,7 +39,7 @@ const Login = () => {
         <button>Continuar</button>
       </form>
       <h2>¿Eres nuevo en 3D-Models?</h2>
-      <button>Crea tu cuenta de Amazon</button>
+      <button>Crea tu cuenta de 3D-SHOP</button>
     </div>
   )
 }

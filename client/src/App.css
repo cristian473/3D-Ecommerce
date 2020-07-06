@@ -6,6 +6,7 @@ body{
   margin: 0;
   background-color: rgb(243,243,243);
   font-family: 'Montserrat', sans-serif;
+  box-sizing: border-box;
 }
 
 .App-logo {
@@ -43,28 +44,7 @@ body{
   }
 }
 
-.Product {
-    width: 200px;
-    height: 15em;
-    border: 1px black solid;
-    display: inline-flex;
-    margin: 10px;
-    padding: 10px;
-    border-radius: 15px;
-    justify-content: center;
-}
-.categorySelect{
-  display: flex;
-  margin: 10px;
-  font-size: 24px;
-}
-.shopSection{
-  display: flex;
-  justify-content: center;
-}
-.divProduct{
-  justify-content: center;
-}
+
 
 .navBar {
   width: 100%;

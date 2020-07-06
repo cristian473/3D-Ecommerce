@@ -3,6 +3,7 @@ import React, { useEffect }from 'react'
 import {  useDispatch, useSelector } from 'react-redux';
 import { addProductCart, getProductById } from '../../actions/productActions';
 import { ADD_PRODUCT } from '../../constants/searchConstants';
+import '../style.css';
 
 const Product = props =>{
 
@@ -33,7 +34,7 @@ const Product = props =>{
            
               <div className='Product'>
                   <div  >
-                      <img width="60px" src = {props.images}></img>
+                      <img src = {props.images}></img>
                       <h2>{props.name}</h2>
                       <p>{props.description}</p>
                       <h4>Precio: ${props.price}</h4>

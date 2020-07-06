@@ -12,7 +12,6 @@ button, .button {
 	background-color: aquamarine;
 	color:rgb(50, 50, 50);
 	font-weight: bold;
-	margin: 5px;
 	border-radius: 5px;
 	border: none;
 	display: inline;
@@ -21,18 +20,17 @@ button, .button {
 input {
 	font-size: 1em;
 	padding: 10px;
-	margin: 5px;
   display: inline;
   background-color: whitesmoke;
+  border-radius: 5px;
+  border: 1px solid grey;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
-input {
-	font-size: 1em;
-	padding: 10px;
-	margin: 5px;
-	border-radius: 5px;
-	border: none;
-	display: inline;
+label{
+  margin-right: 10px;;
+  font-weight: bold;
 }
 
 select {
@@ -40,7 +38,8 @@ select {
 	padding: 10px;
 	margin: 10px;
 	border-radius: 5px;
-	border: 1px solid grey;
+  border: 1px solid grey;
+  margin-top: 100px;
 }
 
 .inline {
@@ -55,15 +54,21 @@ select {
 
 .containerCategory{
   margin-top: 5rem;
-  width: 28%;
+  width: 26%;
   float: left;
   margin-left: 1%;
   margin-right: 1%;
 }
 
+.containerCategory h2, .containerProduct h2{
+  text-align: center;
+  text-decoration: underline;
+  margin-top: 20px;
+}
+
 .containerProduct{
   margin-top: 5rem;
-  width: 68%;
+  width: 70%;
   float: left;
   margin-left: 1%;
   margin-right: 1%;
@@ -71,10 +76,48 @@ select {
 
 .formAddCategory{
   width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.formAddCategory input{
+  width: 100%;
+  border: 1px solid grey;
+  border-radius: 5px;
+}
+
+.formAddCategory button{
+  width: 100%;
 }
 
 .formAddProducts{
   width: 100%;
+}
+
+.wrapperForm1, .wrapperForm2, .wrapperForm3{
+  width: 32%;
+  float: left;
+}
+
+.wrapperForm2{
+  margin-left: 2%;
+  margin-right: 2%;
+}
+
+.formAddProducts input{
+  width: 100%;
+}
+
+.formAddProducts button{
+  width: 100%;
+  background-color: rgb(50, 50, 50);
+	color: aquamarine;
+}
+
+.formAddProducts button:hover{
+  width: 100%;
+  background-color: aquamarine;
+	color: rgb(50, 50, 50);
 }
 
 .tableProducts, .tableCategory {
@@ -86,9 +129,13 @@ select {
   padding: 2%;
 }
 
+.tableProducts button, .tableCategory button{
+  margin-left: 10px;;
+}
+
 form {
-	padding: 5px;
-	margin: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .image {
@@ -101,4 +148,91 @@ form {
 	flex-wrap: wrap;
 	justify-content: flex-start;
 
+}
+
+.categorySelect{
+  font-size: 1rem;
+  background-color: rgb(243,243,243);
+  width: 100%;
+  font-size: 1em;
+  padding: 10px;
+  margin: 0;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.catalogSelect{
+  font-size: 1rem;
+  min-width: 250px;
+  background-color: rgb(243,243,243);
+  width: 18%;
+  font-size: 1em;
+  padding: 10px;
+  margin: 1%;
+  margin-top: 3.5%;;
+}
+
+.catalogo{
+  display: flex;
+  justify-content: left;
+  flex-wrap: wrap;
+}
+
+.shopSection{
+ background-color: aquamarine;
+}
+
+.Product{
+  width: 18%;
+  min-width: 250px;
+  border-radius: 5px;
+  border: 1px solid grey;
+  float: left;
+  margin: 1%;
+
+}
+
+.Product img{
+  background-color:rgb(50, 50, 50);
+  width: 90%;
+  margin: 5%;
+  height: 300px;
+  border-radius: 5px;
+}
+
+.Product h2{
+  width: 90%;
+  margin: 1% 5%;
+  font-size: 2rem;
+}
+
+.Product p{
+  width: 90%;
+  margin: 1% 5%;
+}
+
+.Product h4{
+  width: 90%;
+  margin: 1% 5%;
+}
+
+.Product button{
+  background-color: rgb(50, 50, 50);
+	color: aquamarine;
+  width: 90%;
+  margin: 5%;
+  position: relative;
+}
+
+.Product button:hover{
+  background-color: aquamarine;
+  color:rgb(50, 50, 50);
+  width: 90%;
+  margin: 5%;
+}
+
+.loginScreen{
+  text-align: center;
+  padding-top: 100px;
+  width: 100%;
 }

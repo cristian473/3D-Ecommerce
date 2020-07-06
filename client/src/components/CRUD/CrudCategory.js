@@ -60,7 +60,7 @@ const CrudCategory = () => {
         </div>
 
         <div className="flex-large">
-          <h2>Categorias</h2>
+          {/* <h2>Categorias</h2> */}
           <CategoryTable categories={categories} />
         </div>
       </div>
