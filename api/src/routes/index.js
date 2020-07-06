@@ -18,7 +18,7 @@ Product.belongsToMany(Category, { through: "products_categories" });
 Category.belongsToMany(Product, { through: "products_categories" });
 
 Order.belongsToMany(Product, { through: "order_details" });
-Product.BelongToMany(Order, { through: "order_details" });
+Product.belongsToMany(Order, { through: "order_details" });
 
 module.exports = router;
 

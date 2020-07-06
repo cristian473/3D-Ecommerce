@@ -5,6 +5,7 @@ import {addProduct} from '../../actions/crudActions'
 import {  useDispatch, useSelector } from 'react-redux';
 
 import { getCategories } from '../../actions/crudCategoryActions';
+import {updateProduct} from '../../actions/crudActions'
 
 const AddProductForm = props => {
 	const initialFormState = { id: null, name: '', description: '', category: '', price: '', stock: '', image: '', idCategory: '' }
@@ -13,7 +14,7 @@ const AddProductForm = props => {
 	const categories = useSelector(store => store.categories);
 	useEffect(() => dispatch(getCategories()),[]);
 
-	var selectedCategory = '';
+	
 	const handleInputChange = event => {
 		const { name, value } = event.target
 		setProduct({ ...product, [name]: value })
