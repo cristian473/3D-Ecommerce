@@ -1,8 +1,9 @@
 var Sequelize = require('sequelize');
 const S = Sequelize;
 const OrderDetail = (sequelize, S) => {
-  const OL = sequelize.define("order_details", {
-    id: {
+
+const OL = sequelize.define("order_details", {
+    orderId: {
       type: S.INTEGER,
       allowNull: true,
       autoIncrement: true,
@@ -22,3 +23,4 @@ const OrderDetail = (sequelize, S) => {
 };
 
 module.exports = OrderDetail;
+
