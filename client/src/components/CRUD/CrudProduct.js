@@ -44,15 +44,6 @@ const Crud = () => {
       <div className="flex-row">
         <div className="flex-large">
           {
-            // <Fragment>
-            //   <h2>Editar productos</h2>
-            //   <EditProductForm
-            //     // editing={editing}
-            //     // setEditing={setEditing}
-            //     // currentProduct={currentProduct}
-            //     // updateProduct={updateProduct}
-            //   />
-            // </Fragment>
              <Fragment>
               <h2>Agregar productos</h2>
                 <AddProductForm/> 
