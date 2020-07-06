@@ -7,7 +7,7 @@ const CategoryTable = props => {
 
   const dispatch = useDispatch();
   const categories = useSelector(store => store.categories);
-  console.log(categories)
+
   return(
       <table className="table">
         <thead>

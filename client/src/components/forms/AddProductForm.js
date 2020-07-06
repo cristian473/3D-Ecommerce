@@ -5,6 +5,7 @@ import {addProduct} from '../../actions/crudActions'
 import {  useDispatch, useSelector } from 'react-redux';
 
 import { getCategories } from '../../actions/crudCategoryActions';
+import {updateProduct} from '../../actions/crudActions'
 
 const AddProductForm = props => {
 	const initialFormState = { id: null, name: '', description: '', category: '', price: '', stock: '', image: '', idCategory: '' }
@@ -13,7 +14,7 @@ const AddProductForm = props => {
 	const categories = useSelector(store => store.categories);
 	useEffect(() => dispatch(getCategories()),[]);
 
-	var selectedCategory = '';
+	
 	const handleInputChange = event => {
 		const { name, value } = event.target
 		setProduct({ ...product, [name]: value })
@@ -48,7 +49,7 @@ const AddProductForm = props => {
 			<label>Precio</label>
 			<input type="text" name="price" placeholder="Agregar precio" value={product.price} onChange={handleInputChange} />
 			<label>Stock</label>
-			<input type="text" name="stock" placeholder="Agregar stock" value={product.stock} onChange={handleInputChange} />
+			<input type="number" name="stock" min='1' placeholder="Agregar stock" value={product.stock} onChange={handleInputChange} />
 			<label>Imagen</label>
 			<input type="text" name="image" placeholder="Agregar url de la imagen" value={product.image} onChange={handleInputChange} />
 			

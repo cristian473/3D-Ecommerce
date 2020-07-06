@@ -51,7 +51,7 @@ const Catalog = () =>{
                         name = {element.name}
                         description = {element.description}
                         price = {element.price}
-                        stock = {element.id}
+                        stock = {element.stock}
                     />
                 )}
             </section>
