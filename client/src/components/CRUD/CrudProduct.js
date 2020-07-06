@@ -39,7 +39,7 @@ const Crud = () => {
   }
 
   return (
-    <div className="container">
+    <div className="containerProduct">
       
       <div className="flex-row">
         <div className="flex-large">

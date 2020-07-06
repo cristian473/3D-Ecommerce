@@ -55,7 +55,7 @@ const ProductTable = props => {
 
 
   return(
-      <table className="table">
+      <table className="tableProducts">
         <thead>
           <tr>
             <th>Nombre</th>

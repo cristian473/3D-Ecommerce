@@ -12,6 +12,7 @@ import Banner from './components/banner'
 import Results from './components/search/searchResults'
 import CrudCategory from './components/CRUD/CrudCategory'
 import CrudProduct from './components/CRUD/CrudProduct'
+import Login from './components/login/login.js'
 import store from './store/store'
 import Cart from './components/cart/cart'
 
@@ -28,6 +29,8 @@ function App() {
 
         <Route path='/admin' component={CrudCategory}/>
         <Route path='/admin' component={CrudProduct}/>
+
+        <Route path='/login' component={Login}/>
       </div>
   );
 }

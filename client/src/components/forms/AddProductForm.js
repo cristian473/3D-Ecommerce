@@ -27,7 +27,7 @@ const AddProductForm = props => {
 
 
 	return (
-		<form
+		<form class="formAddProducts"
 			onSubmit={event => {
 				event.preventDefault()
 				if (!product.name || !product.description) return
@@ -36,23 +36,28 @@ const AddProductForm = props => {
 				setProduct(initialFormState)
 			}}
 		>
-			<label>Nombre</label>
-			<input type="text" name="name" placeholder="Agregar nombre" value={product.name} onChange={handleInputChange} />
-			<label>Descripción</label>
-			<input type="text" name="description" placeholder="Agregar descripción" value={product.description} onChange={handleInputChange} />
-			<label>Categorias</label>
-			<select onChange={handleInputChangeOptions} className='categorySelect'>
-				{categories && categories.map(element =>
-					<option key={element.categoryId}  name= 'category' value = {element.categoryId}>{element.name} </option>
-				)}
-			</select>
-			<label>Precio</label>
-			<input type="text" name="price" placeholder="Agregar precio" value={product.price} onChange={handleInputChange} />
-			<label>Stock</label>
-			<input type="number" name="stock" min='1' placeholder="Agregar stock" value={product.stock} onChange={handleInputChange} />
-			<label>Imagen</label>
-			<input type="text" name="image" placeholder="Agregar url de la imagen" value={product.image} onChange={handleInputChange} />
-			
+      <div className="wrapperForm1">
+        <label>Nombre</label>
+        <input type="text" name="name" placeholder="Agregar nombre" value={product.name} onChange={handleInputChange} />
+        <label>Descripción</label>
+        <input type="text" name="description" placeholder="Agregar descripción" value={product.description} onChange={handleInputChange} />
+      </div> 
+      <div className="wrapperForm2">  
+        <label>Categorias</label>
+        <select onChange={handleInputChangeOptions} className='categorySelect'>
+          {categories && categories.map(element =>
+            <option key={element.categoryId}  name= 'category' value = {element.categoryId}>{element.name} </option>
+          )}
+        </select>
+        <label>Precio</label>
+        <input type="text" name="price" placeholder="Agregar precio" value={product.price} onChange={handleInputChange} />
+      </div>
+      <div className="wrapperForm3">  
+        <label>Stock</label>
+        <input type="number" name="stock" min='1' placeholder="Agregar stock" value={product.stock} onChange={handleInputChange} />
+        <label>Imagen</label>
+        <input type="text" name="image" placeholder="Agregar url de la imagen" value={product.image} onChange={handleInputChange} />
+      </div>
 			<button>Agregar nuevo producto</button>
 		</form>
 	)

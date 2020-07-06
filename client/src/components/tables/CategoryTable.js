@@ -9,7 +9,7 @@ const CategoryTable = props => {
   const categories = useSelector(store => store.categories);
 
   return(
-      <table className="table">
+      <table className="tableCategory">
         <thead>
           <tr>
             <th>Categorias</th>
