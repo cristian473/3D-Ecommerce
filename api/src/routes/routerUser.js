@@ -31,13 +31,13 @@ router.post("/:idUser/cart", (req, res) => {
     let product = Product.findByPk(req.body.productId);
     Promise.all([order, product])
         .then(function (values) {
-            let ord = values[0].dataValues;
+            let ord = values[0][0];
             let prod = values[1];
-            console.log(values[0]);
-            console.log(values[1]);
-            prod.addOrders(ord)
+            console.log(ord);
+            console.log(prod);
+            prod.addOrder(ord)
                 .then(() => {
-                    Order.findByPk(ord, { include: [Product] })
+                    Order.findByPk(ord.orderId, { include: [Product] })
                         .then((op) => res.status(200).json({ message: "El producto fue agregado al carrito", op }))
                 })
                 .catch(function (err) {
