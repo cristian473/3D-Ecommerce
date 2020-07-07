@@ -47,4 +47,24 @@ router.post("/:idUser/cart", (req, res) => {
 
 })
 
+// VACIAR CARRITO //
+
+// REF: pasar por body el nuevo "status" del carrito como "carritoVaciado"
+
+router.put('/:userId/cart', (req, res) => {
+    Order.findOne({ where: { userId: req.params.userId, status: "carrito" } })
+        .then(function (order) {
+            console.log(order)
+            Order.update({ status: req.body.status }, { where: { orderId: order.orderId } })
+                .then(
+                    res.status(200).json({ message: "el carro se vació" })
+                )
+        })
+        .catch(function (err) {
+            res.status(400).json({ message: "No se pudo vaciar el carro.", error: err })
+        })
+})
+
+
+
 module.exports = router;
