@@ -9,8 +9,12 @@ const Order = (sequelize, S) => {
             autoIncrement: true,
             primaryKey: true
         },
-        productId: {
+        userId: {
             type: S.INTEGER,
+            allowNull: true,
+        },
+        status: {
+            type: S.TEXT,
             allowNull: true,
         }
     });
