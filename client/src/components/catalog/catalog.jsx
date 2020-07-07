@@ -38,12 +38,13 @@ const Catalog = () =>{
                 <div className='shopSection'><h3>Categorias:</h3>
 
                 
-                <select onChange={handleCategoryChange} className='categorySelect'>
+                <select onChange={handleCategoryChange} className='catalogSelect'>
                 {categories && categories.map(element => 
                     <option key = {element.id} value = {element.categoryId}>{element.name} </option>
                     )}
                     </select>
                 </div>
+                <div className="catalogo">
                 {products && products.map(element => 
                     <Product
                         id = {element.id}
@@ -51,9 +52,10 @@ const Catalog = () =>{
                         name = {element.name}
                         description = {element.description}
                         price = {element.price}
-                        stock = {element.id}
+                        stock = {element.stock}
                     />
                 )}
+                </div>
             </section>
     )
 }

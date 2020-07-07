@@ -17,12 +17,14 @@ import SearchBar from './search/searchBarFix'
         return(
             <div>
                 <div className='navBar'>
-                    <a href="/" ><h1>3D-Shop</h1></a>
+                    <a href="/"><h1>3D-Shop</h1></a>
                     <SearchBar />
                     <div className='navBarButtons'>
+                        <Link className='navLink' to='/cart'>Carrito</Link>
                         <Link className='navLink' to='/'>Inicio</Link> 
                         <Link className='navLink' to='/Catalogo'>Catalogo</Link>
                         <Link className='navLink' to='/admin'>Admin</Link> 
+                        <Link className='navLink' to='/login'>Login</Link> 
                     </div>
                 </div>
 

@@ -1,5 +1,4 @@
 import { createStore, applyMiddleware } from "redux";
-import getData from "../reducers/productReducers";
 import thunk from "redux-thunk";
 import {reducers} from '../reducers/reducers'
 

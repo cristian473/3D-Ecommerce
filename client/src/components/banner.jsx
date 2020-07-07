@@ -17,7 +17,7 @@ import {Link} from 'wouter'
     render(){
         return(
             <div>
-                <img src={require("../images/banner.jpg")} width='100%' height='500px' alt="banner"></img>
+                <img src={require("../images/banner.jpg")} width='100%' alt="banner"></img>
 
             </div>
         )

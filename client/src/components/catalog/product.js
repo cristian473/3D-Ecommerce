@@ -1,31 +1,48 @@
-import React from 'react'
 import {Link} from 'wouter'
+import React, { useEffect }from 'react'
+import {  useDispatch, useSelector } from 'react-redux';
+import { addProductCart, getProductById } from '../../actions/productActions';
+import { ADD_PRODUCT } from '../../constants/searchConstants';
+import '../style.css';
 
-export default class Product extends React.Component{
-    constructor (props){
-        super (props);
-        this.state = {
-            name: this.props.name,
-            description: this.props.description,
-            category: this.props.category,
-            price: this.props.price,
-            stock: this.props.stock,
-            image: this.props.image
-        }
-    }
+const Product = props =>{
 
-    render(){
-        return (
-        <div className ='Product'>
-            <div className='divProduct'>
-            <Link to={'/producto/'+ this.props.id} ><img width="60px" src = {this.props.image}></img>
-            <h2>{this.props.name}</h2></Link>
-            <p>{this.props.description}</p>
-            <h4>Precio: ${this.props.price}</h4>
-            <p>Stock: {this.props.stock}</p>
-            <button>Comprar</button>
-            </div>
-        </div>
-        );
-    }
-}
+    const dispatch = useDispatch();
+
+      
+      const addCart = event =>{
+          
+
+        const id = event.target.value
+        // dispatch (addProductCart(id));
+
+        // 
+
+        getProductById(id).then(function(result){
+
+            var products = JSON.parse(localStorage.getItem('productsInCart') || "[]");
+            products.push(result);
+
+            localStorage.setItem('productsInCart', JSON.stringify(products))
+            
+        })
+
+        
+      }
+      
+      return(
+           
+              <div className='Product'>
+                  <div  >
+                      <img src = {props.images}></img>
+                      <h2>{props.name}</h2>
+                      <p>{props.description}</p>
+                      <h4>Precio: ${props.price}</h4>
+                      <p>Stock: {props.stock}</p>
+                      <button value = {props.id} onClick={addCart}>Agregar al carrito</button>
+                  </div>
+              </div>
+      )
+  }
+
+export default Product

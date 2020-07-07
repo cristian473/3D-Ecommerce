@@ -39,20 +39,11 @@ const Crud = () => {
   }
 
   return (
-    <div className="container">
+    <div className="containerProduct">
       
       <div className="flex-row">
         <div className="flex-large">
           {
-            // <Fragment>
-            //   <h2>Editar productos</h2>
-            //   <EditProductForm
-            //     // editing={editing}
-            //     // setEditing={setEditing}
-            //     // currentProduct={currentProduct}
-            //     // updateProduct={updateProduct}
-            //   />
-            // </Fragment>
              <Fragment>
               <h2>Agregar productos</h2>
                 <AddProductForm/> 
