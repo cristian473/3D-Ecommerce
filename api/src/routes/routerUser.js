@@ -26,15 +26,15 @@ router.post("/", function (req, res) {
 
 // AGREGRAR PRODUCTOS AL CARRITO //
 
-router.post('/:idUser/cart', (req, res) => {
+router.post("/:idUser/cart", (req, res) => {
     let order = Order.findOrCreate({ where: { userId: req.params.idUser, status: "carrito" } });
     let product = Product.findByPk(req.body.productId);
     Promise.all([order, product])
         .then(function (values) {
-            let ord = values[0];
+            let ord = values[0].dataValues;
             let prod = values[1];
-            // console.log(values[0]);
-            // console.log(values[1]);
+            console.log(values[0]);
+            console.log(values[1]);
             prod.addOrders(ord)
                 .then(() => {
                     Order.findByPk(ord, { include: [Product] })

@@ -22,6 +22,8 @@ router.use("/category", routerCategory);
 router.use("/order", routerOrder);
 router.use("/user", routerUser);
 
+// RELACIONES ENTRE TABLAS //
+
 Product.belongsToMany(Category, { through: "products_categories" });
 Category.belongsToMany(Product, { through: "products_categories" });
 
