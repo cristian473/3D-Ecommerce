@@ -7,6 +7,8 @@ const { Product } = require("../models/");
 const { Category } = require("../models/");
 const { Order } = require("../models/");
 const { User } = require("../models/");
+const { OrderDetails } = require("../models/");
+
 
 
 const authRouter = require("./auth.js");
@@ -27,8 +29,14 @@ router.use("/user", routerUser);
 Product.belongsToMany(Category, { through: "products_categories" });
 Category.belongsToMany(Product, { through: "products_categories" });
 
-Order.belongsToMany(Product, { through: "order_details" });
-Product.belongsToMany(Order, { through: "order_details" });
+// Order.belongsToMany(Product, { through: "order_details" });
+// Product.belongsToMany(Order, { through: "order_details" });
+
+// Order.belongsToMany(Product, { through: "order_details", include: [{ model: OrderDetails }] });
+// Product.belongsToMany(Order, { through: "order_details", include: [{ model: OrderDetails }] });
+
+Order.belongsToMany(Product, { through: OrderDetails });
+Product.belongsToMany(Order, { through: OrderDetails });
 
 
 module.exports = router;

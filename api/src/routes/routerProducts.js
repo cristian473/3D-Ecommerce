@@ -55,7 +55,6 @@ router.get("/:id", function (req, res) {
 
 // AGREGAR - EDITAR - BORRAR Productos //
 router.post("/", function (req, res) {
-    { console.log(req.body) }
     Product.create({
         name: req.body.name,
         description: req.body.description,
