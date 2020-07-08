@@ -2,13 +2,15 @@ const router = require('express').Router();
 const { User } = require("../models");
 const { Product } = require("../models/");
 const { Order } = require("../models/");
+const { OrderDetails } = require("../models/");
 var Sequelize = require('sequelize');
+const { propfind } = require('./auth');
+// const OrderDetails = require('../models/OrderDetails');
 const Op = Sequelize.Op;
 
 // AGREGRAR USUARIOS //
 
 router.post("/", function (req, res) {
-    { console.log(req.body) }
     User.create({
         type: req.body.type,
         username: req.body.username,
@@ -27,24 +29,47 @@ router.post("/", function (req, res) {
 // AGREGRAR PRODUCTOS AL CARRITO //
 
 router.post("/:idUser/cart", (req, res) => {
-    let order = Order.findOrCreate({ where: { userId: req.params.idUser, status: "carrito" } });
+    let order = Order.findOrCreate({ amount: req.body.amount, where: { userId: req.params.idUser, status: "carrito" } });
     let product = Product.findByPk(req.body.productId);
     Promise.all([order, product])
         .then(function (values) {
             let ord = values[0][0];
             let prod = values[1];
-            console.log(ord);
-            console.log(prod);
+            // console.log(ord);
+            // console.log(prod);
             prod.addOrder(ord)
                 .then(() => {
                     Order.findByPk(ord.orderId, { include: [Product] })
-                        .then((op) => res.status(200).json({ message: "El producto fue agregado al carrito", op }))
+                        .then((op) => res.status(200).json({ message: "El producto fue agregado al carrito", }))
                 })
                 .catch(function (err) {
                     res.status(400).json({ message: "No se agregó el producto al carrito", error: err })
                 })
         })
 
+})
+
+// MODIFICAR CANTIDADES DE PRODUCTO EN CARRITO //
+
+router.put('/:userId/:productId', async (req, res) => {
+
+    let order = Order.findOne({ where: { userId: req.params.userId, status: "carrito" } });
+    let product = Product.findByPk(req.params.productId);
+    Promise.all([order, product])
+        .then(function (values) {
+            let ord = values[0];
+            let prod = values[1];
+            // console.log(values);
+            OrderDetails.update({
+                amount: req.body.amount
+            }, {
+                returning: true, where: { orderOrderId: ord.orderId, productId: prod.id }
+            })
+                .then(function ([registrosUpdated, [productUpdated]]) {
+
+                    return res.status(200).json({ message: "Su carrito fue actualizado", productUpdated });
+                })
+        })
 })
 
 // VACIAR CARRITO //

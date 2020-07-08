@@ -16,6 +16,10 @@ const Order = (sequelize, S) => {
         status: {
             type: S.TEXT,
             allowNull: true,
+        },
+        amount: {
+            type: S.INTEGER,
+            allowNull: true,
         }
     });
     return O;
