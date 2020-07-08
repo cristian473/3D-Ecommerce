@@ -5,6 +5,7 @@ const { Order } = require("../models/");
 const { OrderDetails } = require("../models/");
 var Sequelize = require('sequelize');
 const { propfind } = require('./auth');
+const { response } = require('express');
 // const OrderDetails = require('../models/OrderDetails');
 const Op = Sequelize.Op;
 
@@ -88,6 +89,14 @@ router.put('/:userId/cart', (req, res) => {
         .catch(function (err) {
             res.status(400).json({ message: "No se pudo vaciar el carro.", error: err })
         })
+})
+
+router.get('/:userId/cart', (req, res)=>{
+    Order.findOne({ where: { userId: req.params.userId, status: "carrito" } })
+        .then(orden =>{
+            OrderDetails.findAll({where: {orderOrderId: orden.orderId}})
+                .then(response => {res.status(200).json(response)})
+        })    
 })
 
 
