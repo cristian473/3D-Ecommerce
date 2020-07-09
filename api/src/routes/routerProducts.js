@@ -23,24 +23,8 @@ router.get('/search', function (req, res) {
         });
 });
 
-// router.get("/", function (req, res, next) {
-//     const category = req.body.categories;
-//     if (category) {
-//         find = { include: [{ model: Category, where: { categoryId: category } }] };
-//     }
-//     else {
-//         find = {include: [{model: Category}] };
-//     }
-//     Product.findAll(find).then(function (product) {
-//         if (!product) {
-//             return res.status(404).send("No hay productos en la tienda");
-//         }
-//         return res.status(200).json(product);
-//     });
-// });
-
 router.get("/", function (req, res, next) {
-    Product.findAll({include: [{model: Category}] }).then(function (product) {
+    Product.findAll({ include: [{ model: Category }] }).then(function (product) {
         if (!product) {
             return res.status(404).send("No hay productos en la tienda");
         }
@@ -71,7 +55,6 @@ router.get("/:id", function (req, res) {
 
 // AGREGAR - EDITAR - BORRAR Productos //
 router.post("/", function (req, res) {
-    { console.log(req.body) }
     Product.create({
         name: req.body.name,
         description: req.body.description,
@@ -125,7 +108,7 @@ router.delete('/delete/:id', (req, res) => {
 });
 
 
-// AGREGAR - BORRAR Categorias //
+// AGREGAR - BORRAR Categorias de Productos//
 router.post('/add/:idProd/:idCat', (req, res) => {
     let product = Product.findByPk(req.params.idProd)
     let category = Category.findByPk(req.params.idCat)

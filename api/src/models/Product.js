@@ -15,7 +15,7 @@ const Product = (sequelize, S) => {
     price: { type: S.REAL },
     color: { type: S.STRING },
     stock: { type: S.REAL },
-    isEditing: { type: S.BOOLEAN},
+    isEditing: { type: S.BOOLEAN },
   });
 
 
