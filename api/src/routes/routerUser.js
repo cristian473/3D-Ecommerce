@@ -22,6 +22,30 @@ router.post("/", function (req, res) {
         })
 })
 
+// DELETE USER BY ID
+router.delete('/delete/:id', (req, res) => {
+  const id = req.params.id;
+  User.findByPk(id)
+  .then((result) => {
+    return User.destroy({
+      where: { userId: id }
+    }).then((user) => {
+      res.status(200).json({ mensaje: "El Usuario ha sido eliminado correctamente", data: result })
+    })
+  })
+});
+//-----
+
+router.get("/:userId/orders", function (req, res, next) {
+  const category = req.params.id;
+  find = { include: [{ model: Category, where: { categoryId: category } }] };
+  Product.findAll(find).then(function (product) {
+      if (!product) {
+          return res.status(404).send("No hay productos en la tienda");
+      }
+      return res.status(200).json(product);
+  });
+});
 
 
 module.exports = router;

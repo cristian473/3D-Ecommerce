@@ -39,6 +39,10 @@ const AddProductForm = props => {
     }
   }
 
+  const getCheckboxValues = () => {
+    console.log("HOLA")
+  }
+
 	return (
 		<form className="formAddProducts"
 			onSubmit={event => {
@@ -68,7 +72,16 @@ const AddProductForm = props => {
         <div ref={checkboxes} className="dropDown" style={{display: "none"}}>
           {categories && categories.map(element =>
             <label className="checkLabel" htmlFor={element.categoryId}>
-              <input type="checkbox" className="checkbox" id={element.categoryId} key={element.categoryId} name="category" value = {element.categoryId} />{element.name}
+              <input 
+                type="checkbox" 
+                className="checkbox" 
+                id={element.categoryId} 
+                key={element.categoryId} 
+                name="category" 
+                value = {element.categoryId}
+                onClick={getCheckboxValues}
+              />
+              {element.name}
             </label>
           )}
         </div>
