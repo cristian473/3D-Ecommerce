@@ -8,9 +8,7 @@ const { propfind } = require('./auth');
 const { response } = require('express');
 // const OrderDetails = require('../models/OrderDetails');
 const Op = Sequelize.Op;
-
 // AGREGRAR USUARIOS //
-
 router.post("/", function (req, res) {
     User.create({
         type: req.body.type,
@@ -30,19 +28,18 @@ router.post("/", function (req, res) {
 // 37 - BORRAR USUARIOS
 
 router.delete('/delete/:id', (req, res) => {
-  const id = req.params.id;
-  User.findByPk(id)
-  .then((result) => {
-    return User.destroy({
-      where: { userId: id }
-    }).then((user) => {
-      res.status(200).json({ mensaje: "El Usuario ha sido eliminado correctamente", data: result })
-    })
-  })
+    const id = req.params.id;
+    User.findByPk(id)
+        .then((result) => {
+            return User.destroy({
+                where: { userId: id }
+            }).then((user) => {
+                res.status(200).json({ mensaje: "El Usuario ha sido eliminado correctamente", data: result })
+            })
+        })
 });
 
 // AGREGRAR PRODUCTOS AL CARRITO //
-
 router.post("/:idUser/cart", (req, res) => {
     let order = Order.findOrCreate({ amount: req.body.amount, where: { userId: req.params.idUser, status: "carrito" } });
     let product = Product.findByPk(req.body.productId);
@@ -61,13 +58,9 @@ router.post("/:idUser/cart", (req, res) => {
                     res.status(400).json({ message: "No se agregó el producto al carrito", error: err })
                 })
         })
-
 })
-
 // MODIFICAR CANTIDADES DE PRODUCTO EN CARRITO //
-
 router.put('/:userId/:productId', async (req, res) => {
-
     let order = Order.findOne({ where: { userId: req.params.userId, status: "carrito" } });
     let product = Product.findByPk(req.params.productId);
     Promise.all([order, product])
@@ -81,14 +74,11 @@ router.put('/:userId/:productId', async (req, res) => {
                 returning: true, where: { orderOrderId: ord.orderId, productId: prod.id }
             })
                 .then(function ([registrosUpdated, [productUpdated]]) {
-
                     return res.status(200).json({ message: "Su carrito fue actualizado", productUpdated });
                 })
         })
 })
-
 // VACIAR CARRITO //
-
 // REF: pasar por body el nuevo "status" del carrito como "carritoVaciado"
 router.put('/:userId/cart', (req, res) => {
     Order.findOne({ where: { userId: req.params.userId, status: "carrito" } })
@@ -106,21 +96,28 @@ router.put('/:userId/cart', (req, res) => {
 
 // 39 - MUESTRA TODOS LOS PRODUCTOS DEL CARRITO 
 
-router.get('/:userId/cart', (req, res)=>{
+router.get('/:userId/cart', (req, res) => {
     Order.findOne({ where: { userId: req.params.userId, status: "carrito" } })
-        .then(orden =>{
-            OrderDetails.findAll({where: {orderOrderId: orden.orderId}})
-                .then(response => {res.status(200).json(response)})
-        })    
+        .then(orden => {
+            OrderDetails.findAll({ where: { orderOrderId: orden.orderId } })
+                .then(response => { res.status(200).json(response) })
+        })
+})
+// 45 - TRAER TODAS LAS ORDENES DE UN USUARIO
+router.get('/:userId/orders', (req, res) => {
+    Order.findAll({ where: { userId: req.params.userId } })
+        .then(ordenes => {
+            res.status(200).json(ordenes);
+        })
 })
 
 // 45 - TRAER TODAS LAS ORDENES DE UN USUARIO
 
-router.get('/:userId/orders', (req, res)=>{
-  Order.findAll({ where: { userId: req.params.userId} })
-  .then(ordenes =>{
-    res.status(200).json(ordenes);
-  })    
+router.get('/:userId/orders', (req, res) => {
+    Order.findAll({ where: { userId: req.params.userId } })
+        .then(ordenes => {
+            res.status(200).json(ordenes);
+        })
 })
 
 module.exports = router;
