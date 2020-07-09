@@ -38,11 +38,7 @@ const AddProductForm = props => {
       expanded = false;
     }
   }
-
-  const getCheckboxValues = () => {
-    console.log("HOLA")
-  }
-
+  
 	return (
 		<form className="formAddProducts"
 			onSubmit={event => {
