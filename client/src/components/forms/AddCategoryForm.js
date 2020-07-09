@@ -20,7 +20,7 @@ const AddCategoryForm = props => {
   useEffect(() => dispatch(getCategories()),[]);
 
 	return (
-		<form class="formAddCategory" onSubmit={event => {
+		<form className="formAddCategory" onSubmit={event => {
 			event.preventDefault()
 			if (!category.name) return
 				dispatch (addCategory(category))

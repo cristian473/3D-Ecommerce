@@ -24,8 +24,8 @@ input {
   background-color: whitesmoke;
   border-radius: 5px;
   border: 1px solid grey;
-  margin-top: 5px;
-  margin-bottom: 5px;
+  /* margin-top: 5px;
+  margin-bottom: 5px; */
 }
 
 label{
@@ -237,9 +237,77 @@ form {
   width: 100%;
 }
 
+.multiselect {
+  width: 200px;
+}
+
+.selectBox {
+  position: relative;
+}
+
+.selectBox select {
+  width: 100%;
+}
+
+.overSelect {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+#checkboxes {
+  display: none;
+  border: 1px #dadada solid;
+}
+
+#checkboxes label {
+  display: block;
+}
+
+#checkboxes label:hover {
+  background-color: #1e90ff;
+}
+
+.selectCategory {
+  margin: 0;
+  background-color: whitesmoke;
+  height: 40px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.dropDown{
+  background-color: whitesmoke;
+  border: 1px solid grey;
+  border-radius: 5px;
+  margin-top: -11px;
+  margin-bottom: 10px;
+  z-index: 2;
+  position: absolute;
+  width: 22.4%;
+  padding: 10px;
+  box-shadow: 0px 10px 10px 0px rgba(50,50,50,0.4);
+}
+
+.formAddProducts input{
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.checkLabel{
+  display: block;
+  font-weight: none;
+}
+
+.checkLabel input{
+  width: 10%;
+  display: inline;
+}
+
 .orderTable{
   z-index: 3 ;
   color: red;
   padding: 50px;
-  
 }

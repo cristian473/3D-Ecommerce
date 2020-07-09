@@ -24,7 +24,9 @@ router.post("/", function (req, res) {
             console.log(err)
         })
 })
+
 // 37 - BORRAR USUARIOS
+
 router.delete('/delete/:id', (req, res) => {
     const id = req.params.id;
     User.findByPk(id)
@@ -36,6 +38,7 @@ router.delete('/delete/:id', (req, res) => {
             })
         })
 });
+
 // AGREGRAR PRODUCTOS AL CARRITO //
 router.post("/:idUser/cart", (req, res) => {
     let order = Order.findOrCreate({ amount: req.body.amount, where: { userId: req.params.idUser, status: "carrito" } });
@@ -90,7 +93,9 @@ router.put('/:userId/cart', (req, res) => {
             res.status(400).json({ message: "No se pudo vaciar el carro.", error: err })
         })
 })
+
 // 39 - MUESTRA TODOS LOS PRODUCTOS DEL CARRITO 
+
 router.get('/:userId/cart', (req, res) => {
     Order.findOne({ where: { userId: req.params.userId, status: "carrito" } })
         .then(orden => {
@@ -105,4 +110,14 @@ router.get('/:userId/orders', (req, res) => {
             res.status(200).json(ordenes);
         })
 })
+
+// 45 - TRAER TODAS LAS ORDENES DE UN USUARIO
+
+router.get('/:userId/orders', (req, res) => {
+    Order.findAll({ where: { userId: req.params.userId } })
+        .then(ordenes => {
+            res.status(200).json(ordenes);
+        })
+})
+
 module.exports = router;

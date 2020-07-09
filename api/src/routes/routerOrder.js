@@ -4,6 +4,7 @@ const { Product } = require("../models");
 var Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
+// CONSULTA TODAS LAS ORDENES //
 
 router.get("/", (req, res) => {
     Order.findAll()
@@ -14,7 +15,9 @@ router.get("/", (req, res) => {
             res.status(400).json({ message: "ocurrió un error o no hay registro de ordenes hechas" })
         })
 })
+
 // 46 - RETORNA UNA ORDEN POR ID
+
 router.get("/:id", (req, res) => {
     OrderDetails.findAll({ where: { orderOrderId: req.params.id } })
         .then(orders => {
@@ -24,7 +27,9 @@ router.get("/:id", (req, res) => {
             res.status(400).json({ message: "ocurrio un error" })
         })
 })
+
 // 47 - MODIFICAR UNA ORDEN
+
 router.put("/:id", (req, res) => {
     Order.findByPk(req.params.id)
         .then(order => {
@@ -38,4 +43,5 @@ router.put("/:id", (req, res) => {
                 })
         })
 })
+
 module.exports = router;
