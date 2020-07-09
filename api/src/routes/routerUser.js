@@ -27,6 +27,20 @@ router.post("/", function (req, res) {
         })
 })
 
+// 37 - BORRAR USUARIOS
+
+router.delete('/delete/:id', (req, res) => {
+  const id = req.params.id;
+  User.findByPk(id)
+  .then((result) => {
+    return User.destroy({
+      where: { userId: id }
+    }).then((user) => {
+      res.status(200).json({ mensaje: "El Usuario ha sido eliminado correctamente", data: result })
+    })
+  })
+});
+
 // AGREGRAR PRODUCTOS AL CARRITO //
 
 router.post("/:idUser/cart", (req, res) => {
@@ -76,7 +90,6 @@ router.put('/:userId/:productId', async (req, res) => {
 // VACIAR CARRITO //
 
 // REF: pasar por body el nuevo "status" del carrito como "carritoVaciado"
-
 router.put('/:userId/cart', (req, res) => {
     Order.findOne({ where: { userId: req.params.userId, status: "carrito" } })
         .then(function (order) {
@@ -91,6 +104,8 @@ router.put('/:userId/cart', (req, res) => {
         })
 })
 
+// 39 - MUESTRA TODOS LOS PRODUCTOS DEL CARRITO 
+
 router.get('/:userId/cart', (req, res)=>{
     Order.findOne({ where: { userId: req.params.userId, status: "carrito" } })
         .then(orden =>{
@@ -99,6 +114,13 @@ router.get('/:userId/cart', (req, res)=>{
         })    
 })
 
+// 45 - TRAER TODAS LAS ORDENES DE UN USUARIO
 
+router.get('/:userId/orders', (req, res)=>{
+  Order.findAll({ where: { userId: req.params.userId} })
+  .then(ordenes =>{
+    res.status(200).json(ordenes);
+  })    
+})
 
 module.exports = router;

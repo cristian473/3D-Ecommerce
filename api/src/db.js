@@ -4,7 +4,7 @@ function db() {
   return new Sequelize(
 
 
-    "postgres://postgres:123@localhost:5432/development",
+    "postgres://postgres:Doce512542@localhost:5432/development",
 
     {
       logging: false, // set to console.log to see the raw SQL queries
