@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import '../style.css';
 
 import {addProduct} from '../../actions/crudActions'
@@ -21,13 +21,26 @@ const AddProductForm = props => {
 	
 		
 	}
-	const handleInputChangeOptions = event =>{
-		product.category = event.target.value
-	}
-
+	// const handleInputChangeOptions = event =>{
+	// 	product.category = event.target.value
+  // }
+  
+  //codigo para el select checkbox
+  var expanded = false;
+  const checkboxes = useRef();
+  
+  const showCheckboxes = () => {
+    if (!expanded) {
+      checkboxes.current.style.display = "block";
+      expanded = true;
+    } else {
+      checkboxes.current.style.display = "none";
+      expanded = false;
+    }
+  }
 
 	return (
-		<form class="formAddProducts"
+		<form className="formAddProducts"
 			onSubmit={event => {
 				event.preventDefault()
 				if (!product.name || !product.description) return
@@ -42,16 +55,28 @@ const AddProductForm = props => {
         <label>Descripción</label>
         <input type="text" name="description" placeholder="Agregar descripción" value={product.description} onChange={handleInputChange} />
       </div> 
+
       <div className="wrapperForm2">  
         <label>Categorias</label>
-        <select onChange={handleInputChangeOptions} className='categorySelect'>
+
+        <div className="selectBox" onClick={showCheckboxes}>
+          <select className="selectCategory">
+            <option>Selecciona las categorías</option>
+          </select>
+          <div className="overSelect"></div>
+        </div>
+        <div ref={checkboxes} className="dropDown" style={{display: "none"}}>
           {categories && categories.map(element =>
-            <option key={element.categoryId}  name= 'category' value = {element.categoryId}>{element.name} </option>
+            <label className="checkLabel" htmlFor={element.categoryId}>
+              <input type="checkbox" className="checkbox" id={element.categoryId} key={element.categoryId} name="category" value = {element.categoryId} />{element.name}
+            </label>
           )}
-        </select>
+        </div>
+
         <label>Precio</label>
         <input type="text" name="price" placeholder="Agregar precio" value={product.price} onChange={handleInputChange} />
       </div>
+
       <div className="wrapperForm3">  
         <label>Stock</label>
         <input type="number" name="stock" min='1' placeholder="Agregar stock" value={product.stock} onChange={handleInputChange} />
