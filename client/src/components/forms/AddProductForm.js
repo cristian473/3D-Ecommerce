@@ -75,7 +75,6 @@ const AddProductForm = props => {
                 key={element.categoryId} 
                 name="category" 
                 value = {element.categoryId}
-                onClick={getCheckboxValues}
               />
               {element.name}
             </label>
