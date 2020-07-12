@@ -6,8 +6,10 @@ const { OrderDetails } = require("../models/");
 var Sequelize = require('sequelize');
 const { propfind } = require('./auth');
 const { response } = require('express');
-// const OrderDetails = require('../models/OrderDetails');
 const Op = Sequelize.Op;
+// const OrderDetails = require('../models/OrderDetails');
+
+
 // AGREGRAR USUARIOS //
 router.post("/", function (req, res) {
     User.create({
@@ -24,6 +26,18 @@ router.post("/", function (req, res) {
             console.log(err)
         })
 })
+
+// BUSCAR UN USUARIO
+
+router.get("/:id", function (req, res) {
+    User.findByPk(req.params.id).then(function (user) {
+        if (!user) {
+            return res.status(404).send("Usuario Inexistente");
+        }
+        return res.status(200).json(user);
+
+    });
+});
 
 // 37 - BORRAR USUARIOS
 
@@ -83,14 +97,13 @@ router.put('/:userId/:productId', async (req, res) => {
 router.put('/:userId/cart', (req, res) => {
     Order.findOne({ where: { userId: req.params.userId, status: "carrito" } })
         .then(function (order) {
-            console.log(order)
             Order.update({ status: req.body.status }, { where: { orderId: order.orderId } })
                 .then(
-                    res.status(200).json({ message: "el carro se vació" })
+                    res.status(200).json({ message: "El carrito fue vaciado" })
                 )
         })
         .catch(function (err) {
-            res.status(400).json({ message: "No se pudo vaciar el carro.", error: err })
+            res.status(400).json({ message: "No se pudo vaciar el carrito.", error: err })
         })
 })
 
@@ -111,13 +124,5 @@ router.get('/:userId/orders', (req, res) => {
         })
 })
 
-// 45 - TRAER TODAS LAS ORDENES DE UN USUARIO
-
-router.get('/:userId/orders', (req, res) => {
-    Order.findAll({ where: { userId: req.params.userId } })
-        .then(ordenes => {
-            res.status(200).json(ordenes);
-        })
-})
 
 module.exports = router;

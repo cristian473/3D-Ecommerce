@@ -3,13 +3,14 @@ import { getData, Detail, CartReducers } from './productReducers'
 import getDataCategories from './crudCategoryReducers'
 import searchReducer from './searchReducer'
 import orderReducer from './orderReducer'
+import getDataUser from './crudUserReducers'
 
-// creemos que esto es el STORE  //
 export const reducers = combineReducers({
     products: getData,
     categories: getDataCategories,
     search: searchReducer,
     detail: Detail,
     cart: CartReducers,
-    orders: orderReducer
+    orders: orderReducer,
+    users: getDataUser
 })
