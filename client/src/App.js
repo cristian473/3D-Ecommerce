@@ -15,6 +15,7 @@ import Results from './components/search/searchResults'
 import CrudCategory from './components/CRUD/CrudCategory'
 import CrudProduct from './components/CRUD/CrudProduct'
 import Login from './components/login/login.js'
+import AddUserForm from './components/forms/AddUserForm.js'
 import Cart from './components/cart/cart'
 import OrderLog from './components/orders/orders'
 
@@ -30,7 +31,9 @@ function App() {
       <Route path='/admin' component={CrudCategory} />
       <Route path='/admin' component={CrudProduct} />
       <Route path='/login' component={Login} />
+      <Route path='/login' component={AddUserForm} />
       <Route path='/admin' component={OrderLog} />
+
     </div>
   );
 }

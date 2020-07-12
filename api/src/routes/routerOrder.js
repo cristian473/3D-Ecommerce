@@ -28,7 +28,7 @@ router.get("/:id", (req, res) => {
         })
 })
 
-// 47 - MODIFICAR UNA ORDEN
+// 47 - MODIFICAR ESTADO DE UNA ORDEN
 
 router.put("/:id", (req, res) => {
     Order.findByPk(req.params.id)
@@ -39,7 +39,7 @@ router.put("/:id", (req, res) => {
                 returning: true, where: { orderId: req.params.id }
             })
                 .then(function (orderUpdated) {
-                    return res.status(200).json({ message: "Estado de orden actualizada a " + req.body.status, orderUpdated });
+                    return res.status(200).json({ message: "El estado de la orden ha sido cambiado a : " + req.body.status, orderUpdated });
                 })
         })
 })

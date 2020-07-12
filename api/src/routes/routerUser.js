@@ -27,6 +27,18 @@ router.post("/", function (req, res) {
         })
 })
 
+// BUSCAR UN USUARIO
+
+router.get("/:id", function (req, res) {
+    User.findByPk(req.params.id).then(function (user) {
+        if (!user) {
+            return res.status(404).send("Usuario Inexistente");
+        }
+        return res.status(200).json(user);
+
+    });
+});
+
 // 37 - BORRAR USUARIOS
 
 router.delete('/delete/:id', (req, res) => {
@@ -112,13 +124,5 @@ router.get('/:userId/orders', (req, res) => {
         })
 })
 
-// 45 - TRAER TODAS LAS ORDENES DE UN USUARIO
-
-router.get('/:userId/orders', (req, res) => {
-    Order.findAll({ where: { userId: req.params.userId } })
-        .then(ordenes => {
-            res.status(200).json(ordenes);
-        })
-})
 
 module.exports = router;
