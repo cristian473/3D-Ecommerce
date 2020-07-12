@@ -16,7 +16,7 @@ const OrderDetails = (sequelize, S) => {
         },
         amount: {
             type: S.INTEGER,
-            allowNull: true,
+            allowNull: false,
             defaultValue: 1
         }
     });
