@@ -16,11 +16,21 @@ export function addProduct (product, idCategory){
     return (dispatch) =>{
         axios.post('http://localhost:3001/products/', product)
             .then(response=>{
-                axios.post('http://localhost:3001/products/add/'+ response.data.newProduct.id +'/'+ idCategory)
-                .then(response =>{
+                
+                // var binary = {};
+                // var bytes = [].slice.call(new Uint8Array(response.data.newProduct.images.data))
+                // bytes.forEach(b => console.log(String.fromCharCode(b)));
+                
+                
+                for (let i = 0; i < idCategory.length; i++) {
+                    axios.post('http://localhost:3001/products/add/'+ response.data.newProduct.id +'/'+ idCategory[i])
+                        .then(response =>{
                     
-                    dispatch({type:ADD_PRODUCT, payload: response.data.pc})
+                        dispatch({type:ADD_PRODUCT, payload: response.data.pc})
                 })
+                    
+                }
+                
                 
             })
     }

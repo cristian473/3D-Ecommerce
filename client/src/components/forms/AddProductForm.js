@@ -3,12 +3,13 @@ import '../style.css';
 
 import {addProduct} from '../../actions/crudActions'
 import {  useDispatch, useSelector } from 'react-redux';
+import axios from 'axios'
 
 import { getCategories } from '../../actions/crudCategoryActions';
 import {updateProduct} from '../../actions/crudActions'
 
 const AddProductForm = props => {
-	const initialFormState = { id: null, name: '', description: '', category: '', price: '', stock: '', image: '', idCategory: '' }
+	const initialFormState = { id: null, name: '', description: '', category: [], price: '', stock: '', images: '', idCategory: '' }
 	const [ product, setProduct ] = useState(initialFormState)
 	const dispatch = useDispatch();
 	const categories = useSelector(store => store.categories);
@@ -19,10 +20,21 @@ const AddProductForm = props => {
 		const { name, value } = event.target
 		setProduct({ ...product, [name]: value })
 	
+		// console.log (event.target.files[0])
 		
 	}
 	const handleInputChangeOptions = event =>{
-		product.category = event.target.value
+		product.category.push(event.target.value)
+	}
+
+	const handlerImageUploaded = event =>{
+		const files = event.target.files[0]
+		const data = new FormData()
+		data.append('file', files )
+		console.log(files)
+		   
+			axios.post("http://localhost:3001/products/uploadImages", data)
+			.then (response=> console.log(response))
 	}
 
 
@@ -56,7 +68,7 @@ const AddProductForm = props => {
         <label>Stock</label>
         <input type="number" name="stock" min='1' placeholder="Agregar stock" value={product.stock} onChange={handleInputChange} />
         <label>Imagen</label>
-        <input type="text" name="image" placeholder="Agregar url de la imagen" value={product.image} onChange={handleInputChange} />
+        <input type="file" name="image" placeholder="Choose your images" value={product.image} onChange={handlerImageUploaded} />
       </div>
 			<button>Agregar nuevo producto</button>
 		</form>

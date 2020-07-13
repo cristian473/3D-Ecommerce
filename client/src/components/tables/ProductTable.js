@@ -108,7 +108,7 @@ const ProductTable = props => {
               <tr key={product.id}>
                 <td>{product.name}</td>
                 <td>{product.description}</td>
-                {product.categories.length >= 0 ? (<td>{product.categories[0].name}</td>) : (<td>No se le asignaron categorias</td>)}
+                {product.categories.length > 0 ? (<td>{product.categories[0].name}</td>) : (<td>No se le asignaron categorias</td>)}
                 <td>${product.price}</td>
                 <td>{product.stock}</td>
                 <td><img className="image" src={product.image}/></td>

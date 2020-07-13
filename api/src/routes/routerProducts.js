@@ -3,9 +3,16 @@ const { Product } = require("../models/");
 const { Category } = require("../models");
 var Sequelize = require('sequelize');
 const Op = Sequelize.Op;
+const multer = require('multer')
+
+
+
+
 
 // CONSULTA DE PRODUCTOS //
 router.get('/search', function (req, res) {
+
+    
     const productName = req.query.keyword;
     Product.findAll(
         {
@@ -53,8 +60,63 @@ router.get("/:id", function (req, res) {
     });
 });
 
+var storage = multer.diskStorage({
+        destination: function (req, file, cb) {
+        cb(null, '../../public')
+      },
+      filename: function (req, file, cb) {
+        let filename = 'filenametogive';
+        req.body.file = filename
+  
+        cb(null, filename )
+      }
+})
+
+// const upload = multer({ storage: storage }).single('file');
+
+// var storage = multer.diskStorage({
+
+//     destination: function (req, file, cb) {
+  
+//       cb(null, '../../public')
+//     },
+  
+  
+//     filename: function (req, file, cb) {
+  
+//       let filename = 'filenametogive';
+//        req.body.file = filename
+  
+//       cb(null, filename)
+//     }
+//   })
+  
+var upload = multer({ storage: storage }).single('file');
+
+router.post("/uploadImages", function(req,res){
+
+    
+    
+    upload(req, res, function (err) {
+            if (err instanceof multer.MulterError) {
+                
+                return res.status(500).json(err)
+            } 
+        
+            console.log(req.body)
+            
+        return res.status(200).send(req.body)
+
+    })
+
+
+})
+
 // AGREGAR - EDITAR - BORRAR Productos //
 router.post("/", function (req, res) {
+
+    
+    
     Product.create({
         name: req.body.name,
         description: req.body.description,
