@@ -40,7 +40,11 @@ passport.deserializeUser(function (id, done) {
 router.post('/login',
     passport.authenticate('local', { failureRedirect: '/login' }),
     function (req, res) {
+<<<<<<< HEAD
         res.redirect('/');
+=======
+        res.status(200);
+>>>>>>> 02e0d040c3efd57f5b2df2a2d558393b6bbb0c24
     });
 
 router.post('/changepassword');
