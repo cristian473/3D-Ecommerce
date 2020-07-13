@@ -133,6 +133,8 @@ router.post("/", function (req, res) {
         })
 })
 
+// EDITAR PRODUCTOS //
+
 router.put('/update/:id', async (req, res) => {
 
     Product.findByPk(req.params.id).then(function (product) {
@@ -145,7 +147,8 @@ router.put('/update/:id', async (req, res) => {
                 description: req.body.description,
                 images: req.body.images,
                 price: req.body.price,
-                color: req.body.color
+                color: req.body.color,
+                stock: req.body.newStock
             }, {
                 returning: true, where: { id: product.id }
             }

@@ -31,7 +31,6 @@ const AddProductForm = props => {
 		const files = event.target.files[0]
 		const data = new FormData()
 		data.append('file', files )
-		console.log(files)
 		   
 			axios.post("http://localhost:3001/products/uploadImages", data)
 			.then (response=> console.log(response))
