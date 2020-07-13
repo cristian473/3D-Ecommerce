@@ -11,25 +11,10 @@ const { response } = require('express');
 router.use(passport.initialize());
 router.use(passport.session());
 
-
-
-// passport.use(new LocalStrategy(
-//     function (username, password, done) {
-//         console.log(username);
-//         console.log(password);
-//         if (username === "aguspagano" && password === "discoplus") {
-//             return done(null, { id: 1, name: "Agustin" })
-//             done(null, false);
-//         }
-//     }))
-
 passport.use(new LocalStrategy(
     function (username, password, done) {
-        console.log(username);
-        console.log(password);
         User.findOne({ where: { username: username } })
             .then(function (user, err) {
-                console.log(user);
                 if (err) { return done(err); }
                 if (!user) { return done(null, false); }
                 if (!user.checkPassword(password)) { return done(null, false); }
@@ -41,10 +26,6 @@ passport.use(new LocalStrategy(
 passport.serializeUser(function (user, done) {
     done(null, user.userId)
 })
-
-// passport.deserializeUser(function (id, done) {
-//     done(null, { userId: id, name: "Agustin" })
-// })
 
 passport.deserializeUser(function (id, done) {
     User.findByPk(id)
@@ -59,7 +40,7 @@ passport.deserializeUser(function (id, done) {
 router.post('/login',
     passport.authenticate('local', { failureRedirect: '/login' }),
     function (req, res) {
-        res.send('Hola');
+        res.redirect('/');
     });
 
 router.post('/changepassword');
