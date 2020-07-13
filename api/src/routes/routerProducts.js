@@ -61,14 +61,13 @@ router.get("/:id", function (req, res) {
 });
 
 var storage = multer.diskStorage({
-        destination: function (req, file, cb) {
+    
+    destination: function (req, file, cb) {
         cb(null, '../../public')
       },
       filename: function (req, file, cb) {
-        let filename = 'filenametogive';
-        req.body.file = filename
-  
-        cb(null, filename )
+        
+        cb(null, file.originalname )
       }
 })
 
@@ -102,8 +101,6 @@ router.post("/uploadImages", function(req,res){
                 
                 return res.status(500).json(err)
             } 
-        
-            console.log(req.body)
             
         return res.status(200).send(req.body)
 

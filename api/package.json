@@ -25,6 +25,7 @@
     "passport-local": "^1.0.0",
     "pg": "^8.2.1",
     "pg-native": "^3.0.0",
+    "react-file-base64": "^1.0.3",
     "sequelize": "^5.21.13"
   },
   "devDependencies": {

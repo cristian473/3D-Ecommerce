@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef  } from 'react'
 import '../style.css';
 
 import {addProduct} from '../../actions/crudActions'
@@ -7,6 +7,7 @@ import axios from 'axios'
 
 import { getCategories } from '../../actions/crudCategoryActions';
 import {updateProduct} from '../../actions/crudActions'
+import FileBase64 from 'react-file-base64';
 
 const AddProductForm = props => {
 	const initialFormState = { id: null, name: '', description: '', category: [], price: '', stock: '', images: '', idCategory: '' }
@@ -24,16 +25,40 @@ const AddProductForm = props => {
 		
 	}
 	const handleInputChangeOptions = event =>{
+		if (event.target.checked)
 		product.category.push(event.target.value)
+		else {
+			product.category.splice(product.category.indexOf(event.target.value), 1)
+		}
 	}
 
-	const handlerImageUploaded = event =>{
-		const files = event.target.files[0]
-		const data = new FormData()
-		data.append('file', files )
+
+
+	const handlerImageUploaded = files =>{
+		// const files = event.target.files[0]
+		// const data = new FormData()
+		// data.append('file', files )
 		   
-			axios.post("http://localhost:3001/products/uploadImages", data)
-			.then (response=> console.log(response))
+		// 	axios.post("http://localhost:3001/products/uploadImages", data, )
+		// 	.then (response=> console.log(response))
+		product.images = files[0].base64
+
+		console.log (product.images)
+
+	}
+
+
+	var expanded = false;
+	const checkboxes = useRef();
+  
+	const showCheckboxes = () => {
+	  if (!expanded) {
+		checkboxes.current.style.display = "block";
+		expanded = true;
+	  } else {
+		checkboxes.current.style.display = "none";
+		expanded = false;
+	  }
 	}
 
 
@@ -55,19 +80,41 @@ const AddProductForm = props => {
       </div> 
       <div className="wrapperForm2">  
         <label>Categorias</label>
-        <select onChange={handleInputChangeOptions} className='categorySelect'>
+        <div className="selectBox" onClick={showCheckboxes}>
+          <select className="selectCategory">
+            <option>Selecciona las categorías</option>
+          </select>
+          <div className="overSelect"></div>
+        </div>
+        <div ref={checkboxes} className="dropDown" style={{ display: "none" }}>
           {categories && categories.map(element =>
-            <option key={element.categoryId}  name= 'category' value = {element.categoryId}>{element.name} </option>
+            <label className="checkLabel" htmlFor={element.categoryId}>
+              <input
+                type="checkbox"
+                className="checkbox"
+                id={element.categoryId}
+                key={element.categoryId}
+                name="category"
+                value={element.categoryId}
+				onClick={handleInputChangeOptions}
+              />
+              {element.name}
+            </label>
           )}
-        </select>
+        </div>
         <label>Precio</label>
         <input type="text" name="price" placeholder="Agregar precio" value={product.price} onChange={handleInputChange} />
       </div>
       <div className="wrapperForm3">  
         <label>Stock</label>
         <input type="number" name="stock" min='1' placeholder="Agregar stock" value={product.stock} onChange={handleInputChange} />
-        <label>Imagen</label>
-        <input type="file" name="image" placeholder="Choose your images" value={product.image} onChange={handlerImageUploaded} />
+        {/* <label>Imagen</label>
+        <input type="file" name="image" placeholder="Choose your images" value={product.image} onChange={handlerImageUploaded} /> */}
+		<FileBase64
+		multiple={ true }
+        onDone={ handlerImageUploaded }
+		
+		/>
       </div>
 			<button>Agregar nuevo producto</button>
 		</form>

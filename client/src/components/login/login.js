@@ -1,45 +1,43 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { addLogin } from '../../actions/crudUserActions'
 import {
-  BrowserRouter as Router,
-  Link,
-  Route,
-  Switch,
-} from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+    BrowserRouter as Router,
+    Link
+  } from 'react-router-dom';
+import {  useDispatch } from 'react-redux';
 
-const Login = () => {
+const Login = props => {
 
-  const initialFormState = { id: null, email: '', password: '' };
-  const [user, setUser] = useState(initialFormState)
+  const initialLoginState = { id: null, username: '', password: '' };
+	const [ login, setLogin ] = useState(initialLoginState)
   const dispatch = useDispatch();
 
   const handleInputChange = event => {
     const { name, value } = event.target
-    setUser({ ...user, [name]: value })
-  }
-
+    setLogin({ ...login, [name]: value })
+	}
+    
   return (
     <div className="loginScreen">
-      <h2>Iniciar Sesión</h2>
-      <form onSubmit={event => {
-        event.preventDefault()
-        if (!user.name || !user.description)
-          return
-        console.log(user.category)
-        setUser(initialFormState)
-      }
-      }
-      >
-        <label>Dirección de correo electrónico</label>
-        <input type="text" name="username" placeholder="Escribe tu correo electrónico" value={user.username} onChange={handleInputChange} />
-        <label>Password</label>
-        <input type="password" name="password" placeholder="Escribe tu password" value={user.password} onChange={handleInputChange} />
-
-        <button>Continuar</button>
-      </form>
-      <h2>¿Eres nuevo en 3D-Models?</h2>
-      <button>Crea tu cuenta de 3D-SHOP</button>
+      <div className="wrapper">
+        <h2>Iniciar Sesión</h2>
+        <form onSubmit={event => {
+          event.preventDefault()
+          // (!login.name)
+          dispatch(addLogin(login))
+          setLogin(initialLoginState)
+        }}
+        >
+          <label>Dirección de correo electrónico</label>
+          <input type="text" name="username" placeholder="Escribe tu correo electrónico" value={login.username} onChange={handleInputChange} />
+          <label>Password</label>
+          <input type="pass" name="password" placeholder="Escribe tu password" value={login.password} onChange={handleInputChange} />
+          
+          <button>Continuar</button>
+        </form>
+        <h3>¿Eres nuevo en 3D-SHOP?</h3>
+        <Link to="/newUser" className="button buttonGreyBorder">Crea tu cuenta de 3D-SHOP</Link>
+      </div>
     </div>
   )
 }

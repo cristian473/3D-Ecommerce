@@ -11,7 +11,7 @@ const Product = (sequelize, S) => {
     },
     name: { type: S.STRING, allowNull: true },
     description: { type: S.TEXT },
-    images: { type: S.BLOB },
+    images: { type: S.TEXT },
     price: { type: S.REAL },
     color: { type: S.STRING },
     stock: { type: S.REAL },
