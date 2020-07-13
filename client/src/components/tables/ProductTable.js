@@ -9,7 +9,7 @@ import { getCategories } from '../../actions/crudCategoryActions';
 const ProductTable = props => {
 
 
-  const initialFormState = { id: null, name: '', description: '', category: '', price: '', stock: '', image: '', idCategory: '' }
+  const initialFormState = { id: null, name: '', description: '', category: [], price: '', stock: '', image: '', idCategory: '' }
   const [product, setProduct] = useState(initialFormState)
   const categories = useSelector(store => store.categories);
   useEffect(() => dispatch(getCategories()), []);
@@ -19,10 +19,6 @@ const ProductTable = props => {
     const { name, value } = event.target
     console.log(value)
     setProduct({ ...product, [name]: value })
-  }
-
-  const handleInputChangeOptions = event => {
-    product.category = event.target.value
   }
 
   const dispatch = useDispatch();
@@ -44,6 +40,15 @@ const ProductTable = props => {
     dispatch({ type: CHANGE_EDIT, payload: indexProductEdit })
     forceUpdate();
   }
+
+  const handleInputChangeCheck = event =>{
+		if (event.target.checked)
+		product.category.push(event.target.value)
+		else {
+			product.category.splice(product.category.indexOf(event.target.value), 1)
+		}
+	}
+
 
   var expanded = false;
 	const checkboxes = useRef();
@@ -90,10 +95,8 @@ const ProductTable = props => {
                     </div>
                     <div ref={checkboxes} className="dropDown" style={{ display: "none" }}>
                       {categories && categories.map(element => {
-                        // var encontrado = product.categories.find(elemento => elemento == element.categoryId)
-                      //  console.log (product.categories)
-                      //  console.log(element.categoryId)
-                      if ( product.categories.includes(element.categoryId)){
+                        var encontrado = product.categories.find(elemento => elemento.categoryId == element.categoryId)
+                      if ( encontrado){
 
                         return( <label className="checkLabel" htmlFor={element.categoryId}>
                           <input
@@ -104,7 +107,7 @@ const ProductTable = props => {
                             key={element.categoryId}
                             name="category"
                             value={element.categoryId}
-                            onClick={handleInputChangeOptions}
+                            onClick={handleInputChangeCheck}
                           />
                           {element.name}
                         </label>)
@@ -119,7 +122,7 @@ const ProductTable = props => {
                             key={element.categoryId}
                             name="category"
                             value={element.categoryId}
-                            onClick={handleInputChangeOptions}
+                            onClick={handleInputChangeCheck}
                           />
                           {element.name}
                         </label>
