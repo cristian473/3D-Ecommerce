@@ -1,39 +1,75 @@
-const server = require('express').Router();
-const { User } = require('../models/User');
+const router = require('express').Router();
+const { User } = require("../models");
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+var Sequelize = require('sequelize');
+const Op = Sequelize.Op;
+
+const { propfind } = require('./auth');
+const { response } = require('express');
+
+router.use(passport.initialize());
+router.use(passport.session());
 
 
 
-server.post('/changepassword');
+// passport.use(new LocalStrategy(
+//     function (username, password, done) {
+//         console.log(username);
+//         console.log(password);
+//         if (username === "aguspagano" && password === "discoplus") {
+//             return done(null, { id: 1, name: "Agustin" })
+//             done(null, false);
+//         }
+//     }))
 
-server.post('/login');
+passport.use(new LocalStrategy(
+    function (username, password, done) {
+        console.log(username);
+        console.log(password);
+        User.findOne({ where: { username: username } })
+            .then(function (user, err) {
+                console.log(user);
+                if (err) { return done(err); }
+                if (!user) { return done(null, false); }
+                if (!user.checkPassword(password)) { return done(null, false); }
+                return done(null, user);
+            })
+    }
+));
+
+passport.serializeUser(function (user, done) {
+    done(null, user.userId)
+})
+
+// passport.deserializeUser(function (id, done) {
+//     done(null, { userId: id, name: "Agustin" })
+// })
+
+passport.deserializeUser(function (id, done) {
+    User.findByPk(id)
+        .then(user => {
+            done(null, user);
+        })
+        .catch(err => done(err));
+});
 
 // S63 - RUTA PARA LOGIN //
 
-server.put('/login', async (req, res) => {
+router.post('/login',
+    passport.authenticate('local', { failureRedirect: '/login' }),
+    function (req, res) {
+        res.send('Hola');
+    });
 
-    User.findOne(req.body.username).then(function (user) {
-        if (!user) {
-            return res.status(404).send("Usuario no encontrado");
-        }
-        else {
-            User.update({
-                status: "logged",
-            }, {
-                returning: true, where: { userId: user.userId }
-            }
-            ).then(function ([userStatus]) {
-                return res.status(200).json({ message: "El usuario fue loggeado", userStatus });
-            })
-        }
-    })
-});
+router.post('/changepassword');
 
-server.get('/logout');
+router.get('/logout');
 
-server.post('/register');
+router.post('/register');
 
-server.get('/me');
+router.get('/me');
 
-server.put('/promote');
+router.put('/promote');
 
-module.exports = server;
+module.exports = router;
