@@ -34,15 +34,16 @@ export function updateProduct (id, newProduct, index, idCategory){
     return(dispatch) => {
         axios.put('http://localhost:3001/products/update/'+ id, newProduct)
         .then(response =>{
-            axios.post('http://localhost:3001/products/add/'+ response.data.productUpdated.id +'/'+ idCategory)
-            .then(response =>{
-                
-                dispatch ({type: EDITING_FALSE, payload: index, newProduct: response.data.pc})
+            for (let i = 0; i < idCategory.length; i++) {
+                axios.post('http://localhost:3001/products/add/'+ response.data.productUpdated.id +'/'+ idCategory[i])
+                .then(response =>{
+                    if (i === idCategory.length-1)
+                    dispatch ({type: EDITING_FALSE, payload: index, newProduct: response.data.pc})
                 
             })
 
-            
-        })
-        
-    }
+        }
+    
+    })
+}
 }
