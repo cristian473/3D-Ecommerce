@@ -14,13 +14,17 @@ export function delProduct (id){
 export function addProduct (product, idCategory){
     
     return (dispatch) =>{
+        
         axios.post('http://localhost:3001/products/', product)
             .then(response=>{
-                axios.post('http://localhost:3001/products/add/'+ response.data.newProduct.id +'/'+ idCategory)
-                .then(response =>{
-                    
-                    dispatch({type:ADD_PRODUCT, payload: response.data.pc})
-                })
+                for (let i = 0; i < idCategory.length; i++) {
+                    axios.post('http://localhost:3001/products/add/'+ response.data.newProduct.id +'/'+ idCategory[i])
+                     .then(response =>{
+                         if (i === idCategory.length-1)
+                         dispatch({type:ADD_PRODUCT, payload: response.data.pc})
+                     })   
+                }
+               
                 
             })
     }

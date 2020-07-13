@@ -22,8 +22,8 @@ const Details = props =>{
     return(
          
             <div >
-                <div >
-                    <img width="60px" src = {detail.images}></img>
+                <div className="details">
+                    <img width="70%" src = {detail.images}></img>
                     <h2>{detail.name}</h2>
                     <p>{detail.description}</p>
                     <h4>Precio: ${detail.price}</h4>
