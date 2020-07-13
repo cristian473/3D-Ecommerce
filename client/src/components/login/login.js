@@ -8,11 +8,11 @@ import {  useDispatch } from 'react-redux';
 
 const Login = props => {
 
-  const initialLoginState = { id: null, email: '', password: '' };
+  const initialLoginState = { id: null, username: '', password: '' };
 	const [ login, setLogin ] = useState(initialLoginState)
   const dispatch = useDispatch();
-  
-	const handleInputChange = event => {
+
+  const handleInputChange = event => {
     const { name, value } = event.target
     setLogin({ ...login, [name]: value })
 	}
@@ -23,13 +23,13 @@ const Login = props => {
         <h2>Iniciar Sesión</h2>
         <form onSubmit={event => {
           event.preventDefault()
-          if (!login.name) return
+          // (!login.name)
           dispatch(addLogin(login))
           setLogin(initialLoginState)
         }}
         >
           <label>Dirección de correo electrónico</label>
-          <input type="text" name="email" placeholder="Escribe tu correo electrónico" value={login.email} onChange={handleInputChange} />
+          <input type="text" name="username" placeholder="Escribe tu correo electrónico" value={login.username} onChange={handleInputChange} />
           <label>Password</label>
           <input type="pass" name="password" placeholder="Escribe tu password" value={login.password} onChange={handleInputChange} />
           
@@ -41,5 +41,5 @@ const Login = props => {
     </div>
   )
 }
-    
+
 export default Login

@@ -40,6 +40,18 @@ router.post("/", function (req, res) {
         })
 })
 
+// S-36 TRAER TODOS LOS USUARIOS //
+
+router.get("/", function (req, res, next) {
+    User.findAll()
+        .then(function (user) {
+            if (!user) {
+                return res.status(404).send("No hay usuarios registrados");
+            }
+            return res.status(200).json(user);
+        });
+});
+
 // BUSCAR UN USUARIO
 
 router.get("/:id", function (req, res) {
@@ -136,6 +148,8 @@ router.get('/:userId/orders', (req, res) => {
             res.status(200).json(ordenes);
         })
 })
+
+
 
 
 module.exports = router;
