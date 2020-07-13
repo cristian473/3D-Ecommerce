@@ -19,6 +19,13 @@ body{
     animation: App-logo-spin infinite 20s linear;
   }
 }
+.details {
+  text-align: center;
+  margin-top: 15%;
+  /* margin-left: 46%; */
+  position: absolute;
+  display: block;
+}
 
 .App-header {
   background-color: #282c34;
