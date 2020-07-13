@@ -18,7 +18,7 @@ const AddUserForm = props => {
 		setUser({ ...user, [name]: value })
 	}
 
-	useEffect(() => dispatch(getUsers()), []);
+	// useEffect(() => dispatch(getUsers()), []);
 
 	return (
     <div className="formUserScreen">

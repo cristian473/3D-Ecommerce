@@ -1,22 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { addLogin } from '../../actions/crudUserActions'
 import {
     BrowserRouter as Router,
-    Link,
-    Route,
-    Switch,
+    Link
   } from 'react-router-dom';
-import {  useDispatch, useSelector } from 'react-redux';
+import {  useDispatch } from 'react-redux';
 
-const Login = () => {
+const Login = props => {
 
-  const initialFormState = { id: null, email: '', password: '' };
-	const [ user, setUser ] = useState(initialFormState)
+  const initialLoginState = { id: null, email: '', password: '' };
+	const [ login, setLogin ] = useState(initialLoginState)
   const dispatch = useDispatch();
   
 	const handleInputChange = event => {
     const { name, value } = event.target
-    setUser({ ...user, [name]: value })
+    setLogin({ ...login, [name]: value })
 	}
     
   return (
@@ -25,17 +23,15 @@ const Login = () => {
         <h2>Iniciar Sesión</h2>
         <form onSubmit={event => {
           event.preventDefault()
-          if (!user.name || !user.description)
-            return
-              console.log(user.category)
-              setUser(initialFormState)
-            }
-          }
+          if (!login.name) return
+          dispatch(addLogin(login))
+          setLogin(initialLoginState)
+        }}
         >
           <label>Dirección de correo electrónico</label>
-          <input type="text" name="email" placeholder="Escribe tu correo electrónico" value={user.email} onChange={handleInputChange} />
+          <input type="text" name="email" placeholder="Escribe tu correo electrónico" value={login.email} onChange={handleInputChange} />
           <label>Password</label>
-          <input type="pass" name="password" placeholder="Escribe tu password" value={user.password} onChange={handleInputChange} />
+          <input type="pass" name="password" placeholder="Escribe tu password" value={login.password} onChange={handleInputChange} />
           
           <button>Continuar</button>
         </form>
