@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useSelector } from 'react'
+import { BrowserRouter as Router, Link } from 'react-router-dom';
 import '../style.css';
 import { useDispatch } from 'react-redux'
 import { addUsers } from '../../actions/crudUserActions'
@@ -17,27 +18,34 @@ const AddUserForm = props => {
 		setUser({ ...user, [name]: value })
 	}
 
-	useEffect(() => dispatch(getUsers()), []);
+	// useEffect(() => dispatch(getUsers()), []);
 
 	return (
-		<form className="formAddCategory" onSubmit={event => {
-			event.preventDefault()
-			if (!user.name) return
-			dispatch(addUsers(user))
-			setUser(initialUserState)
-		}}
-		>
-			<label>Username:</label>
-			<input type="text" name="username" placeholder="Agregar username" value={user.username} onChange={handleInputChange} />
-			<label>Password:</label>
-			<input type="text" name="password" placeholder="Insertar password" value={user.password} onChange={handleInputChange} />
-			<label>Nombre:</label>
-			<input type="text" name="name" placeholder="Agregar nombre" value={user.name} onChange={handleInputChange} />
-			<label>Apellido:</label>
-			<input type="text" name="lastname" placeholder="Agregar apellido" value={user.lastname} onChange={handleInputChange} />
+    <div className="formUserScreen">
+      <div className="wrapper">
+        <h2>Creá tu cuenta</h2>
+        <form onSubmit={event => {
+          event.preventDefault()
+          if (!user.name) return
+          dispatch(addUsers(user))
+          setUser(initialUserState)
+        }}
+        >
+          <label>Username:</label>
+          <input type="text" name="username" placeholder="Agregar username" value={user.username} onChange={handleInputChange} />
+          <label>Password:</label>
+          <input type="text" name="password" placeholder="Insertar password" value={user.password} onChange={handleInputChange} />
+          <label>Nombre:</label>
+          <input type="text" name="name" placeholder="Agregar nombre" value={user.name} onChange={handleInputChange} />
+          <label>Apellido:</label>
+          <input type="text" name="lastname" placeholder="Agregar apellido" value={user.lastname} onChange={handleInputChange} />
 
-			<button>Agregar nuevo usuario</button>
-		</form>
+          <button>Agregar nuevo usuario</button>
+        </form>
+        <h4>¿Ya tienes una cuenta?</h4>
+        <Link to="/login" className="button buttonGreyBorder">Inicia Sesión</Link>
+      </div>  
+    </div>  
 	)
 }
 

@@ -1,4 +1,9 @@
-import { GET_USERS, ADD_USERS, DELETE_USERS } from '../constants/crudUserConstants';
+import { 
+  GET_USERS, 
+  ADD_USERS, 
+  DELETE_USERS,
+  ADD_LOGIN
+} from '../constants/crudUserConstants';
 
 const initialState = [];
 
@@ -17,3 +22,10 @@ function getDataUser(state = initialState, action) {
   return state;
 }
 export default getDataUser;
+
+export function LoginReducers(state = initialState, action) {
+  if (action.type === ADD_LOGIN){
+    return action.payload;
+  }
+  return state
+}

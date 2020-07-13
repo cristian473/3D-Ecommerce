@@ -9,6 +9,19 @@ const { response } = require('express');
 const Op = Sequelize.Op;
 // const OrderDetails = require('../models/OrderDetails');
 
+// 36 - OBTENER TODOS LOS USUARIOS //
+
+router.get("/", (req,res) => {
+  User.findAll()
+  .then(users => {
+    res.status(200).json(users)
+  })
+  .catch(function(err) {
+    res.status(400).json({message:"Ocurrió un error o no hay usuarios registrados"})
+  })
+})
+
+// AGREGRAR USUARIOS //
 
 // AGREGRAR USUARIOS //
 router.post("/", function (req, res) {

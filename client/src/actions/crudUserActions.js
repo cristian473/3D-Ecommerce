@@ -1,4 +1,9 @@
-import { GET_USERS, ADD_USERS, DELETE_USERS } from '../constants/crudUserConstants';
+import { 
+  GET_USERS, 
+  ADD_USERS, 
+  DELETE_USERS,
+  ADD_LOGIN
+} from '../constants/crudUserConstants';
 import axios from 'axios'
 
 export function getUsers(id) {
@@ -24,6 +29,16 @@ export function deleteUsers(id) {
     axios.delete("http://localhost:3001/user/delete/" + id)
       .then(response => {
         dispatch({ type: DELETE_USERS, payload: id })
+      })
+  };
+}
+
+// LOGIN
+export function addLogin(login) {
+  return (dispatch) => {
+    axios.post("http://localhost:3001/auth/login/", login)
+      .then(response => {
+        dispatch({ type: ADD_LOGIN, payload: response.data })
       })
   };
 }

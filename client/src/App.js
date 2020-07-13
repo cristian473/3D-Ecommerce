@@ -30,9 +30,10 @@ function App() {
       <Route path='/products/search' component={Results} />
       <Route path='/admin' component={CrudCategory} />
       <Route path='/admin' component={CrudProduct} />
-      <Route path='/login' component={Login} />
-      <Route path='/login' component={AddUserForm} />
       <Route path='/admin' component={OrderLog} />
+
+      <Route path='/login' component={Login} />
+      <Route path='/newUser' component={AddUserForm} />
 
     </div>
   );

@@ -231,12 +231,6 @@ form {
   margin: 5%;
 }
 
-.loginScreen{
-  text-align: center;
-  padding-top: 100px;
-  width: 100%;
-}
-
 .multiselect {
   width: 200px;
 }
@@ -310,4 +304,86 @@ form {
   z-index: 3 ;
   color: red;
   padding: 50px;
+}
+
+.loginScreen, .formUserScreen{
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: aquamarine;
+}
+
+.loginScreen .wrapper{
+  display: flex;
+  flex-direction: column;
+  padding: 50px;
+  border-radius: 5px;
+  background-color: whitesmoke;
+}
+
+.loginScreen .wrapper form{
+  display: flex;
+  flex-direction: column;
+}
+
+.loginScreen label, .loginScreen input, .loginScreen button, .loginScreen h2{
+  margin: 5px;
+  width: 400px;
+}
+
+.buttonGrey{
+  background-color: rgb(50, 50, 50);
+	color: aquamarine;
+}
+
+.buttonGrey:hover{
+  background-color: aquamarine;
+	color: rgb(50, 50, 50);
+}
+
+.formUserScreen {
+ background-color: rgb(60, 60, 60);
+}
+
+.formUserScreen .wrapper{
+  display: flex;
+  flex-direction: column;
+  padding: 50px;
+  border-radius: 5px;
+  background-color: whitesmoke;
+}
+
+.formUserScreen .wrapper form{
+  display: flex;
+  flex-direction: column;
+}
+
+.formUserScreen label, .formUserScreen input, .formUserScreen button, .formUserScreen h2{
+  margin: 5px;
+  width: 400px;
+}
+
+.formUserScreen h4, .loginScreen h3{
+  margin: 5px;
+  margin-top: 25px;
+  padding-top: 25px;
+  width: 400px;
+  color: rgb(50,50,50);
+  border-top: 1px solid rgb(50, 50, 50);
+}
+
+.buttonGreyBorder{
+  background-color: whitesmoke;
+  color:rgb(50, 50, 50);
+  border: 1px solid rgb(50, 50, 50);
+  width: 100%;
+  margin: 5px;
+  text-align: center;
+}
+
+.buttonGreyBorder:hover{
+  background-color: rgb(50, 50, 50);
+  color:whitesmoke;
 }
