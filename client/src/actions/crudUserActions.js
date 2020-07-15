@@ -1,9 +1,4 @@
-import { 
-  GET_USERS, 
-  ADD_USERS, 
-  DELETE_USERS,
-  ADD_LOGIN
-} from '../constants/crudUserConstants';
+import { GET_USERS, ADD_USERS, DELETE_USERS, ADD_LOGIN } from '../constants/crudUserConstants';
 import axios from 'axios'
 
 export function getUsers(id) {

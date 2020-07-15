@@ -8,8 +8,7 @@ const Op = Sequelize.Op;
 const { propfind } = require('./auth');
 const { response } = require('express');
 
-router.use(passport.initialize());
-router.use(passport.session());
+
 
 passport.use(new LocalStrategy(
     function (username, password, done) {
@@ -35,16 +34,15 @@ passport.deserializeUser(function (id, done) {
         .catch(err => done(err));
 });
 
+router.use(passport.initialize());
+router.use(passport.session());
+
 // S63 - RUTA PARA LOGIN //
 
 router.post('/login',
-    passport.authenticate('local', { failureRedirect: '/login' }),
+    passport.authenticate('local', { failureRedirect: '/' }),
     function (req, res) {
-<<<<<<< HEAD
-        res.redirect('/');
-=======
         res.status(200);
->>>>>>> 02e0d040c3efd57f5b2df2a2d558393b6bbb0c24
     });
 
 router.post('/changepassword');
