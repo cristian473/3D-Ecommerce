@@ -18,7 +18,7 @@ import Login from './components/login/login.js'
 import AddUserForm from './components/forms/AddUserForm.js'
 import Cart from './components/cart/cart'
 import OrderLog from './components/orders/orders'
-
+import addReviewForm from './components/forms/AddReviewForm'
 
 
 function App() {
@@ -28,6 +28,7 @@ function App() {
       <Route path='/' component={Banner} />
       <Route path='/Catalogo' component={Catalog} />
       <Route path='/producto/:id' component={Details} />
+      <Route path='/producto/:id' component={addReviewForm} />
       <Route path='/cart' component={Cart} />
       <Route path='/products/search' component={Results} />
       <Route path='/admin' component={CrudCategory} />

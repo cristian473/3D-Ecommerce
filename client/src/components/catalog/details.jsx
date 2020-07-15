@@ -2,7 +2,7 @@ import React, { useState, useEffect }from 'react'
 
 import {  useDispatch, useSelector } from 'react-redux';
 import { getProducts, getProductsByCategory, getProductDetail } from '../../actions/productActions';
-import { getCategories } from '../../actions/crudCategoryActions';
+import { getReviewsByProduct } from '../../actions/reviewActions';
 
 
 
@@ -13,9 +13,10 @@ const Details = props =>{
   const id = props.params.id
   const dispatch = useDispatch();
   const detail = useSelector(store => store.detail);
+  const reviews = useSelector(store => store.review);
    
     useEffect(() => dispatch(getProductDetail(id)),[]);
-    // useEffect(() => dispatch(getCategories()),[]);
+    useEffect(() => dispatch(getReviewsByProduct(id)),[]);
     
     
     console.log()
@@ -30,6 +31,17 @@ const Details = props =>{
                     <p>Stock: {detail.stock}</p>
                     <button>Comprar</button>
                 </div>
+
+                <div className="details">
+                    {reviews.map(element=>{
+                        return(<div>
+                            <h2>{element.title}</h2>
+                            <p>{element.description}</p>
+                            <p>{element.stars}</p>
+                        </div>)
+                    })}
+                </div>
+
             </div>
     )
 }

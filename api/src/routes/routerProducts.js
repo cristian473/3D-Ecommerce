@@ -1,9 +1,11 @@
 const router = require('express').Router();
 const { Product } = require("../models/");
 const { Category } = require("../models");
+const {Reviews} =  require("../models")
 var Sequelize = require('sequelize');
 const Op = Sequelize.Op;
-const multer = require('multer')
+const multer = require('multer');
+const { response } = require('express');
 
 
 
@@ -59,56 +61,6 @@ router.get("/:id", function (req, res) {
 
     });
 });
-
-var storage = multer.diskStorage({
-    
-    destination: function (req, file, cb) {
-        cb(null, '../../public')
-      },
-      filename: function (req, file, cb) {
-        
-        cb(null, file.originalname )
-      }
-})
-
-// const upload = multer({ storage: storage }).single('file');
-
-// var storage = multer.diskStorage({
-
-//     destination: function (req, file, cb) {
-  
-//       cb(null, '../../public')
-//     },
-  
-  
-//     filename: function (req, file, cb) {
-  
-//       let filename = 'filenametogive';
-//        req.body.file = filename
-  
-//       cb(null, filename)
-//     }
-//   })
-  
-var upload = multer({ storage: storage }).single('file');
-
-router.post("/uploadImages", function(req,res){
-
-    
-    
-    upload(req, res, function (err) {
-            if (err instanceof multer.MulterError) {
-                
-                return res.status(500).json(err)
-            } 
-            
-        return res.status(200).send(req.body)
-
-    })
-
-
-})
-
 // AGREGAR - EDITAR - BORRAR Productos //
 router.post("/", function (req, res) {
 
@@ -205,6 +157,99 @@ router.delete("/remove/:idProd/:idCat", (req, res) => {
             res.status(400).json({ message: "No se agregó la categoría al producto", error: err })
         })
 });
+
+//RUTAS DE REVIEWS
+
+router.post("/:id/review", (req, res)=>{
+
+    const idProduct = req.params.id;
+
+
+
+    Reviews.create({
+        productId: idProduct,
+        userUserId: req.body.userId,
+        stars: req.body.stars,
+        title: req.body.title,
+        description: req.body.description,
+    })
+    .then(function (review) {
+        res.send({ message: "La review "+req.body.title +" se agregó con exito", review });
+    })
+    .catch(function (err) {
+        res.status(400).send({message: "ocurrió un error!", err})
+    })
+
+
+
+})
+
+
+router.delete("/:id/review/:idReview", (req,res)=>{
+
+    const idReview = req.params.idReview;
+
+    Reviews.findByPk(idReview)
+        .then((result) => {
+            return Reviews.destroy({
+                where: { idReview: result.idReview }
+            }).then((response) => {
+                res.status(200).json({ mensaje: "la review ("+result.title+") ha sido eliminada correctamente", result })
+            })
+        })
+})
+
+
+router.get("/:id/review", (req, res) =>{
+
+    Reviews.findAll()
+    .then(response =>{
+        res.status(200).json(response)
+    })
+    .catch(function (err) {
+        res.send(err)
+    })
+})
+
+
+router.get("/productreviews/:id", (req, res) =>{
+
+    Reviews.findAll({where:{productId: req.params.id}})
+    .then(response =>{
+        res.status(200).json(response)
+    })
+    .catch(function (err) {
+        console.log(err)
+        res.send(err)
+    })
+})
+
+router.put("/:id/review/:idReview", (req, res) => {
+
+    const idReview = req.params.idReview;
+
+    Reviews.findByPk(idReview)
+        .then(review =>{
+            Reviews.update({
+
+                title: req.body.title,
+                description: req.body.description,
+                stars: req.body.stars
+
+            },{
+                returning: true, where: {idReview: review.idReview}
+            }).then(result =>{
+                res.status(200).json({message : "review modificada con exito!", result})
+            })
+        })
+        .catch(function(err){
+            res.send(err)
+        })
+
+
+
+})
+
 
 
 module.exports = router;
