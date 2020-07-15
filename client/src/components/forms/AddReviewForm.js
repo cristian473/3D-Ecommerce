@@ -6,26 +6,29 @@ import { getReviews } from '../../actions/reviewActions'
 
 
 const AddReviewForm = props => {
-	const initialFormState = { id: null, description: '', stars: '' }
+	const initialFormState = { id: null, title: '', description: '', stars: '' }
 	const [review, setReview] = useState(initialFormState)
 	const dispatch = useDispatch();
+	const id = props.params.id
 
 	const handleInputChange = event => {
-		const { description, value } = event.target
+		const { name, value } = event.target
 
-		setReview({ ...review, [description]: value })
+		setReview({ ...review, [name]: value })
 	}
 
 	return (
-		<form className="formAddCategory" onSubmit={event => {
+		<form className="formReview" onSubmit={event => {
 			event.preventDefault()
 			if (!(review.description && review.stars)) return
-			dispatch(addReviews(review))
+			dispatch(addReviews(review, id))
 			setReview(initialFormState)
 		}}
 		>
 			<label>Review</label>
-			<input type="text" description="description" placeholder="¿Qué te pareció el producto?" value={review.description} onChange={handleInputChange} />
+			<input type="text" name="title" placeholder="¿Qué te pareció el producto?" value={review.title} onChange={handleInputChange} />
+			<input type="text" name="description" placeholder="¿Qué te pareció el producto?" value={review.description} onChange={handleInputChange} />
+			<input type="text" name="stars" placeholder="¿Qué te pareció el producto?" value={review.stars} onChange={handleInputChange} />
 
 			<button>Agregar review</button>
 		</form>

@@ -7,3 +7,4 @@ export const ADD_LOGIN = 'ADD_LOGIN';
 // REVIEWS
 export const ADD_REVIEWS = 'ADD_REVIEWS';
 export const GET_REVIEWS = 'GET_REVIEWS';
+export const GET_REVIEWS_BY_PRODUCT = 'GET_REVIEWS_BY_PRODUCT'
