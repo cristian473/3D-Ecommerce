@@ -2,7 +2,7 @@ import { GET_CATEGORIES, ADD_CATEGORY, DELETE_CATEGORY } from '../constants/crud
 import axios from 'axios'
 
 export function getCategories() {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     axios.get("http://localhost:3001/category/")
     .then (response =>{
       dispatch ({type: GET_CATEGORIES, payload: response.data})
@@ -20,7 +20,7 @@ export function addCategory(category) {
 }
 
 export function deleteCategory(id) {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     axios.delete("http://localhost:3001/category/delete/" + id)
     .then (response => {
       dispatch ({type: DELETE_CATEGORY, payload: id})

@@ -1,8 +1,7 @@
 import {Link} from 'wouter'
-import React, { useEffect }from 'react'
-import {  useDispatch, useSelector } from 'react-redux';
-import { addProductCart, getProductById } from '../../actions/productActions';
-import { ADD_PRODUCT } from '../../constants/searchConstants';
+import React from 'react'
+import {  useDispatch } from 'react-redux';
+import { getProductById } from '../../actions/productActions';
 import '../style.css';
 
 const Product = props =>{
@@ -14,9 +13,6 @@ const Product = props =>{
           
 
         const id = event.target.value
-        // dispatch (addProductCart(id));
-
-        // 
 
         getProductById(id).then(function(result){
 

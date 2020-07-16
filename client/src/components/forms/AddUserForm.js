@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useSelector } from 'react'
-import { BrowserRouter as Router, Link } from 'react-router-dom';
+import React, { useState } from 'react'
+import { BrowserRouter as Link } from 'react-router-dom';
 import '../style.css';
 import { useDispatch } from 'react-redux'
 import { addUsers } from '../../actions/crudUserActions'
-import { getUsers } from '../../actions/crudUserActions'
 
 const AddUserForm = props => {
 	const initialUserState = { userId: null, username: '', password: '', name: '', lastname: '' }
@@ -18,7 +17,6 @@ const AddUserForm = props => {
 		setUser({ ...user, [name]: value })
 	}
 
-	// useEffect(() => dispatch(getUsers()), []);
 
 	return (
     <div className="formUserScreen">

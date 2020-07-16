@@ -1,8 +1,8 @@
-import { GET_REVIEWS, ADD_REVIEWS, GET_REVIEWS_BY_PRODUCT } from '../constants/crudUserConstants';
+import {  ADD_REVIEWS, GET_REVIEWS_BY_PRODUCT } from '../constants/crudUserConstants';
 import axios from 'axios'
 
 export function addReviews(review, idProduct) {
-    return (dispatch, getState) => {
+    return (dispatch) => {
         console.log(review)
         console.log(idProduct)
         axios.post("http://localhost:3001/products/" + idProduct + "/review", review)
@@ -14,7 +14,7 @@ export function addReviews(review, idProduct) {
 }
 
 export function getReviewsByProduct(idProduct) {
-    return (dispatch, getState) => {
+    return (dispatch) => {
         axios.get("http://localhost:3001/products/productreviews/" + idProduct)
             .then(response => {
                 console.log(response)

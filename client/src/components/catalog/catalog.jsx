@@ -1,12 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import React, { useEffect } from 'react'
 import Product from './product'
-import {
-    BrowserRouter as Router,
-    Link,
-    Route,
-    Switch,
-} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProducts, getProductsByCategory } from '../../actions/productActions';
 import { getCategories } from '../../actions/crudCategoryActions';
@@ -32,7 +25,7 @@ const Catalog = () => {
     }
 
 
-    console.log(products)
+    
     return (
 
         <section >
