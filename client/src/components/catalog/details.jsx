@@ -1,7 +1,7 @@
-import React, { useState, useEffect }from 'react'
+import React, {  useEffect }from 'react'
 
 import {  useDispatch, useSelector } from 'react-redux';
-import { getProducts, getProductsByCategory, getProductDetail } from '../../actions/productActions';
+import { getProductDetail } from '../../actions/productActions';
 import { getReviewsByProduct } from '../../actions/reviewActions';
 
 
@@ -18,8 +18,6 @@ const Details = props =>{
     useEffect(() => dispatch(getProductDetail(id)),[]);
     useEffect(() => dispatch(getReviewsByProduct(id)),[]);
     
-    
-    console.log()
     return(
          
             <div >

@@ -1,9 +1,8 @@
 import React from 'react';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import '../style.css';
 import { getSearch } from '../../actions/searchActions';
 import {Link} from 'wouter'
-import { INPUT_CHANGE } from '../../constants/searchConstants';
 
 
 

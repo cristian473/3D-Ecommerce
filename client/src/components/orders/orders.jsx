@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react'
-import Order from './order'
+import React, {  useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { getOrders } from '../../actions/orderActions';
-// import { getCategories } from '../../actions/crudCategoryActions';
+
 
 const OrderLog = () => {
 
@@ -12,7 +11,7 @@ const OrderLog = () => {
     //el useEffect dispatchea las acctions antes de que se renderize el componente
     useEffect(() => dispatch(getOrders()), []);   // Ejecuta la accion getProducts de actions/productActions
 
-    console.log(order)
+
     return (
 
         <section >

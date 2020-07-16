@@ -29,11 +29,6 @@ router.use("/user", routerUser);
 Product.belongsToMany(Category, { through: "products_categories" });
 Category.belongsToMany(Product, { through: "products_categories" });
 
-// Order.belongsToMany(Product, { through: "order_details" });
-// Product.belongsToMany(Order, { through: "order_details" });
-
-// Order.belongsToMany(Product, { through: "order_details", include: [{ model: OrderDetails }] });
-// Product.belongsToMany(Order, { through: "order_details", include: [{ model: OrderDetails }] });
 
 Order.belongsToMany(Product, { through: OrderDetails });
 Product.belongsToMany(Order, { through: OrderDetails });

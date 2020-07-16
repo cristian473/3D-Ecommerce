@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useSelector } from 'react'
+import React, { useState } from 'react'
 import '../style.css';
 import { useDispatch } from 'react-redux'
 import { addReviews } from '../../actions/reviewActions'
-import { getReviews } from '../../actions/reviewActions'
 
 
 const AddReviewForm = props => {
