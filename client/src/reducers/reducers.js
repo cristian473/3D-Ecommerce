@@ -6,6 +6,7 @@ import orderReducer from './orderReducer'
 import getDataUser, { LoginReducers } from './crudUserReducers'
 import getDataReviews from './reviewsReducers'
 
+
 export const reducers = combineReducers({
     products: getData,
     categories: getDataCategories,

@@ -8,7 +8,7 @@ const { Category } = require("../models/");
 const { Order } = require("../models/");
 const { User } = require("../models/");
 const { OrderDetails } = require("../models/");
-const {Reviews} = require("../models/");
+const { Reviews } = require("../models/");
 
 const authRouter = require("./auth.js");
 const routerProducts = require("./routerProducts.js");
@@ -35,12 +35,12 @@ Product.belongsToMany(Order, { through: OrderDetails });
 
 
 
-Product.belongsToMany(Reviews, {through: 'product_Reviews'});
-Reviews.belongsTo(Product, {through: 'product_Reviews'});
+Product.belongsToMany(Reviews, { through: 'product_Reviews' });
+Reviews.belongsTo(Product, { through: 'product_Reviews' });
 
 
-User.belongsToMany(Reviews, {through: 'user_review'});
-Reviews.belongsTo(User, {through: 'user_review'})
+User.belongsToMany(Reviews, { through: 'user_review' });
+Reviews.belongsTo(User, { through: 'user_review' })
 
 
 
