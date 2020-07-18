@@ -3,8 +3,6 @@ import axios from 'axios'
 
 export function addReviews(review, idProduct) {
     return (dispatch) => {
-        console.log(review)
-        console.log(idProduct)
         axios.post("http://localhost:3001/products/" + idProduct + "/review", review)
             .then(response => {
                 console.log(response)
