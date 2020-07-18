@@ -125,7 +125,7 @@ select {
 	border: 1px solid grey;
   border-radius: 5px;
   text-align: center;
-  margin-top: 2%;
+  margin-top: 0%;
   padding: 2%;
 }
 
@@ -386,4 +386,8 @@ form {
 .buttonGreyBorder:hover{
   background-color: rgb(50, 50, 50);
   color:whitesmoke;
+}
+
+.cartContainer{
+  padding-top: 10%;
 }

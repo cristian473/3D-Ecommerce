@@ -62,9 +62,12 @@ export function delProductCart(index) {
 
   return (dispatch) => {
     var products = JSON.parse(localStorage.getItem('productsInCart') || "[]");
-    var newProducts = products.splice(index, 1)
+    
+    products[index].stock--;
 
     localStorage.removeItem('productsInCart')
+    console.log(products)
+
     localStorage.setItem('productsInCart', JSON.stringify(products))
 
     dispatch({ type: REM_PRODUCT_CART, payload: products })

@@ -16,10 +16,42 @@ const Product = props =>{
 
         getProductById(id).then(function(result){
 
-            var products = JSON.parse(localStorage.getItem('productsInCart') || "[]");
-            products.push(result);
+            var productsInCart = JSON.parse(localStorage.getItem('productsInCart') || "[]");
+            
+            result.images = '';
 
-            localStorage.setItem('productsInCart', JSON.stringify(products))
+         
+            
+
+            if (!productsInCart.find(encontrado => encontrado.id == result.id)){
+                result.stock=1;
+                productsInCart.push(result)
+            }
+            
+            productsInCart.map(element => {
+              if (element.id === result.id ){
+                element.stock++
+              }
+            })
+
+            console.log(productsInCart)
+
+            // productsInCart.push(result)
+
+            //  productsInCart.map(element =>{
+                  
+            //   var cantidad = productsInCart.filter(elemento => elemento.id === element.id);
+            //     element.stock = cantidad.length;
+
+            //   if (!products.find(encontrado => encontrado.id == element.id)){
+            //     products.push(element)
+            //   }
+              
+            //})
+
+            
+
+            localStorage.setItem('productsInCart', JSON.stringify(productsInCart))
             
         })
 

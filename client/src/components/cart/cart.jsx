@@ -11,11 +11,24 @@ const Cart = () =>{
     const productsOfCart = useSelector(store => store.cart);
     
         useEffect(() => {
-            var productsInCart = JSON.parse(localStorage.getItem("productsInCart") || "[]");
+            var productsInCart = JSON.parse(localStorage.getItem("productsInCart") || "[]")
+                
             dispatch({type: GET_CART, payload: productsInCart})
         }, [])
 
+    const addItem = event =>{
+      var productsInCart = JSON.parse(localStorage.getItem('productsInCart') || "[]");
+      var add = event.target.value 
+
+      productsInCart[add].stock++;
+
+      dispatch({type: GET_CART, payload: productsInCart})
+      localStorage.setItem('productsInCart', JSON.stringify(productsInCart))
+
+    }
+
     const deleteItemToCache = event =>{
+
 
         var remove = event.target.value
         dispatch(delProductCart(remove));
@@ -25,25 +38,34 @@ const Cart = () =>{
     
    
     return(
-        <table>
+      <div className = "cartContainer">
+        <table className="tableProducts">
 
         {productsOfCart.length > 0 ? (
             productsOfCart.map((product, index) => (
+              
+        
+                  <tr key={index}>
+                    <td>{product.name}</td>
+                    <td>{product.description}</td>
+                    <td>{product.price}</td>
+                    <td>{product.price * product.stock}</td>
+                    <td><img className="image" src={product.image}/></td>
+                    <td>
+                      <button value={index}
+                        onClick={deleteItemToCache}
+                      >
+                        -
+                      </button>
+                      {product.stock}
+                      <button value={index}
+                        onClick={addItem}
+                      >
+                        +
+                      </button>
+                    </td>
+                  </tr>
                
-              <tr key={index}>
-                <td>{product.name}</td>
-                <td>{product.description}</td>
-                <td>{product.price}</td>
-                <td>{product.stock}</td>
-                <td><img className="image" src={product.image}/></td>
-                <td>
-                  <button value={index}
-                    onClick={deleteItemToCache}
-                  >
-                    Eliminar
-                  </button>
-                </td>
-              </tr>
             ))
           ) : (
             <tr>
@@ -52,6 +74,7 @@ const Cart = () =>{
           )}
 
         </table>
+        </div>
     )
 
     
