@@ -1,14 +1,13 @@
 const router = require('express').Router();
 const { User } = require("../models");
 const passport = require('passport');
+const session = require('express-session');
 const LocalStrategy = require('passport-local').Strategy;
 var Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
 const { propfind } = require('./auth');
 const { response } = require('express');
-
-
 
 passport.use(new LocalStrategy(
     function (username, password, done) {
@@ -34,6 +33,7 @@ passport.deserializeUser(function (id, done) {
         .catch(err => done(err));
 });
 
+router.use(session({ secret: "mi secreto" }));
 router.use(passport.initialize());
 router.use(passport.session());
 

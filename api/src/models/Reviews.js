@@ -3,7 +3,7 @@ const S = Sequelize;
 const Reviews = (sequelize, S) => {
 
     const PR = sequelize.define("Reviews", {
-       
+
         idReview: {
             type: S.INTEGER,
             allowNull: true,

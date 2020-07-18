@@ -33,6 +33,7 @@ export function addLogin(login) {
   return (dispatch) => {
     axios.post("http://localhost:3001/auth/login/", login)
       .then(response => {
+        console.log(response)
         dispatch({ type: ADD_LOGIN, payload: response.data })
       })
   };
