@@ -1,13 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react'
 import '../style.css';
-
 import { addProduct } from '../../actions/crudActions'
 import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios'
-
 import { getCategories } from '../../actions/crudCategoryActions';
-import { updateProduct } from '../../actions/crudActions'
 import FileBase64 from 'react-file-base64';
+
+
 
 const AddProductForm = props => {
 	const initialFormState = { id: null, name: '', description: '', category: [], price: '', stock: '', images: '', idCategory: '' }
@@ -20,10 +18,8 @@ const AddProductForm = props => {
 	const handleInputChange = event => {
 		const { name, value } = event.target
 		setProduct({ ...product, [name]: value })
-
-		// console.log (event.target.files[0])
-
 	}
+
 	const handleInputChangeOptions = event => {
 		if (event.target.checked)
 			product.category.push(event.target.value)
@@ -35,14 +31,8 @@ const AddProductForm = props => {
 
 
 	const handlerImageUploaded = files => {
-		// const files = event.target.files[0]
-		// const data = new FormData()
-		// data.append('file', files)
-
-		// axios.post("http://localhost:3001/products/uploadImages", data,)
-		// 	.then(response => console.log(response))
 		product.images = files[0].base64
-		console.log(product.images)
+
 	}
 
 	var expanded = false;
@@ -59,7 +49,7 @@ const AddProductForm = props => {
 
 
 	return (
-		<form class="formAddProducts"
+		<form className="formAddProducts"
 			onSubmit={event => {
 				event.preventDefault()
 				if (!product.name || !product.description) return
@@ -83,8 +73,8 @@ const AddProductForm = props => {
 					<div className="overSelect"></div>
 				</div>
 				<div ref={checkboxes} className="dropDown" style={{ display: "none" }}>
-					{categories && categories.map(element =>
-						<label className="checkLabel" htmlFor={element.categoryId}>
+					{categories && categories.map((element, index) =>
+						<label key={index} className="checkLabel" htmlFor={element.categoryId}>
 							<input
 								type="checkbox"
 								className="checkbox"
@@ -104,8 +94,6 @@ const AddProductForm = props => {
 			<div className="wrapperForm3">
 				<label>Stock</label>
 				<input type="number" name="stock" min='1' placeholder="Agregar stock" value={product.stock} onChange={handleInputChange} />
-				{/* <label>Imagen</label>
-        <input type="file" name="image" placeholder="Choose your images" value={product.image} onChange={handlerImageUploaded} /> */}
 				<FileBase64
 					multiple={true}
 					onDone={handlerImageUploaded}

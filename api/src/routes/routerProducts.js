@@ -168,7 +168,11 @@ router.post("/:id/review", (req, res) => {
         })
         .catch(function (err) {
             res.status(400).send({ message: "ocurrió un error!", err })
+            console.log(err)
         })
+
+
+
 })
 
 

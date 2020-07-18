@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import '../style.css'
 import {deleteCategory} from '../../actions/crudCategoryActions'
@@ -18,16 +18,16 @@ const CategoryTable = props => {
         </thead>
         <tbody>
           {categories.length > 0 ? (
-            categories.map(category => (
-              <tr key={category.id}>
+            categories.map((category,index) => (
+              <tr key={index}>
                 <td>{category.name}</td>
                 <td>
-                  <button onClick={() => {
+                  {/* <button onClick={() => {
                       // () => dispatch((category.id))
                     }}
                   >
                     Editar
-                  </button>
+                  </button> */}
                   <button
                     onClick={() => dispatch(deleteCategory(category.categoryId))}
                   >

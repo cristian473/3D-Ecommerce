@@ -2,7 +2,7 @@ import { GET_USERS, ADD_USERS, DELETE_USERS, ADD_LOGIN } from '../constants/crud
 import axios from 'axios'
 
 export function getUsers(id) {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     axios.get("http://localhost:3001/user/ " + id)
       .then(response => {
         dispatch({ type: GET_USERS, payload: response.data })
@@ -20,7 +20,7 @@ export function addUsers(user) {
 }
 
 export function deleteUsers(id) {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     axios.delete("http://localhost:3001/user/delete/" + id)
       .then(response => {
         dispatch({ type: DELETE_USERS, payload: id })

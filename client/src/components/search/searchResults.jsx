@@ -1,12 +1,11 @@
 import React  from 'react'
 import Product from '../catalog/product'
-import axios from 'axios'
 import {useSelector} from 'react-redux'
-import { getSearch } from '../../actions/searchActions';
+
 
 const Results = () =>{
     const search = useSelector (store => store.search)
-    console.log(search)
+  
     return(
             <div className="result">
                

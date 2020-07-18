@@ -1,9 +1,6 @@
 
 import React from 'react';
 import { Route } from 'wouter'
-import Provider from 'react-redux'
-import store from './store/store'
-import logo from './logo.svg';
 import './App.css';
 
 import Product from './components/catalog/product'
