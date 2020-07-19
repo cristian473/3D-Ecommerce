@@ -5,7 +5,7 @@ import { addReviews } from '../../actions/reviewActions'
 
 
 const AddReviewForm = props => {
-	const initialFormState = { id: null,title:'', description: '', stars: '' }
+	const initialFormState = { id: null, title: '', description: '', stars: '' }
 	const [review, setReview] = useState(initialFormState)
 	const dispatch = useDispatch();
 	const id = props.params.id

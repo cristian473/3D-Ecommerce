@@ -1,4 +1,4 @@
-import { GET_REVIEWS, ADD_REVIEWS,GET_REVIEWS_BY_PRODUCT  } from '../constants/crudUserConstants';
+import { GET_REVIEWS, ADD_REVIEWS, GET_REVIEWS_BY_PRODUCT } from '../constants/crudUserConstants';
 import { store } from '../store/store'
 
 const initialState = [];

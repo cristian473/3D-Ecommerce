@@ -5,20 +5,20 @@ import { useDispatch } from 'react-redux'
 import { addUsers } from '../../actions/crudUserActions'
 
 const AddUserForm = props => {
-	const initialUserState = { userId: null, username: '', password: '', name: '', lastname: '' }
-	const [user, setUser] = useState(initialUserState)
-	const dispatch = useDispatch();
+  const initialUserState = { userId: null, username: '', password: '', name: '', lastname: '' }
+  const [user, setUser] = useState(initialUserState)
+  const dispatch = useDispatch();
 
 
 
-	const handleInputChange = event => {
-		const { name, value } = event.target
+  const handleInputChange = event => {
+    const { name, value } = event.target
 
-		setUser({ ...user, [name]: value })
-	}
+    setUser({ ...user, [name]: value })
+  }
 
 
-	return (
+  return (
     <div className="formUserScreen">
       <div className="wrapper">
         <h2>Creá tu cuenta</h2>
@@ -32,7 +32,7 @@ const AddUserForm = props => {
           <label>Username:</label>
           <input type="text" name="username" placeholder="Agregar username" value={user.username} onChange={handleInputChange} />
           <label>Password:</label>
-          <input type="text" name="password" placeholder="Insertar password" value={user.password} onChange={handleInputChange} />
+          <input type="password" name="password" placeholder="Insertar password" value={user.password} onChange={handleInputChange} />
           <label>Nombre:</label>
           <input type="text" name="name" placeholder="Agregar nombre" value={user.name} onChange={handleInputChange} />
           <label>Apellido:</label>
@@ -42,9 +42,9 @@ const AddUserForm = props => {
         </form>
         <h4>¿Ya tienes una cuenta?</h4>
         <Link to="/login" className="button buttonGreyBorder">Inicia Sesión</Link>
-      </div>  
-    </div>  
-	)
+      </div>
+    </div>
+  )
 }
 
 export default AddUserForm

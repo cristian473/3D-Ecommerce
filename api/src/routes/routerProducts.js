@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { Product } = require("../models/");
 const { Category } = require("../models");
-const {Reviews} =  require("../models")
+const { Reviews } = require("../models")
 var Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 const multer = require('multer');
@@ -9,12 +9,8 @@ const { response } = require('express');
 
 
 
-
-
 // CONSULTA DE PRODUCTOS //
 router.get('/search', function (req, res) {
-
-    
     const productName = req.query.keyword;
     Product.findAll(
         {
@@ -64,8 +60,6 @@ router.get("/:id", function (req, res) {
 // AGREGAR - EDITAR - BORRAR Productos //
 router.post("/", function (req, res) {
 
-    
-    
     Product.create({
         name: req.body.name,
         description: req.body.description,
@@ -128,7 +122,6 @@ router.post('/add/:idProd/:idCat', (req, res) => {
     let category = Category.findByPk(req.params.idCat)
     Promise.all([product, category])
         .then(function (values) {
-            console.log(values);
             let prod = values[0];
             let cat = values[1];
             prod.addCategory(cat)
@@ -146,7 +139,6 @@ router.delete("/remove/:idProd/:idCat", (req, res) => {
     Product.findByPk(req.params.idProd)
 
         .then(function (product) {
-            console.log(product);
             let prod = product;
             prod.removeCategories(categoryId)
         })
@@ -160,11 +152,9 @@ router.delete("/remove/:idProd/:idCat", (req, res) => {
 
 //RUTAS DE REVIEWS
 
-router.post("/:id/review", (req, res)=>{
+router.post("/:id/review", (req, res) => {
 
     const idProduct = req.params.id;
-
-
 
     Reviews.create({
         productId: idProduct,
@@ -173,20 +163,20 @@ router.post("/:id/review", (req, res)=>{
         title: req.body.title,
         description: req.body.description,
     })
-    .then(function (review) {
-        res.send({ message: "La review "+req.body.title +" se agregó con exito", review });
-    })
-    .catch(function (err) {
-        res.status(400).send({message: "ocurrió un error!", err})
-        console.log(err)
-    })
+        .then(function (review) {
+            res.send({ message: "La review " + req.body.title + " se agregó con exito", review });
+        })
+        .catch(function (err) {
+            res.status(400).send({ message: "ocurrió un error!", err })
+            console.log(err)
+        })
 
 
 
 })
 
 
-router.delete("/:id/review/:idReview", (req,res)=>{
+router.delete("/:id/review/:idReview", (req, res) => {
 
     const idReview = req.params.idReview;
 
@@ -195,34 +185,34 @@ router.delete("/:id/review/:idReview", (req,res)=>{
             return Reviews.destroy({
                 where: { idReview: result.idReview }
             }).then((response) => {
-                res.status(200).json({ mensaje: "la review ("+result.title+") ha sido eliminada correctamente", result })
+                res.status(200).json({ mensaje: "la review (" + result.title + ") ha sido eliminada correctamente", result })
             })
         })
 })
 
 
-router.get("/:id/review", (req, res) =>{
+router.get("/:id/review", (req, res) => {
 
     Reviews.findAll()
-    .then(response =>{
-        res.status(200).json(response)
-    })
-    .catch(function (err) {
-        res.send(err)
-    })
+        .then(response => {
+            res.status(200).json(response)
+        })
+        .catch(function (err) {
+            res.send(err)
+        })
 })
 
 
-router.get("/productreviews/:id", (req, res) =>{
+router.get("/productreviews/:id", (req, res) => {
 
-    Reviews.findAll({where:{productId: req.params.id}})
-    .then(response =>{
-        res.status(200).json(response)
-    })
-    .catch(function (err) {
-        console.log(err)
-        res.send(err)
-    })
+    Reviews.findAll({ where: { productId: req.params.id } })
+        .then(response => {
+            res.status(200).json(response)
+        })
+        .catch(function (err) {
+            console.log(err)
+            res.send(err)
+        })
 })
 
 router.put("/:id/review/:idReview", (req, res) => {
@@ -230,20 +220,20 @@ router.put("/:id/review/:idReview", (req, res) => {
     const idReview = req.params.idReview;
 
     Reviews.findByPk(idReview)
-        .then(review =>{
+        .then(review => {
             Reviews.update({
 
                 title: req.body.title,
                 description: req.body.description,
                 stars: req.body.stars
 
-            },{
-                returning: true, where: {idReview: review.idReview}
-            }).then(result =>{
-                res.status(200).json({message : "review modificada con exito!", result})
+            }, {
+                returning: true, where: { idReview: review.idReview }
+            }).then(result => {
+                res.status(200).json({ message: "review modificada con exito!", result })
             })
         })
-        .catch(function(err){
+        .catch(function (err) {
             res.send(err)
         })
 

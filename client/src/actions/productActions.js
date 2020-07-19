@@ -8,7 +8,6 @@ export function getProducts() {
     // esto simula el postman //
     axios.get("http://localhost:3001/products")
       .then(response => {
-        // ejecuta el reducer
         dispatch({ type: GET_PRODUCTS, payload: response.data })
       })
   };
@@ -28,7 +27,7 @@ export function getProductDetail(id) {
   return (dispatch) => {
     axios.get("http://localhost:3001/products/" + id)
       .then(response => {
-      
+
         dispatch({ type: GET_PRODUCT_DETAIL, payload: response.data })
       })
   };
@@ -40,9 +39,6 @@ export function getProductById(id) {
     .then(response => {
       return response.data
     })
-
-
-
 };
 
 
@@ -51,7 +47,7 @@ export function addProductCart(id) {
   return (dispatch, getState) => {
     axios.get("http://localhost:3001/products/" + id)
       .then(response => {
- 
+
 
         dispatch({ type: ADD_PRODUCT_CART, payload: response.data })
       })
@@ -62,7 +58,7 @@ export function delProductCart(index) {
 
   return (dispatch) => {
     var products = JSON.parse(localStorage.getItem('productsInCart') || "[]");
-    
+
     products[index].stock--;
 
     localStorage.removeItem('productsInCart')
@@ -71,7 +67,5 @@ export function delProductCart(index) {
     localStorage.setItem('productsInCart', JSON.stringify(products))
 
     dispatch({ type: REM_PRODUCT_CART, payload: products })
-
-
   }
 }

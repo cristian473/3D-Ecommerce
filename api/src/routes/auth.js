@@ -1,15 +1,13 @@
 const router = require('express').Router();
 const { User } = require("../models");
 const passport = require('passport');
+const session = require('express-session');
 const LocalStrategy = require('passport-local').Strategy;
 var Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
 const { propfind } = require('./auth');
 const { response } = require('express');
-
-router.use(passport.initialize());
-router.use(passport.session());
 
 passport.use(new LocalStrategy(
     function (username, password, done) {
@@ -35,10 +33,14 @@ passport.deserializeUser(function (id, done) {
         .catch(err => done(err));
 });
 
+router.use(session({ secret: "mi secreto" }));
+router.use(passport.initialize());
+router.use(passport.session());
+
 // S63 - RUTA PARA LOGIN //
 
 router.post('/login',
-    passport.authenticate('local', { failureRedirect: '/login' }),
+    passport.authenticate('local', { failureRedirect: '/' }),
     function (req, res) {
         res.status(200);
     });

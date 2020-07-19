@@ -46,4 +46,33 @@ router.put("/:id", (req, res) => {
         })
 })
 
+router.post("/:userId", function (req, res) {
+    console.log(req.body);
+    var confirmation = false;
+    Order.create({
+        userId: req.params.userId,
+        status: "checkout"
+    }).then(function (order) {
+        var products = req.body;
+        products.forEach(element => {
+            var count = count + 1
+            console.log(count);
+            OrderDetails.create({
+                orderOrderId: order.orderId,
+                productId: element.id,
+                amount: element.stock,
+            }).then(function () {
+                confirmation = true
+            })
+                .catch(function (err) {
+                    confirmation = false
+                })
+        });
+        if (confirmation == true) {
+            res.send({ message: "Se hizo el checkout" })
+        }
+        res.send({ message: "No se hizo el checkout" })
+    })
+})
+
 module.exports = router;
