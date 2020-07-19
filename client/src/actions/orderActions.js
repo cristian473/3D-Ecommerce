@@ -5,7 +5,7 @@ import axios from 'axios'
 
 
 export function getOrders() {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     // esto simula el postman //
     axios.get("http://localhost:3001/order")
       .then(response => {

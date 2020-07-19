@@ -14,6 +14,9 @@ const OrderDetails = (sequelize, S) => {
             allowNull: true,
             primaryKey: true,
         },
+        name: {
+            type: S.TEXT
+        },
         amount: {
             type: S.INTEGER,
             allowNull: false,
