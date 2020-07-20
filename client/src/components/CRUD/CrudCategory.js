@@ -10,7 +10,6 @@ const CrudCategory = () => {
 
   useEffect(() => dispatch(getCategories()),[]);
 
-
   return (
     <div className="containerCategory">
       
@@ -19,7 +18,7 @@ const CrudCategory = () => {
           {
              <Fragment>
               <h2>Agregar Categorias</h2>
-                <AddCategoryForm /> 
+              <AddCategoryForm /> 
             </Fragment>
           }
         </div>

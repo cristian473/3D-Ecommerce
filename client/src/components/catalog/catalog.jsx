@@ -30,7 +30,7 @@ const Catalog = () => {
     
 
 
-    
+    console.log(categories);
     return (
 
         <section >

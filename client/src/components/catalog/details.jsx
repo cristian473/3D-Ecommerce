@@ -19,28 +19,34 @@ const Details = props =>{
     useEffect(() => dispatch(getReviewsByProduct(id)),[]);
     
     return(
-         
-            <div >
+      <div>
+          <div className='detailScreen'>
+            <div className='productoDetail'>
                 <div className="details">
                     <img width="70%" src = {detail.images}></img>
-                    <h2>{detail.name}</h2>
-                    <p>{detail.description}</p>
-                    <h4>Precio: ${detail.price}</h4>
-                    <p>Stock: {detail.stock}</p>
-                    <button>Comprar</button>
+                    <div className="detailsInfo">
+                      <h2>{detail.name}</h2>
+                      <p>{detail.description}</p>
+                      <h4>Precio: ${detail.price}</h4>
+                      <p>Stock: {detail.stock}</p>
+                      <button>Comprar</button>
+                    </div>
                 </div>
 
-                <div className="details">
-                    {reviews.map(element=>{
-                        return(<div>
-                            <h2>{element.title}</h2>
-                            <p>{element.description}</p>
-                            <p>{element.stars}</p>
-                        </div>)
-                    })}
-                </div>
+                
 
             </div>
+          </div>  
+          <div className="detailsReview">
+          {reviews.map(element=>{
+              return(<div className="review">
+                  <h2>{element.title}</h2>
+                  <p>{element.description}</p>
+                  <p className="estrella">{element.stars}</p>
+              </div>)
+          })}
+      </div>
+      </div>
     )
 }
     

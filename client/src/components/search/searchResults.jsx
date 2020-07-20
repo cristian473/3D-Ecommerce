@@ -13,7 +13,6 @@ const Results = () =>{
                 <ul className="wrapper">
                     {search.map((element, i) => (
                         <div key={i}>
-                            {console.log(element.name)}
                             <Product
                                 image = {element.images}
                                 name = {element.name}
