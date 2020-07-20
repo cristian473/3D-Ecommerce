@@ -6,7 +6,7 @@ import '../style.css';
 const Order = props => {
 
   return (
-    <div className='Product'>
+    <div className='productOrder'>
       <div  >
         <p>{props.orderId}</p>
         <p>{props.userId}</p>

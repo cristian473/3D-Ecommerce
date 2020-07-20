@@ -21,6 +21,7 @@ import Cart from './components/cart/cart'
 import OrderLog from './components/orders/orders'
 import addReviewForm from './components/forms/AddReviewForm'
 import UsersTable from './components/tables/usersTable';
+import CheckOut from './components/cart/checkout';
 
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
         <Route path='/producto/:id' component={Details} />
         <Route path='/producto/:id' component={addReviewForm} />
         <Route path='/cart' component={Cart} />
+        <Route path ='/cart/checkout' component={CheckOut} />
         <Route path='/products/search' component={Results} />
         <Route path='/admin' component={CrudCategory} />
         <Route path='/admin' component={CrudProduct} />

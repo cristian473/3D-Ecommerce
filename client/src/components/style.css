@@ -302,9 +302,9 @@ form {
 }
 
 .orderTable{
-  z-index: 3 ;
-  color: red;
+  z-index: 3;
   padding: 50px;
+  width: 100%;
 }
 
 .loginScreen, .formUserScreen{
@@ -473,4 +473,7 @@ form {
 .estrella{
   border-top: 1px solid grey;
   padding-top: 10px;
+}
+.productOrder{
+  background-color: blue;
 }

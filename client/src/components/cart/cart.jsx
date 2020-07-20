@@ -4,15 +4,13 @@ import '../style.css'
 import { delProductCart } from '../../actions/productActions'
 import { REM_PRODUCT_CART, GET_CART } from '../../constants/searchConstants'
 import { sendOrderDetails } from '../../actions/orderActions'
+import {Link} from 'wouter'
 
 
 
 const Cart = () => {
   const dispatch = useDispatch();
   const productsOfCart = useSelector(store => store.cart);
-
-  // var isLogged = JSON.parse(localStorage.getItem("isLogin") || "[]");
-  // console.log(isLogged)
 
   useEffect(() => {
     var productsInCart = JSON.parse(localStorage.getItem("productsInCart") || "[]")
@@ -74,7 +72,7 @@ const Cart = () => {
           )}
 
       </table>
-      <button onClick={() => dispatch(sendOrderDetails())}> Checkout </button>
+      <Link to='/cart/checkout'><button> Checkout </button></Link>
     </div>
   )
 }

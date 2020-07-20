@@ -251,9 +251,7 @@ td {
   justify-content: space-between;
 }
 
-/* .formReview{
+.checkoutContainer{
   position: absolute;
-  top: 700px;
-  left: 300px;
-
-} */
+  top: 300px
+}
