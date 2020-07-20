@@ -1,12 +1,8 @@
 import React, { useState, useEffect, useRef  } from 'react'
 import '../style.css';
-
 import {addProduct} from '../../actions/crudActions'
 import {  useDispatch, useSelector } from 'react-redux';
-import axios from 'axios'
-
 import { getCategories } from '../../actions/crudCategoryActions';
-import {updateProduct} from '../../actions/crudActions'
 import FileBase64 from 'react-file-base64';
 
 const AddProductForm = props => {
@@ -34,7 +30,7 @@ const AddProductForm = props => {
 
 
 
-	const handlerImageUploaded = files =>{
+	const handlerImageUploaded = files => {
 		// const files = event.target.files[0]
 		// const data = new FormData()
 		// data.append('file', files )
@@ -108,8 +104,8 @@ const AddProductForm = props => {
       <div className="wrapperForm3">  
         <label>Stock</label>
         <input type="number" name="stock" min='1' placeholder="Agregar stock" value={product.stock} onChange={handleInputChange} />
-        {/* <label>Imagen</label>
-        <input type="file" name="image" placeholder="Choose your images" value={product.image} onChange={handlerImageUploaded} /> */}
+         <label>Imagen</label>
+        {/*<input type="file" name="image" placeholder="Choose your images" value={product.image} onChange={handlerImageUploaded} /> */}
 		<FileBase64
 		multiple={ true }
         onDone={ handlerImageUploaded }

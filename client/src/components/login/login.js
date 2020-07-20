@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { addLogin } from '../../actions/crudUserActions'
 import {
     BrowserRouter as Router,
@@ -23,7 +23,6 @@ const Login = props => {
         <h2>Iniciar Sesión</h2>
         <form onSubmit={event => {
           event.preventDefault()
-          // (!login.name)
           dispatch(addLogin(login))
           setLogin(initialLoginState)
         }}

@@ -34,7 +34,7 @@ const Product = props =>{
            
               <div className='Product'>
                   <div  >
-                      <Link to = {'/producto/'+ props.id}><img src = {props.image}></img></Link>
+                      <Link to = {'/producto/'+ props.id}><img src = {props.image} className="clip-ellipse"></img></Link>
                       <h2>{props.name}</h2>
                       <p>{props.description}</p>
                       <h4>Precio: ${props.price}</h4>

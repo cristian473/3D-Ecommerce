@@ -15,19 +15,32 @@ const OrderLog = () => {
     console.log(order)
     return (
 
-        <section >
-            <div className="orderTable">
-                {order && order.map(element =>
-                    <div className='Product'>
-                        <div  >
-                            <p>{element.orderId}</p>
-                            <p>{element.userId}</p>
-                            <p>{element.status}</p>
-                        </div>
-                    </div>
-                )}
+      <table className="tableCategory">
+      <thead>
+        <tr>
+          <th>Ordenes</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+      <div className="orderTable">
+              {order && order.map(element =>
+                <div className='Product'>
+                  <h2>Ordenes</h2>
+                  <tr key={element.orderId}>
+                    <td>{element.orderId}</td>
+                    <td>{element.userId}</td>
+                    <td>{element.status}</td>
+                  </tr>
+                </div>
+              )}
             </div>
-        </section>
+      </tbody>
+    </table>
+
+
+            
+
     )
 }
 export default OrderLog

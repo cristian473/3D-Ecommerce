@@ -194,10 +194,11 @@ form {
 
 .Product img{
   background-color:rgb(50, 50, 50);
+  text-align: center;
   width: 90%;
   margin: 5%;
-  height: 300px;
   border-radius: 5px;
+  mask-image: initial;
 }
 
 .Product h2{
