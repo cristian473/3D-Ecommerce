@@ -1,8 +1,7 @@
 import {Link} from 'wouter'
-import React, { useEffect }from 'react'
-import {  useDispatch, useSelector } from 'react-redux';
-import { addProductCart, getProductById } from '../../actions/productActions';
-import { ADD_PRODUCT } from '../../constants/searchConstants';
+import React from 'react'
+import {  useDispatch } from 'react-redux';
+import { getProductById } from '../../actions/productActions';
 import '../style.css';
 
 const Product = props =>{
@@ -14,16 +13,45 @@ const Product = props =>{
           
 
         const id = event.target.value
-        // dispatch (addProductCart(id));
-
-        // 
 
         getProductById(id).then(function(result){
 
-            var products = JSON.parse(localStorage.getItem('productsInCart') || "[]");
-            products.push(result);
+            var productsInCart = JSON.parse(localStorage.getItem('productsInCart') || "[]");
+            
+            result.images = '';
 
-            localStorage.setItem('productsInCart', JSON.stringify(products))
+         
+            
+
+            if (!productsInCart.find(encontrado => encontrado.id == result.id)){
+                result.stock=1;
+                productsInCart.push(result)
+            }
+            
+            productsInCart.map(element => {
+              if (element.id === result.id ){
+                element.stock++
+              }
+            })
+
+            console.log(productsInCart)
+
+            // productsInCart.push(result)
+
+            //  productsInCart.map(element =>{
+                  
+            //   var cantidad = productsInCart.filter(elemento => elemento.id === element.id);
+            //     element.stock = cantidad.length;
+
+            //   if (!products.find(encontrado => encontrado.id == element.id)){
+            //     products.push(element)
+            //   }
+              
+            //})
+
+            
+
+            localStorage.setItem('productsInCart', JSON.stringify(productsInCart))
             
         })
 

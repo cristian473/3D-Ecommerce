@@ -1,13 +1,30 @@
-import React, { useState, useEffect } from 'react'
-import Order from './order'
+import React, {  useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { getOrders } from '../../actions/orderActions';
-// import { getCategories } from '../../actions/crudCategoryActions';
+import axios from 'axios';
+
 
 const OrderLog = () => {
 
     const dispatch = useDispatch();
     const order = useSelector(store => store.orders);
+
+    const getProductsOrders =(id)=>{
+        var name = ''
+       
+        var concaten = (item) =>{
+            
+            return <p>{item.data.name}</p>
+        }
+        axios.get("http://localhost:3001/products/" + id)
+                .then(response => {
+                    concaten(response)
+            });
+
+        
+       
+         
+    }
 
     //el useEffect dispatchea las acctions antes de que se renderize el componente
     useEffect(() => dispatch(getOrders()), []);   // Ejecuta la accion getProducts de actions/productActions
@@ -15,28 +32,24 @@ const OrderLog = () => {
     console.log(order)
     return (
 
-      <table className="tableCategory">
-      <thead>
-        <tr>
-          <th>Ordenes</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-      <div className="orderTable">
-              {order && order.map(element =>
-                <div className='Product'>
-                  <h2>Ordenes</h2>
-                  <tr key={element.orderId}>
-                    <td>{element.orderId}</td>
-                    <td>{element.userId}</td>
-                    <td>{element.status}</td>
-                  </tr>
-                </div>
-              )}
+        <section >
+            <div className="orderTable">
+                {order && order.map(element =>
+                    <div className='Product'>
+                        <div  >
+                            {element[1].map(product =>(
+                               <div>
+                                   <p>{product.amount} {product.name}</p>
+                                    <p></p>
+                                </div>
+                            ))}
+                            <p>{element[2][0].username}</p>
+                            <p>{element[0].status}</p>
+                        </div>
+                    </div>
+                )}
             </div>
-      </tbody>
-    </table>
+          </section>  
 
 
             

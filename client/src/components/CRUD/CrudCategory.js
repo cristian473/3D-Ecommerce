@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react'
+import React, {  Fragment, useEffect } from 'react'
 import AddCategoryForm from '../forms/AddCategoryForm'
 import CategoryTable from '../tables/CategoryTable'
 import { useDispatch, useSelector} from 'react-redux'
@@ -16,7 +16,7 @@ const CrudCategory = () => {
       <div className="flex-row">
         <div className="flex-large">
           {
-            <Fragment>
+             <Fragment>
               <h2>Agregar Categorias</h2>
               <AddCategoryForm /> 
             </Fragment>

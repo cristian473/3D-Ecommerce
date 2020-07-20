@@ -1,8 +1,8 @@
-import { DEL_PRODUCT, ADD_PRODUCT, UPDATE_PRODUCT, EDITING_FALSE,GET_PRODUCTS } from '../constants/searchConstants';
+import { DEL_PRODUCT, ADD_PRODUCT, EDITING_FALSE } from '../constants/searchConstants';
 import axios from 'axios'
 //delete
 export function delProduct (id){
-    return (dispatch, getState) => {
+    return (dispatch) => {
         axios.delete("http://localhost:3001/products/delete/" + id)
             .then (response =>{
                 

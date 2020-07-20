@@ -10,7 +10,7 @@ const User = (sequelize, S) => {
             primaryKey: true
 
         },
-        type: { type: S.STRING, allowNull: true },
+        type: { type: S.STRING, allowNull: true, defaultValue: "client" },
         username: {
             type: S.TEXT,
             isEmail: true,

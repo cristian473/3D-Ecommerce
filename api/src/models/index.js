@@ -23,10 +23,4 @@ const { Product } = models;
 const { Category } = models;
 const { Order } = models;
 
-
-// Add model relationships here
-// Product.belongsToMany(Category, { through: "product_categories" });
-// Category.belongsToMany(Product, { through: "product_categories" });
-
-
 module.exports = models;

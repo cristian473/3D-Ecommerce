@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useSelector } from 'react'
+import React, { useState, useEffect } from 'react'
 import '../style.css';
 import { useDispatch } from 'react-redux'
 import { addCategory } from '../../actions/crudCategoryActions'

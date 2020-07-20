@@ -1,12 +1,9 @@
-import { Link } from 'wouter'
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { addProductCart, getProductById } from '../../actions/productActions';
-import { ADD_PRODUCT } from '../../constants/searchConstants';
+
+import React from 'react'
+
 import '../style.css';
 
 const Order = props => {
-  const dispatch = useDispatch();
 
   return (
     <div className='Product'>

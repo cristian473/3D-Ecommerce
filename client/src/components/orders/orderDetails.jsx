@@ -1,8 +1,8 @@
-import React, { useState, useEffect }from 'react'
+import React, {  useEffect }from 'react'
 
 import {  useDispatch, useSelector } from 'react-redux';
-import { getProducts, getProductsByCategory, getProductDetail } from '../../actions/productActions';
-import { getCategories } from '../../actions/crudCategoryActions';
+import {  getProductDetail } from '../../actions/productActions';
+
 
 
 
@@ -15,7 +15,6 @@ const Details = props =>{
   const detail = useSelector(store => store.detail);
    
     useEffect(() => dispatch(getProductDetail(id)),[]);
-    // useEffect(() => dispatch(getCategories()),[]);
     
     
     console.log()

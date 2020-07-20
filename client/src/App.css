@@ -19,13 +19,12 @@ body{
     animation: App-logo-spin infinite 20s linear;
   }
 }
-.details {
+/* .details {
   text-align: center;
   margin-top: 15%;
-  /* margin-left: 46%; */
   position: absolute;
   display: block;
-}
+} */
 
 .App-header {
   background-color: #282c34;
@@ -251,3 +250,10 @@ td {
   display: flex;
   justify-content: space-between;
 }
+
+/* .formReview{
+  position: absolute;
+  top: 700px;
+  left: 300px;
+
+} */

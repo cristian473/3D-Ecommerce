@@ -2,36 +2,15 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import '../style.css'
 import { delProduct, updateProduct } from '../../actions/crudActions'
-import { CHANGE_EDIT, EDITING_FALSE } from '../../constants/searchConstants'
-import Order from '../orders/order'
-import { getCategories } from '../../actions/crudCategoryActions';
+import { CHANGE_EDIT } from '../../constants/searchConstants'
+
 
 const OrderTable = props => {
-
-
-  // const initialFormState = { id: null, name: '', description: '', category: '', price: '', stock: '', image: '', idCategory: '' }
-  // const [ product, setProduct ] = useState(initialFormState)
-  // const categories = useSelector(store => store.categories);
-  // useEffect(() => dispatch(getCategories()),[]);
-
-  // const handleInputChange = event => {
-
-  //   const { name, value } = event.target
-  //   console.log(value)
-  // 	setProduct({ ...product, [name]: value })
-
-
-  // }
-
-  // const handleInputChangeOptions = event =>{
-  // 	product.category = event.target.value
-  // }
 
   // Desde aca traigo las ordenes del store //
 
   const dispatch = useDispatch();
   const order = useSelector(store => store.orders);
-  // console.log(products)
   const [, updateState] = React.useState();
   const forceUpdate = React.useCallback(() => updateState({}), []);
 

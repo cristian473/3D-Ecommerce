@@ -23,7 +23,7 @@ const ProductTable = props => {
 
   const dispatch = useDispatch();
   const products = useSelector(store => store.products);
-  // console.log(products)
+
   const [, updateState] = React.useState();
   const forceUpdate = React.useCallback(() => updateState({}), []);
 

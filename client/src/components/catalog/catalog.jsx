@@ -1,12 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import React, { useEffect } from 'react'
 import Product from './product'
-import {
-    BrowserRouter as Router,
-    Link,
-    Route,
-    Switch,
-} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProducts, getProductsByCategory } from '../../actions/productActions';
 import { getCategories } from '../../actions/crudCategoryActions';
@@ -30,20 +23,28 @@ const Catalog = () => {
     const handleCategoryChange = event => {
         dispatch(getProductsByCategory(event.target.value))
     }
+    const handlerAllProducts = () =>{
+        dispatch(getProducts())
+    }
+
+    
 
 
-    console.log(products)
+    console.log(categories);
     return (
 
         <section >
             <div className='shopSection'><h3>Categorias:</h3>
-
+                <button onClick={handlerAllProducts}>Todos</button>
 
                 <select onChange={handleCategoryChange} className='catalogSelect'>
+                  
+
                     {categories && categories.map(element =>
                         <option key={element.id} value={element.categoryId}>{element.name} </option>
                     )}
-                </select>
+                </select>  
+                
             </div>
             <div className="catalogo">
                 {products && products.map(element =>

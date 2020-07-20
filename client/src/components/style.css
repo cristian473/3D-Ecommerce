@@ -125,7 +125,7 @@ select {
 	border: 1px solid grey;
   border-radius: 5px;
   text-align: center;
-  margin-top: 2%;
+  margin-top: 0%;
   padding: 2%;
 }
 
@@ -387,4 +387,90 @@ form {
 .buttonGreyBorder:hover{
   background-color: rgb(50, 50, 50);
   color:whitesmoke;
+}
+
+.cartContainer{
+  padding-top: 10%;
+}
+.detailScreen {
+  display: flex;
+  padding: 50px 50px 0 50px;
+  width: 100%;
+}
+.productoDetail{
+  width: 100%;
+  padding: 50px;
+}
+.details{
+  display: flex;
+  justify-content: center;
+}
+.detailsInfo{
+  margin-left: 50px;
+}
+.detailsInfo h2{
+  font-size: 2.5em;
+}
+.detailsInfo h4, .detailsInfo p{
+  font-size: 1em;
+  border-bottom: 1px solid grey;
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+.detailsInfo button{
+  margin-top: 10px;
+}
+.productoDetail img{
+  width: 50%;
+  border-radius: 5px;;
+}
+.formReview{
+  background-color: rgb(50, 50, 50);
+  width: 25%;
+  float: left;
+  position: absolute;
+  top: 400px;
+  right: 130px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border-radius: 5px;
+  color: whitesmoke
+}
+.formReview input{
+  margin-top: 10px;
+  border: none;
+}
+
+.formReview button{
+  margin-top: 10px;
+}
+.detailsReview{
+  display: flex;
+  flex-wrap: wrap;
+  background-color: rgb(50, 50, 50);
+  width: 100%;
+  padding-left: 100px;
+  padding-right: 100px;
+  padding-top: 50px;
+}
+.review{
+  margin: 10px;
+  padding: 20px;
+  border: 1px solid grey;
+  border-radius: 5px;
+  color: whitesmoke;
+  width: 18%;
+}
+
+.review h2{
+  text-decoration: underline;
+  color: aquamarine
+}
+.review p{
+  margin-top: 10px;
+}
+.estrella{
+  border-top: 1px solid grey;
+  padding-top: 10px;
 }
