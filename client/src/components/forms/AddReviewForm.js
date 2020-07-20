@@ -25,9 +25,9 @@ const AddReviewForm = props => {
 		}}
 		>
 			<label>Review</label>
-			<input type="text" name="title" placeholder="¿Qué te pareció el producto?" value={review.title} onChange={handleInputChange} />
-			<input type="text" name="description" placeholder="¿Qué te pareció el producto?" value={review.description} onChange={handleInputChange} />
-			<input type="text" name="stars" placeholder="¿Qué te pareció el producto?" value={review.stars} onChange={handleInputChange} />
+			<input type="text" name="title" placeholder="titulo" value={review.title} onChange={handleInputChange} />
+			<input type="text" name="description" placeholder="contenido?" value={review.description} onChange={handleInputChange} />
+			<input type="text" name="stars" placeholder="estrellas" size = "2" value={review.stars} onChange={handleInputChange} />
 
 			<button>Agregar review</button>
 		</form>

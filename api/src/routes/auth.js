@@ -45,7 +45,7 @@ router.post('/login',passport.authenticate('local'
  ),
     function (req, res) {
        
-        res.status(200).json({login: true, userId: req.user.userId, username: req.user.username});
+        res.status(200).json({login: true, userId: req.user.userId, username: req.user.username, type: req.user.type});
     });
 
 router.post('/changepassword');

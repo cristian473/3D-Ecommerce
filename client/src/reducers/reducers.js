@@ -3,7 +3,7 @@ import { getData, Detail, CartReducers } from './productReducers'
 import getDataCategories from './crudCategoryReducers'
 import searchReducer from './searchReducer'
 import orderReducer from './orderReducer'
-import getDataUser, { LoginReducers } from './crudUserReducers'
+import {getDataUser, LoginReducers } from './crudUserReducers'
 import getDataReviews from './reviewsReducers'
 
 

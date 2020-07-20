@@ -8,7 +8,7 @@ const initialState = [];
 
 export function getData(state = initialState, action) {
     if (action.type === GET_PRODUCTS) {
-
+        
         return action.payload
 
     }

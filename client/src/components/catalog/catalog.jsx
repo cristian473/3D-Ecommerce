@@ -23,6 +23,11 @@ const Catalog = () => {
     const handleCategoryChange = event => {
         dispatch(getProductsByCategory(event.target.value))
     }
+    const handlerAllProducts = () =>{
+        dispatch(getProducts())
+    }
+
+    
 
 
     
@@ -30,13 +35,16 @@ const Catalog = () => {
 
         <section >
             <div className='shopSection'><h3>Categorias:</h3>
-
+                <button onClick={handlerAllProducts}>Todos</button>
 
                 <select onChange={handleCategoryChange} className='catalogSelect'>
+                  
+
                     {categories && categories.map(element =>
                         <option key={element.id} value={element.categoryId}>{element.name} </option>
                     )}
-                </select>
+                </select>  
+                
             </div>
             <div className="catalogo">
                 {products && products.map(element =>
