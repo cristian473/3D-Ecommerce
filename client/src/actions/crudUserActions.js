@@ -1,5 +1,7 @@
 import { GET_USERS, ADD_USERS, DELETE_USERS, ADD_LOGIN } from '../constants/crudUserConstants';
 import axios from 'axios'
+import { Redirect } from "wouter";
+
 
 export function getUsers(id) {
   return (dispatch) => {
@@ -33,8 +35,11 @@ export function addLogin(login) {
   return (dispatch) => {
     axios.post("http://localhost:3001/auth/login/", login)
       .then(response => {
-        console.log(response)
-        dispatch({ type: ADD_LOGIN, payload: response.data })
+       
+        
+        dispatch({ type: ADD_LOGIN, payload: response.data });
+        window.location = "http://localhost:3000/cart"
+        
       })
   };
 }

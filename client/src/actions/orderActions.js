@@ -17,9 +17,11 @@ export function getOrders() {
 
 export function sendOrderDetails() {
   return (dispatch) => {
+
     var orderDetails = JSON.parse(localStorage.getItem('productsInCart') || "[]");
-    console.log(orderDetails);
-    axios.post("http://localhost:3001/order/" + 1, orderDetails)
+    var user =  JSON.parse(localStorage.getItem('isLogin') || "[]");
+
+    axios.post("http://localhost:3001/order/" + user.userId, orderDetails)
       .then(response => {
         localStorage.removeItem('productsInCart');
         dispatch({ type: CLEAR_CART, payload: [] })

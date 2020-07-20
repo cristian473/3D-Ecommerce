@@ -11,6 +11,9 @@ const Cart = () => {
   const dispatch = useDispatch();
   const productsOfCart = useSelector(store => store.cart);
 
+  // var isLogged = JSON.parse(localStorage.getItem("isLogin") || "[]");
+  // console.log(isLogged)
+
   useEffect(() => {
     var productsInCart = JSON.parse(localStorage.getItem("productsInCart") || "[]")
 

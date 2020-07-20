@@ -16,6 +16,7 @@ passport.use(new LocalStrategy(
                 if (err) { return done(err); }
                 if (!user) { return done(null, false); }
                 if (!user.checkPassword(password)) { return done(null, false); }
+                console.log(user)
                 return done(null, user);
             })
     }
@@ -39,10 +40,12 @@ router.use(passport.session());
 
 // S63 - RUTA PARA LOGIN //
 
-router.post('/login',
-    passport.authenticate('local', { failureRedirect: '/' }),
+router.post('/login',passport.authenticate('local'
+//  { successRedirect: '/',failureRedirect: '/login' }
+ ),
     function (req, res) {
-        res.status(200);
+       
+        res.status(200).json({login: true, userId: req.user.userId, username: req.user.username});
     });
 
 router.post('/changepassword');
