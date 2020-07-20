@@ -1,5 +1,7 @@
 // USERS
 export const GET_USERS = 'GET_USERS';
+export const GET_ALL_USERS = 'GET_ALL_USERS';
+export const PROMOTE_USER = 'PROMOTE_USER'
 export const ADD_USERS = 'ADD_USERS';
 export const DELETE_USERS = 'DELETE_USERS';
 // LOGIN

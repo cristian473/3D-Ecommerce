@@ -20,6 +20,7 @@ import AddUserForm from './components/forms/AddUserForm.js'
 import Cart from './components/cart/cart'
 import OrderLog from './components/orders/orders'
 import addReviewForm from './components/forms/AddReviewForm'
+import UsersTable from './components/tables/usersTable';
 
 
 function App() {
@@ -29,12 +30,12 @@ function App() {
       }, [])}
   const dispatch = useDispatch();
   return (
-  <BrowserRouter>
+  
       <div className="App">
       
         <Navbar />
         
-        {/* <Redirect from = "/login/isloginSuccess" to ="/cart" /> */}
+        
         <Route path='/' component={Banner} />
         <Route path='/Catalogo' component={Catalog} />
         <Route path='/producto/:id' component={Details} />
@@ -44,12 +45,13 @@ function App() {
         <Route path='/admin' component={CrudCategory} />
         <Route path='/admin' component={CrudProduct} />
         <Route path='/admin' component={OrderLog} />
+        <Route path ='/admin' component = {UsersTable}/>
 
         <Route path='/login' component={Login} />
         <Route path='/newUser' component={AddUserForm} />
       
       </div>
-     </BrowserRouter>
+     
   );
 }
 

@@ -26,7 +26,6 @@ router.get("/", (req,res) => {
 // AGREGRAR USUARIOS //
 router.post("/", function (req, res) {
     User.create({
-        type: req.body.type,
         username: req.body.username,
         password: req.body.password,
         name: req.body.name,
@@ -34,6 +33,26 @@ router.post("/", function (req, res) {
     })
         .then(function (newUser) {
             res.send({ message: "Se ha creado el Usuario con éxito", newUser });
+        })
+        .catch(function (err) {
+            console.log(err)
+        })
+})
+// MODIFICAR USUARIOS //
+
+router.put("/update", function (req, res) {
+    var tipo = 'admin' 
+    console.log(req.body)
+    if (req.body.type === 'admin'){
+        tipo = 'client';
+    }
+    User.update({
+        type: tipo,
+    }, {
+       returning: true, where: {userId : req.body.userId}
+    })
+        .then(function (newUser) {
+            res.send({ message: "user Updated", newUser });
         })
         .catch(function (err) {
             console.log(err)

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { BrowserRouter as Link } from 'react-router-dom';
+import {Link } from 'wouter';
 import '../style.css';
 import { useDispatch } from 'react-redux'
 import { addUsers } from '../../actions/crudUserActions'
@@ -41,7 +41,7 @@ const AddUserForm = props => {
           <button>Agregar nuevo usuario</button>
         </form>
         <h4>¿Ya tienes una cuenta?</h4>
-        <Link to="/login" className="button buttonGreyBorder">Inicia Sesión</Link>
+        <Link to="/login" ><button className="button buttonGreyBorder">Inicia Sesión</button></Link>
       </div>
     </div>
   )
