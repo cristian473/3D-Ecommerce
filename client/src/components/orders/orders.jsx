@@ -37,14 +37,19 @@ const OrderLog = () => {
                 {order && order.map(element =>
                     <div className='Product'>
                         <div  >
+                        <h4>orden N°: {element[0].orderId}</h4>
+                        <p>Items</p>
                             {element[1].map(product =>(
                                <div>
                                    <p>{product.amount} {product.name}</p>
                                     <p></p>
                                 </div>
                             ))}
-                            <p>{element[2][0].username}</p>
-                            <p>{element[0].status}</p>
+                            <p>usuario: {element[2][0].username}</p>
+                            <p>direccion: {element[0].address}</p>
+                            <p>telefono :{element[0].tel}</p>
+                            <p>email: {element[0].email}</p>
+                            <p>estado de la orden: {element[0].status}</p>
                         </div>
                     </div>
                 )}

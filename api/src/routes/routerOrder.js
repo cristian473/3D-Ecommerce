@@ -80,7 +80,11 @@ router.put("/:id", (req, res) => {
     Order.findByPk(req.params.id)
         .then(order => {
             Order.update({
-                status: req.body.status
+                status: req.body.status,
+                address: req.body.direccion,
+                tel: req.body.telefono,
+                email: req.body.correo
+
             }, {
                 returning: true, where: { orderId: req.params.id }
             })
@@ -99,8 +103,7 @@ router.post("/:userId", function (req, res) {
     }).then(function (order) {
         var products = req.body;
         products.forEach(element => {
-            var count = count + 1
-            console.log(count);
+           
             OrderDetails.create({
                 orderOrderId: order.orderId,
                 productId: element.id,

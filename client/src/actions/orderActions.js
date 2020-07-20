@@ -15,16 +15,21 @@ export function getOrders() {
   };
 }
 
-export function sendOrderDetails() {
+export function sendOrderDetails(contact) {
   return (dispatch) => {
 
     var orderDetails = JSON.parse(localStorage.getItem('productsInCart') || "[]");
     var user =  JSON.parse(localStorage.getItem('isLogin') || "[]");
 
+    console.log(contact)
     axios.post("http://localhost:3001/order/" + user.userId, orderDetails)
       .then(response => {
+        console.log(response.data)
         localStorage.removeItem('productsInCart');
-        dispatch({ type: CLEAR_CART, payload: [] })
+        
+
+        axios.put("http://localhost:3001/order/" + user.userId, contact)
+         .then (dispatch({ type: CLEAR_CART, payload: [] }))
       })
 
   }
