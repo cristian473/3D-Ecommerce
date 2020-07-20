@@ -1,21 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { addLogin } from '../../actions/crudUserActions'
 import {
   BrowserRouter as Router,
-  Link
+  Link,
 } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import {Redirect} from 'wouter'
 
 const Login = props => {
 
   const initialLoginState = { id: null, username: '', password: '' };
   const [login, setLogin] = useState(initialLoginState)
   const dispatch = useDispatch();
+  const isLogin = useSelector(store => store.login)
+  
 
+  
   const handleInputChange = event => {
     const { name, value } = event.target
     setLogin({ ...login, [name]: value })
   }
+  if (isLogin.login === true){
+    localStorage.setItem('isLogin', JSON.stringify(isLogin));
+  }
+
 
   return (
     <div className="loginScreen">
