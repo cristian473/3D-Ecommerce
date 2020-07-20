@@ -20,6 +20,18 @@ const Order = (sequelize, S) => {
         amount: {
             type: S.INTEGER,
             allowNull: true,
+        },
+        address: {
+            type: S.TEXT,
+            allowNull: true,
+        },
+        tel: {
+            type: S.TEXT,
+            allowNull: true,
+        },
+        email: {
+            type: S.TEXT,
+            allowNull: true,
         }
     });
     return O;

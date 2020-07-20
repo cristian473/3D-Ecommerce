@@ -258,3 +258,8 @@ td {
   left: 300px;
 
 }
+
+.checkoutContainer{
+  position: absolute;
+  top: 300px
+}
